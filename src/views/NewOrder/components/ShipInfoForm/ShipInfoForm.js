@@ -12,7 +12,7 @@ const ShipInfoForm = () => {
         gutterBottom
         variant="h6"
       >
-        Shipping address
+        Sender information
       </Typography>
       <Grid
         container
@@ -59,7 +59,7 @@ const ShipInfoForm = () => {
             required
           />
         </Grid>
-        <Grid
+        {/*<Grid
           item
           xs={12}
         >
@@ -96,7 +96,7 @@ const ShipInfoForm = () => {
             label="State/Province/Region"
             name="state"
           />
-        </Grid>
+        </Grid> */ }
         <Grid
           item
           sm={6}
@@ -111,7 +111,7 @@ const ShipInfoForm = () => {
             required
           />
         </Grid>
-        <Grid
+        {/* <Grid
           item
           sm={6}
           xs={12}
@@ -124,7 +124,7 @@ const ShipInfoForm = () => {
             name="country"
             required
           />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           xs={12}
