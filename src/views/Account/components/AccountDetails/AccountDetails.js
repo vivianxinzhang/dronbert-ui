@@ -10,7 +10,7 @@ import {
   Divider,
   Grid,
   Button,
-  TextField
+  TextField, Typography
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -23,11 +23,14 @@ const AccountDetails = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@devias.io',
+    phone: '3529321352',
+    address: '343 Jefferson Ave, Apt 12',
+    city:'San Francisco',
+    zipcode:'94129',
+    state: 'CA',
     country: 'USA'
   });
 
@@ -139,31 +142,19 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={6}
+              md={12}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Select State"
+                label="Primary address"
                 margin="dense"
-                name="state"
+                name="address"
                 onChange={handleChange}
                 required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
+                value={values.address}
                 variant="outlined"
-              >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+              />
             </Grid>
             <Grid
               item
@@ -172,12 +163,56 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Country"
+                label="city"
                 margin="dense"
-                name="country"
+                name="city"
                 onChange={handleChange}
                 required
-                value={values.country}
+                value={values.city}
+                variant="outlined"
+              />
+            </Grid>
+            {/*<Grid*/}
+            {/*  item*/}
+            {/*  md={6}*/}
+            {/*  xs={12}*/}
+            {/*>*/}
+            {/*  <TextField*/}
+            {/*    fullWidth*/}
+            {/*    label="Select State"*/}
+            {/*    margin="dense"*/}
+            {/*    name="state"*/}
+            {/*    onChange={handleChange}*/}
+            {/*    required*/}
+            {/*    select*/}
+            {/*    // eslint-disable-next-line react/jsx-sort-props*/}
+            {/*    SelectProps={{ native: true }}*/}
+            {/*    value={values.state}*/}
+            {/*    variant="outlined"*/}
+            {/*  >*/}
+            {/*    {states.map(option => (*/}
+            {/*      <option*/}
+            {/*        key={option.value}*/}
+            {/*        value={option.value}*/}
+            {/*      >*/}
+            {/*        {option.label}*/}
+            {/*      </option>*/}
+            {/*    ))}*/}
+            {/*  </TextField>*/}
+            {/*</Grid>*/}
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="zip-code"
+                margin="dense"
+                name="zip-code"
+                onChange={handleChange}
+                required
+                value={values.zipcode}
                 variant="outlined"
               />
             </Grid>
