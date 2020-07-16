@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const LatestSales = props => {
+const PackageMap = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -37,7 +37,7 @@ const LatestSales = props => {
       {...rest}
       className={clsx(classes.root, className)}
     >
-      <CardHeader
+      {/* <CardHeader
         action={
           <Button
             size="small"
@@ -48,16 +48,15 @@ const LatestSales = props => {
         }
         title="Latest Sales"
       />
-      <Divider />
+      <Divider />*/}
+
       <CardContent>
         <div className={classes.chartContainer}>
-          <Bar
-            data={data}
-            options={options}
-          />
+          <img alt="map" src="/images/map.jpg"/>
         </div>
       </CardContent>
-      <Divider />
+
+      {/*<Divider />
       <CardActions className={classes.actions}>
         <Button
           color="primary"
@@ -66,13 +65,13 @@ const LatestSales = props => {
         >
           Overview <ArrowRightIcon />
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };
 
-LatestSales.propTypes = {
+PackageMap.propTypes = {
   className: PropTypes.string
 };
 
-export default LatestSales;
+export default PackageMap;

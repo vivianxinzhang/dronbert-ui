@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const ShipInfoForm = () => {
+const top100Films = [
+  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'The Godfather', year: 1972 },
+  { title: 'The Godfather: Part II', year: 1974 },
+]
+
+function ShipInfoForm() {
+
+  const [senderAddress, setSenderAddress] = useState('');
+
+
+
+  console.log(senderAddress);
   return (
     <React.Fragment>
       <Typography
@@ -50,6 +63,25 @@ const ShipInfoForm = () => {
           item
           xs={12}
         >
+          <Autocomplete
+            id="free-solo-demo"
+            freeSolo
+            options={top100Films.map((option) => option.title)}
+            renderInput={(params) => (
+              <TextField
+                autoComplete="shipping address-line1"
+                fullWidth
+                id="address1"
+                label="Sender Address"
+                name="senderAddress"
+                required
+                {...params}
+                margin="normal"
+                onChange={(e) => {setSenderAddress(e.target.value)}}
+                value={senderAddress}
+              />
+            )}
+          />
           <TextField
             autoComplete="shipping address-line1"
             fullWidth
@@ -59,44 +91,7 @@ const ShipInfoForm = () => {
             required
           />
         </Grid>
-        {/*<Grid
-          item
-          xs={12}
-        >
-          <TextField
-            autoComplete="shipping address-line2"
-            fullWidth
-            id="address2"
-            label="Address line 2"
-            name="address2"
-          />
-        </Grid>
-        <Grid
-          item
-          sm={6}
-          xs={12}
-        >
-          <TextField
-            autoComplete="shipping address-level2"
-            fullWidth
-            id="city"
-            label="City"
-            name="city"
-            required
-          />
-        </Grid>
-        <Grid
-          item
-          sm={6}
-          xs={12}
-        >
-          <TextField
-            fullWidth
-            id="state"
-            label="State/Province/Region"
-            name="state"
-          />
-        </Grid> */ }
+
         <Grid
           item
           sm={6}
@@ -111,20 +106,7 @@ const ShipInfoForm = () => {
             required
           />
         </Grid>
-        {/* <Grid
-          item
-          sm={6}
-          xs={12}
-        >
-          <TextField
-            autoComplete="shipping country"
-            fullWidth
-            id="country"
-            label="Country"
-            name="country"
-            required
-          />
-        </Grid> */}
+
         <Grid
           item
           xs={12}

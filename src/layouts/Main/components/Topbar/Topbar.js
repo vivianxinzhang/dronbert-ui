@@ -106,23 +106,18 @@ const Topbar = props => {
             inputProps={{ 'aria-label': 'search' }}
           />
         </div>
-        <RouterLink to='/neworder'>
-          <Fab variant="extended" color="secondary">
-            <AddIcon className={classes.extendedIcon} />
-            New Order
-          </Fab>
-        </RouterLink>
+
         <div className={classes.flexGrow} />
         <Hidden mdDown>
-          <IconButton color="inherit">
-            <Badge
+          {/* <IconButton color="inherit">
+            * <Badge
               badgeContent={notifications.length}
               color="primary"
               variant="dot"
             >
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
           <RouterLink to='/sign-in'><IconButton
             className={classes.signOutButton}
             color="inherit"

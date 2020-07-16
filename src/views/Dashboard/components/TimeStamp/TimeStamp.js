@@ -15,6 +15,7 @@ import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import TabletMacIcon from '@material-ui/icons/TabletMac';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,13 +39,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UsersByDevice = props => {
+const TimeStamp = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
   const theme = useTheme();
 
-  const data = {
+  /* const data = {
     datasets: [
       {
         data: [63, 15, 22],
@@ -60,8 +61,9 @@ const UsersByDevice = props => {
     ],
     labels: ['Desktop', 'Tablet', 'Mobile']
   };
+  */
 
-  const options = {
+  /* const options = {
     legend: {
       display: false
     },
@@ -82,27 +84,7 @@ const UsersByDevice = props => {
       footerFontColor: theme.palette.text.secondary
     }
   };
-
-  const devices = [
-    {
-      title: 'Desktop',
-      value: '63',
-      icon: <LaptopMacIcon />,
-      color: theme.palette.primary.main
-    },
-    {
-      title: 'Tablet',
-      value: '15',
-      icon: <TabletMacIcon />,
-      color: theme.palette.error.main
-    },
-    {
-      title: 'Mobile',
-      value: '23',
-      icon: <PhoneIphoneIcon />,
-      color: theme.palette.warning.main
-    }
-  ];
+  */
 
   return (
     <Card
@@ -110,45 +92,31 @@ const UsersByDevice = props => {
       className={clsx(classes.root, className)}
     >
       <CardHeader
+        title="Package to Sai arrives in:"
         action={
-          <IconButton size="small">
-            <RefreshIcon />
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
           </IconButton>
         }
-        title="Users By Device"
       />
       <Divider />
       <CardContent>
         <div className={classes.chartContainer}>
-          <Doughnut
+          {/* <Doughnut
             data={data}
             options={options}
-          />
+          /> */}
+          0 hr 30 mins
         </div>
         <div className={classes.stats}>
-          {devices.map(device => (
-            <div
-              className={classes.device}
-              key={device.title}
-            >
-              <span className={classes.deviceIcon}>{device.icon}</span>
-              <Typography variant="body1">{device.title}</Typography>
-              <Typography
-                style={{ color: device.color }}
-                variant="h2"
-              >
-                {device.value}%
-              </Typography>
-            </div>
-          ))}
         </div>
       </CardContent>
     </Card>
   );
 };
 
-UsersByDevice.propTypes = {
+TimeStamp.propTypes = {
   className: PropTypes.string
 };
 
-export default UsersByDevice;
+export default TimeStamp;
