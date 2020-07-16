@@ -116,9 +116,10 @@ const UsersTable = props => {
                   {/*</TableCell>*/}
                   <TableCell>Order ID</TableCell>
                   <TableCell>Order Status</TableCell>
-                  <TableCell>Created at</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
+                  <TableCell>Recipent</TableCell>
+                  <TableCell>Delivery Address</TableCell>
+                  <TableCell>Delivery Time</TableCell>
+                  <TableCell>Order Date</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -139,21 +140,21 @@ const UsersTable = props => {
                     {/*</TableCell>*/}
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.avatarUrl}
-                        >
-                          {getInitials(user.name)}
-                        </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
+                        {/*<Avatar*/}
+                        {/*  className={classes.avatar}*/}
+                        {/*  src={user.avatarUrl}*/}
+                        {/*>*/}
+                        {/*  {getInitials(user.name)}*/}
+                        {/*</Avatar>*/}
+                        <Typography variant="body1">{user.orderID}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.status}</TableCell>
+                    <TableCell>{user.name}</TableCell>
                     <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
+                      {user.address.street}, {user.address.city}
                     </TableCell>
-                    <TableCell>{user.phone}</TableCell>
+                    <TableCell>{user.deliveryTime}</TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
