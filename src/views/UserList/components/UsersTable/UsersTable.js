@@ -103,22 +103,23 @@ const UsersTable = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedUsers.length === users.length}
-                      color="primary"
-                      indeterminate={
-                        selectedUsers.length > 0 &&
-                        selectedUsers.length < users.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
+                  {/*<TableCell padding="checkbox">*/}
+                  {/*  <Checkbox*/}
+                  {/*    checked={selectedUsers.length === users.length}*/}
+                  {/*    color="primary"*/}
+                  {/*    indeterminate={*/}
+                  {/*      selectedUsers.length > 0 &&*/}
+                  {/*      selectedUsers.length < users.length*/}
+                  {/*    }*/}
+                  {/*    onChange={handleSelectAll}*/}
+                  {/*  />*/}
+                  {/*</TableCell>*/}
+                  <TableCell>Order ID</TableCell>
+                  <TableCell>Order Status</TableCell>
+                  <TableCell>Recipent</TableCell>
+                  <TableCell>Delivery Address</TableCell>
+                  <TableCell>Delivery Time</TableCell>
+                  <TableCell>Order Date</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -129,31 +130,31 @@ const UsersTable = props => {
                     key={user.id}
                     selected={selectedUsers.indexOf(user.id) !== -1}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={selectedUsers.indexOf(user.id) !== -1}
-                        color="primary"
-                        onChange={event => handleSelectOne(event, user.id)}
-                        value="true"
-                      />
-                    </TableCell>
+                    {/*<TableCell padding="checkbox">*/}
+                    {/*  <Checkbox*/}
+                    {/*    checked={selectedUsers.indexOf(user.id) !== -1}*/}
+                    {/*    color="primary"*/}
+                    {/*    onChange={event => handleSelectOne(event, user.id)}*/}
+                    {/*    value="true"*/}
+                    {/*  />*/}
+                    {/*</TableCell>*/}
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.avatarUrl}
-                        >
-                          {getInitials(user.name)}
-                        </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
+                        {/*<Avatar*/}
+                        {/*  className={classes.avatar}*/}
+                        {/*  src={user.avatarUrl}*/}
+                        {/*>*/}
+                        {/*  {getInitials(user.name)}*/}
+                        {/*</Avatar>*/}
+                        <Typography variant="body1">{user.orderID}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.status}</TableCell>
+                    <TableCell>{user.name}</TableCell>
                     <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
+                      {user.address.street}, {user.address.city}
                     </TableCell>
-                    <TableCell>{user.phone}</TableCell>
+                    <TableCell>{user.deliveryTime}</TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
