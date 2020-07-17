@@ -63,7 +63,7 @@ const Routes = () => {
       />
       <RouteWithLayout
         component={NewOrderView}
-        layout={MinimalLayout}
+        layout={MainLayout}
         path="/neworder"
       />
       <RouteWithLayout
