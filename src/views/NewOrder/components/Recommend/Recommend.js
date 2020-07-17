@@ -227,51 +227,6 @@ const Recommend = () => {
         </Grid>
       </Container>
       {/* Footer */}
-      <Container
-        className={classes.footer}
-        component="footer"
-        maxWidth="md"
-      >
-        <Grid
-          container
-          justify="space-evenly"
-          spacing={4}
-        >
-          {footers.map((footer) => (
-            <Grid
-              item
-              key={footer.title}
-              sm={3}
-              xs={6}
-            >
-              <Typography
-                color="textPrimary"
-                gutterBottom
-                variant="h6"
-              >
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link
-                      color="textSecondary"
-                      href="#"
-                      variant="subtitle1"
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
-      {/* End footer */}
     </React.Fragment>
   );
 }

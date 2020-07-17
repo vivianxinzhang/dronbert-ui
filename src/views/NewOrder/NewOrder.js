@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -70,24 +70,30 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping information', 'Select solution', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <ShipInfoForm />;
-    case 1:
-      return <Recommend />;
-    case 2:
-      return <PaymentForm />;
-    case 3:
-      return <Checkout />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
-const NewOrder = () => {
+function NewOrder () {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [orderInfo, setOrderInfo ] = useState({});
+
+  function handleChange(newInfo) {
+    const newOrderInfo = Object.assign(orderInfo, newInfo);
+    setOrderInfo(newOrderInfo);
+  }
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <ShipInfoForm handleChange={handleChange}/>;
+      case 1:
+        return <Recommend />;
+      case 2:
+        return <PaymentForm />;
+      case 3:
+        return <Checkout orderInfo={orderInfo}/>;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -96,6 +102,8 @@ const NewOrder = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  console.log('orderInfo -->', orderInfo);
 
   return (
     <React.Fragment>
