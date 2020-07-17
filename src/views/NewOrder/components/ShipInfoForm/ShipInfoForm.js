@@ -7,31 +7,25 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-]
-
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
 function ShipInfoForm(props) {
   const { handleChange } = props;
 
   const [senderAddress, setSenderAddress] = useState('');
   const [senderZip, setSenderZip] = useState('');
-  const [recipientAddress, setRecipientAddress] = useState('');
-  const [recipientZip, setRecipientZip] = useState('');
+  const [recipientAddress, setRecipientAddress] = useState('1600 Amphitheatre Parkway, Mountain View');
+  const [recipientZip, setRecipientZip] = useState('94043');
   const [fragile, setFragile] = useState(false);
 
-  const [options, setOptions] = useState([{
-    address: 'google',
-    zip: '94025',
-  }]);
+  const [options, setOptions] = useState([
+    {
+      address: '1600 Amphitheatre Parkway, Mountain View',
+      zipCode: '94043',
+    },
+    {
+      address: '1 Hacker Way, Menlo Park',
+      zipCode: '94025',
+    }
+  ]);
 
   console.log('options -->', options);
 
@@ -119,9 +113,9 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="phone-number"
             fullWidth
-            id="senderLastName"
+            id="senderPhoneNumber"
             label="Phone Number"
-            name="senderLastName"
+            name="senderPhoneNumber"
             required
             onChange={(event) => {
               handleChange({senderPhoneNumber : event.target.value});
@@ -155,18 +149,25 @@ function ShipInfoForm(props) {
             getOptionSelected={(option, value) => option.name === value.name }
             getOptionLabel={(option) => option.address ? option.address : ''}
             options={options}
-            onChange={(event, value) => {
-              setSenderAddress(value['address']);
-              setSenderZip(value['zip']);
-              handleChange({
-                senderAddress: value['address'] + ' ,CA, ' + value['zip'],
-              });
+            onChange={(event, value,reason) => {
+              if (reason === 'select-option'){
+                setSenderAddress(value['address']);
+                setSenderZip(value['zipCode']);
+                handleChange({
+                  senderAddress: value['address'] + ' ,CA, ' + value['zipCode'],
+                });
+              }
             }}
-            onInputChange={handleAddressInput}
+            inputValue={senderAddress}
+            onInputChange={(event, value) => {
+              setSenderAddress(value);
+              handleAddressInput(event, value);
+            }
+            }
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="senderAddress"
+                label="Address"
                 InputProps={{
                   ...params.InputProps,
                 }}
@@ -247,9 +248,9 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="phone-number"
             fullWidth
-            id="recipientLastName"
+            id="recipientPhoneNumber"
             label="Phone Number"
-            name="recipientLastName"
+            name="recipientPhoneNumber"
             required
             onChange={(event) => {
               handleChange({recipientPhoneNumber : event.target.value});
@@ -283,18 +284,24 @@ function ShipInfoForm(props) {
             getOptionSelected={(option, value) => option.name === value.name }
             getOptionLabel={(option) => option.address ? option.address : ''}
             options={options}
-            onChange={(event, value) => {
-              setRecipientAddress(value['address']);
-              setRecipientZip(value['zip']);
-              handleChange({
-                recipientAddress: value['address'] + ' ,CA, ' + value['zip'],
-              });
+            onChange={(event, value, reason) => {
+              if (reason === 'select-option') {
+                setRecipientAddress(value['address']);
+                setRecipientZip(value['zipCode']);
+                handleChange({
+                  recipientAddress: value['address'] + ' ,CA, ' + value['zipCode'],
+                });
+              }
             }}
-            onInputChange={handleAddressInput}
+            inputValue={recipientAddress}
+            onInputChange={(event, value) => {
+              setRecipientAddress(value);
+              handleAddressInput(event, value);
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="recipientAddress"
+                label="Address"
                 InputProps={{
                   ...params.InputProps,
                 }}
