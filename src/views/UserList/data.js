@@ -3,39 +3,40 @@ import uuid from 'uuid/v1';
 export default [
   {
     id: uuid(),
-    name: 'Ekaterina Tankova',
+    name: 'Anje Keizer',
+    orderID: '97428291',
+    status: 'delivered',
+    deliveryTime: '11:35am',
     address: {
-      country: 'USA',
-      state: 'West Virginia',
-      city: 'Parkersburg',
-      street: '2849 Fulton Street'
-    },
-    email: 'ekaterina.tankova@devias.io',
-    phone: '304-428-3097',
-    avatarUrl: '/images/avatars/avatar_3.png',
-    createdAt: 1555016400000
-  },
-  {
-    id: uuid(),
-    name: 'Cao Yu',
-    address: {
-      country: 'USA',
-      state: 'Bristow',
-      city: 'Iowa',
+      city: 'San Francisco',
       street: '1865  Pleasant Hill Road'
     },
-    email: 'cao.yu@devias.io',
-    avatarUrl: '/images/avatars/avatar_4.png',
     phone: '712-351-5711',
     createdAt: 1555016400000
   },
   {
     id: uuid(),
+    name: 'Jone Doe',
+    orderID: '98223429',
+    status: 'delivered',
+    address: {
+      city: 'San Francisco',
+      street: '2343 Jeffery Ave, Apt 3'
+    },
+    phone: '712-351-5711',
+    deliveryTime: '4:50pm',
+    createdAt: 1555016400000
+  },
+  {
+    id: uuid(),
+    orderID: '98928239',
+    status: 'delivered',
+    deliveryTime: '2:35pm',
     name: 'Alexa Richardson',
     address: {
       country: 'USA',
       state: 'Georgia',
-      city: 'Atlanta',
+      city: 'San Francisco',
       street: '4894  Lakeland Park Drive'
     },
     email: 'alexa.richardson@devias.io',
@@ -45,11 +46,14 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Anje Keizer',
+    orderID: '99823324',
+    status: 'delivered',
+    deliveryTime: '3:50pm',
+    name: 'Harry Potter',
     address: {
       country: 'USA',
       state: 'Ohio',
-      city: 'Dover',
+      city: 'San Francisco',
       street: '4158  Hedge Street'
     },
     email: 'anje.keizer@devias.io',
@@ -59,12 +63,15 @@ export default [
   },
   {
     id: uuid(),
+    orderID: '87873239',
+    status: 'delivered',
+    deliveryTime: '12:50pm',
     name: 'Clarke Gillebert',
     address: {
       country: 'USA',
       state: 'Texas',
-      city: 'Dallas',
-      street: '75247'
+      city: 'San Francisco',
+      street: '234 Dixon Rd, Apt 15'
     },
     email: 'clarke.gillebert@devias.io',
     phone: '972-333-4106',
@@ -73,12 +80,15 @@ export default [
   },
   {
     id: uuid(),
+    orderID: '87873242',
+    status: 'delivered',
+    deliveryTime: '11:05am',
     name: 'Adam Denisov',
     address: {
       country: 'USA',
       state: 'California',
-      city: 'Bakerfield',
-      street: '317 Angus Road'
+      city: 'San Francisco',
+      street: '317 Angus Road, Apt D1'
     },
     email: 'adam.denisov@devias.io',
     phone: '858-602-3409',
@@ -87,11 +97,14 @@ export default [
   },
   {
     id: uuid(),
+    orderID: '77873234',
+    status: 'delivered',
+    deliveryTime: '10:35am',
     name: 'Ava Gregoraci',
     address: {
       country: 'USA',
       state: 'California',
-      city: 'Redondo Beach',
+      city: 'San Francisco',
       street: '2188  Armbrester Drive'
     },
     email: 'ava.gregoraci@devias.io',
@@ -101,11 +114,14 @@ export default [
   },
   {
     id: uuid(),
+    orderID: '69283742',
+    status: 'delivered',
+    deliveryTime: '9:55am',
     name: 'Emilee Simchenko',
     address: {
       country: 'USA',
       state: 'Nevada',
-      city: 'Las Vegas',
+      city: 'San Francisco',
       street: '1798  Hickory Ridge Drive'
     },
     email: 'emilee.simchenko@devias.io',
@@ -113,31 +129,4 @@ export default [
     avatarUrl: '/images/avatars/avatar_8.png',
     createdAt: 1523048400000
   },
-  {
-    id: uuid(),
-    name: 'Kwak Seong-Min',
-    address: {
-      country: 'USA',
-      state: 'Michigan',
-      city: 'Detroit',
-      street: '3934  Wildrose Lane'
-    },
-    email: 'kwak.seong.min@devias.io',
-    avatarUrl: '/images/avatars/avatar_9.png',
-    phone: '313-812-8947'
-  },
-  {
-    id: uuid(),
-    name: 'Merrile Burgett',
-    address: {
-      country: 'USA',
-      state: 'Utah',
-      city: 'Salt Lake City',
-      street: '368 Lamberts Branch Road'
-    },
-    email: 'merrile.burgett@devias.io',
-    phone: '801-301-7894',
-    avatarUrl: '/images/avatars/avatar_10.png',
-    createdAt: 1522702800000
-  }
 ];
