@@ -41,10 +41,10 @@ const AccountProfile = props => {
 
   const user = {
     name: 'Shen Zhi',
-    city: 'Los Angeles',
+    city: 'San Francisco',
     country: 'USA',
     timezone: 'GTM-7',
-    avatar: '/images/avatars/avatar_11.png'
+    //avatar: '/images/avatars/avatar_11.png'
   };
 
   return (
@@ -57,10 +57,11 @@ const AccountProfile = props => {
           <div>
             <Typography
               gutterBottom
-              variant="h2"
+              variant="h1"
             >
               John Doe
             </Typography>
+            <br/>
             <Typography
               className={classes.locationText}
               color="textSecondary"
@@ -76,30 +77,41 @@ const AccountProfile = props => {
               {moment().format('hh:mm A')} ({user.timezone})
             </Typography>
           </div>
-          <Avatar
-            className={classes.avatar}
-            src={user.avatar}
-          />
+          {/*<Avatar*/}
+          {/*  className={classes.avatar}*/}
+          {/*  src={user.avatar}*/}
+          {/*/>*/}
         </div>
         <div className={classes.progress}>
-          <Typography variant="body1">Profile Completeness: 70%</Typography>
+          <Typography variant="body1">Profile Completeness: 90%</Typography>
           <LinearProgress
-            value={70}
+            value={90}
             variant="determinate"
           />
         </div>
+        <br />
+        <br/>
+        <Typography
+          gutterBottom
+          variant="determinate"
+        >
+          2343 Concourse Drive, Apt 3
+          <br />
+          San Francisco, CA 94118
+        </Typography>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button
-          className={classes.uploadButton}
-          color="primary"
-          variant="text"
-        >
-          Upload picture
-        </Button>
-        <Button variant="text">Remove picture</Button>
-      </CardActions>
+
+      {/*<CardActions>*/}
+      {/*  <Button*/}
+      {/*    className={classes.uploadButton}*/}
+      {/*    color="primary"*/}
+      {/*    variant="text"*/}
+      {/*  >*/}
+      {/*    Upload picture*/}
+      {/*  </Button>*/}
+      {/*  <Button variant="text">Remove picture</Button>*/}
+      {/*</CardActions>*/}
     </Card>
   );
 };

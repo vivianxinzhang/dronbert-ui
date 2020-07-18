@@ -11,17 +11,18 @@ const useStyles = makeStyles(theme => ({
   root: {},
   item: {
     display: 'flex',
-    paddingTop: 0,
-    paddingBottom: 0
+    paddingTop: 20,
+    paddingBottom: 20
   },
   button: {
     color: colors.blueGrey[800],
-    padding: '10px 8px',
+    padding: '35px 6px',
     justifyContent: 'flex-start',
     textTransform: 'none',
     letterSpacing: 0,
     width: '100%',
-    fontWeight: theme.typography.fontWeightMedium
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: 18
   },
   icon: {
     color: theme.palette.icon,
@@ -29,11 +30,12 @@ const useStyles = makeStyles(theme => ({
     height: 24,
     display: 'flex',
     alignItems: 'center',
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   active: {
     color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightMedium,
+
+    // fontWeight: theme.typography.fontWeightMedium,
     '& $icon': {
       color: theme.palette.primary.main
     }
