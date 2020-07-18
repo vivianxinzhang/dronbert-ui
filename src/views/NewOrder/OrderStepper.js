@@ -97,11 +97,11 @@ function OrderStepper () {
       case 0:
         return <ShipInfoForm handleChange={handleChange}/>;
       case 1:
-        return <Recommend />;
+        return <Recommend handleChange={handleChange}/>;
       case 2:
         return <Checkout orderInfo={orderInfo}/>;
       case 3:
-        return <PaymentForm />;
+        return <PaymentForm handleChange={handleChange}/>;
       default:
         throw new Error('Unknown step');
     }
@@ -193,9 +193,10 @@ function OrderStepper () {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleNext}
                     className={classes.button}
                     disabled={loading}
+                    onClick={handleNext}
+                    type="submit"
                   >
                     {
                       loading

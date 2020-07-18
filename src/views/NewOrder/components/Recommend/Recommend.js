@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -6,7 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -46,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     flexWrap: 'wrap',
   },
-  toolbarTitle: {
+  toolbartype: {
     flexGrow: 1,
   },
   link: {
@@ -77,62 +76,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tiers = [
+const recommendations = [
   {
-    title: 'Free',
+    type: 'Cheapest',
     price: '0',
-    description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
-    buttonText: 'Sign up for free',
-    buttonVariant: 'outlined',
+    time: '10 users included',
+    carrier: 'Sign up for free',
   },
   {
-    title: 'Pro',
-    subheader: 'Most popular',
+    type: 'Fastest',
     price: '15',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-    ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
+    time: '20 users included',
+    carrier: 'Get started',
   },
   {
-    title: 'Enterprise',
+    type: 'Balanced',
     price: '30',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
-    ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
+    time: '50 users included',
+    carrier: 'Contact us',
   },
 ];
 
 /* const footers = [
   {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
+    type: 'Company',
+    time: ['Team', 'History', 'Contact us', 'Locations'],
   },
   {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
+    type: 'Features',
+    time: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
   },
   {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
+    type: 'Resources',
+    time: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
   },
   {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
+    type: 'Legal',
+    time: ['Privacy policy', 'Terms of use'],
   },
 ]; */
 
-const Recommend = () => {
+const Recommend = (props) => {
+  const { handleChange } = props;
   const classes = useStyles();
+  const [selected, setSelected] = useState(1);
+
+  useEffect(() => {
+    return () => handleChange({
+      solution: recommendations[selected],
+    });
+  },[selected])
+
+  useEffect(() => {
+
+  },[])
 
   return (
     <React.Fragment>
@@ -163,22 +160,21 @@ const Recommend = () => {
           container
           spacing={5}
         >
-          {tiers.map((tier) => (
+          {recommendations.map((option, index) => (
             // Enterprise card is full width at sm breakpoint
             <Grid
               item
-              key={tier.title}
+              key={option.type}
               md={4}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
+              sm={6}
               xs={12}
             >
               <Card>
                 <CardHeader
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
                   className={classes.cardHeader}
-                  subheader={tier.subheader}
+                  subheader={option.subheader}
                   subheaderTypographyProps={{ align: 'center' }}
-                  title={tier.title}
+                  title={option.type}
                   titleTypographyProps={{ align: 'center' }}
                 />
                 <CardContent>
@@ -188,35 +184,34 @@ const Recommend = () => {
                       component="h2"
                       variant="h3"
                     >
-                      ${tier.price}
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="h6"
-                    >
-                      /mo
+                      ${option.price}
                     </Typography>
                   </div>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography
-                        align="center"
-                        component="li"
-                        key={line}
-                        variant="subtitle1"
-                      >
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
+                    <Typography
+                      align="center"
+                      component="h2"
+                      variant="h3"
+                    >
+                      {option.time}
+                    </Typography>
+                    <Typography
+                      align="center"
+                      component="h2"
+                      variant="h3"
+                    >
+                      {option.carrier}
+                    </Typography>
                 </CardContent>
                 <CardActions>
                   <Button
                     color="primary"
                     fullWidth
-                    variant={tier.buttonVariant}
+                    variant={index === selected ? 'contained' : 'outlined'}
+                    onClick={() => {
+                      setSelected(index);
+                    }}
                   >
-                    {tier.buttonText}
+                    Pick me!
                   </Button>
                 </CardActions>
               </Card>
