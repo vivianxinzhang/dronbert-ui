@@ -6,7 +6,7 @@ import { AccountProfile, AccountDetails } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
   }
 }));
 
@@ -15,11 +15,11 @@ const Account = () => {
 
   return (
     <div className={classes.root}>
-      <Grid
+        <Grid
         container
         spacing={4}
       >
-        <Grid
+         <Grid
           item
           lg={4}
           md={6}
@@ -36,8 +36,8 @@ const Account = () => {
           xs={12}
         >
           <AccountDetails />
-        </Grid>
-      </Grid>
+           </Grid>
+       </Grid>
     </div>
   );
 };

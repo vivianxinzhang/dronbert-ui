@@ -5,12 +5,12 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
-  CardActions,
+//  CardActions,
   CardContent,
-  Avatar,
+//  Avatar,
   Typography,
   Divider,
-  Button,
+//  Button,
   LinearProgress
 } from '@material-ui/core';
 
@@ -91,14 +91,6 @@ const AccountProfile = props => {
         </div>
         <br />
         <br/>
-        <Typography
-          gutterBottom
-          variant="determinate"
-        >
-          2343 Concourse Drive, Apt 3
-          <br />
-          San Francisco, CA 94118
-        </Typography>
       </CardContent>
       <Divider />
 
