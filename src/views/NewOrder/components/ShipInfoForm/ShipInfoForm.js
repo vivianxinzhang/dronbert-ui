@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -28,19 +28,6 @@ function ShipInfoForm(props) {
   ]);
 
   console.log('options -->', options);
-
- /* useEffect(() => {
-    return () => { handleSubmit({
-      senderAddress : senderAddress + ', CA, ' + senderZip,
-    }) };
-  }) */
-
-  /* useEffect(async () => {
-    const result = await axios(
-      'https://hn.algolia.com/api/v1/search?query=redux',
-    );
-    setOptions(result);
-  }, [senderAddress]); */
 
   async function getOptions(address) {
     if(!address) { return; }
@@ -184,7 +171,7 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="shipping postal-code"
             fullWidth
-            id="zip"
+            id="senderZip"
             label="Zip / Postal code"
             name="zip"
             required
@@ -317,7 +304,7 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="shipping postal-code"
             fullWidth
-            id="zip"
+            id="recipientZip"
             label="Zip / Postal code"
             name="zip"
             required
