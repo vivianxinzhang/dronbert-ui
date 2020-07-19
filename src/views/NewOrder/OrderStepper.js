@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -27,9 +27,16 @@ import {
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography
+      align="center"
+      color="textSecondary"
+      variant="body2"
+    >
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link
+        color="inherit"
+        href="https://material-ui.com/"
+      >
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -47,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      width: '50%',
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -83,9 +90,14 @@ function OrderStepper () {
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [orderInfo, setOrderInfo ] = useState({});
+  const [paid, setPaid] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
+
+ /* useEffect(() => {
+
+  }, [paid]) */
 
   function handleChange(newInfo) {
     const newOrderInfo = Object.assign(orderInfo, newInfo);
@@ -97,7 +109,9 @@ function OrderStepper () {
       case 0:
         return <ShipInfoForm handleChange={handleChange}/>;
       case 1:
-        return <Recommend handleChange={handleChange}/>;
+        return <Recommend
+          handleChange={handleChange}
+          recommendations={orderInfo['recommendations']}/>;
       case 2:
         return <Checkout orderInfo={orderInfo}/>;
       case 3:
@@ -134,15 +148,86 @@ function OrderStepper () {
           console.log(response.data);
           setLoading(false);
           setActiveStep(activeStep + 1);
+          handleChange({
+            paid : true,
+          });
         })
         .catch((error) => {
           console.log(error);
+          setLoading(false);
+          handleChange({
+            paid : false,
+          });
         })
     }
   }
 
+ /* const placeOrder = async () => {
+    await axios.post( 'http://localhost:5000/neworder', {
+      "senderFisrtName": orderInfo['senderFisrtName'],
+      "senderLastName": orderInfo['senderLastName'],
+      "senderAddress": orderInfo['senderAddress'],
+      "senderPhoneNumber": orderInfo['sender-phone-number'],
+      "senderEmail": orderInfo['sender-email'],
+      "recipientFisrtName": orderInfo['receiver-first-name'],
+      "recipientLastName": orderInfo['receiver-first-name'],
+      "recipientAddress": orderInfo['receiverAddress'],
+      "recipientPhoneNumber": orderInfo['receiver-phone-number'],
+      "recipientEmail": orderInfo['receiver-email'],
+      "packageWeight" : orderInfo['package-weight'],
+      "packageHeight" : orderInfo['package-height'],
+      "packageLength" : orderInfo['package-length'],
+      "packageWidth" : orderInfo['package-width'],
+      "carrier" : recommendations[option]['carrier'],
+      "totalCost" : recommendations[option]['price'],
+      "deliveryTime": recommendations[option]['time'].concat('hr'),
+    })
+      .then((response) => {
+        console.log('response from /neworder -->', response.data);
+        const trackingID = response.data['tracking id'];
+        if(trackingID) {
+          this.setState({
+            trackingID : trackingID,
+            isConfirming: false,
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } */
+
+  const getRecommendations = async () => {
+    console.log('We are ready to get recommendations!');
+    console.log('orderInfo before send to recommendation -->', orderInfo);
+    setLoading(true);
+    await axios.post('http://localhost:5000/recommendation', {
+      'senderAddr': orderInfo['senderAddress'],
+      'receiverAddr': orderInfo['recipientAddress'],
+      'height' : orderInfo['packageHeight'],
+      'length' : orderInfo['packageLength'],
+      'width' : orderInfo['packageWidth'],
+      'weight' : orderInfo['packageWeight'],
+    })
+      .then((response) => {
+        // It is very awkward to put two pieces of data into one object;
+        // We should receive Json array here in the future;
+        console.log('response from backend -->', response.data);
+        handleChange({
+          recommendations: response.data,
+        });
+        setLoading(false);
+        setActiveStep(activeStep + 1);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
   const handleNext = () => {
-    if (activeStep === 3) {
+    if (activeStep === 0) {
+      getRecommendations();
+    } else if (activeStep === 3) {
       pay();
     } else {
       setActiveStep(activeStep + 1);
@@ -160,10 +245,17 @@ function OrderStepper () {
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography
+            align="center"
+            component="h1"
+            variant="h4"
+          >
             Checkout
           </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
+          <Stepper
+            activeStep={activeStep}
+            className={classes.stepper}
+          >
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -173,7 +265,10 @@ function OrderStepper () {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                >
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
@@ -186,17 +281,20 @@ function OrderStepper () {
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
+                    <Button
+                      className={classes.button}
+                      onClick={handleBack}
+                    >
                       Back
                     </Button>
                   )}
                   <Button
-                    variant="contained"
-                    color="primary"
                     className={classes.button}
+                    color="primary"
                     disabled={loading}
                     onClick={handleNext}
                     type="submit"
+                    variant="contained"
                   >
                     {
                       loading

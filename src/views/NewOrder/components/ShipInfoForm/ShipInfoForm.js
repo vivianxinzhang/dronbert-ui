@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 
 function ShipInfoForm(props) {
@@ -60,8 +61,7 @@ function ShipInfoForm(props) {
       >
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="given-name"
@@ -77,8 +77,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="family-name"
@@ -92,27 +91,10 @@ function ShipInfoForm(props) {
             }}
           />
         </Grid>
+
         <Grid
           item
-          sm={6}
-          xs={12}
-        >
-          <TextField
-            autoComplete="phone-number"
-            fullWidth
-            id="senderPhoneNumber"
-            label="Phone Number"
-            name="senderPhoneNumber"
-            required
-            onChange={(event) => {
-              handleChange({senderPhoneNumber : event.target.value});
-            }}
-          />
-        </Grid>
-        <Grid
-          item
-          sm={6}
-          xs={12}
+          xs={6}
         >
           <TextField
             autoComplete="email"
@@ -128,11 +110,26 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          xs={12}
+          xs={3}
+        >
+          <TextField
+            autoComplete="phone-number"
+            fullWidth
+            id="senderPhoneNumber"
+            label="Phone Number"
+            name="senderPhoneNumber"
+            required
+            onChange={(event) => {
+              handleChange({senderPhoneNumber : event.target.value});
+            }}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={6}
         >
           <Autocomplete
             id="senderAddress"
-            style={{ width: 300 }}
             getOptionSelected={(option, value) => option.name === value.name }
             getOptionLabel={(option) => option.address ? option.address : ''}
             options={options}
@@ -165,8 +162,7 @@ function ShipInfoForm(props) {
 
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="shipping postal-code"
@@ -182,7 +178,11 @@ function ShipInfoForm(props) {
             }}
           />
         </Grid>
+        <Grid item xs={12}><Divider /></Grid>
+        <Grid item xs={12}>
+        </Grid>
       </Grid>
+
       <Typography
         gutterBottom
         variant="h6"
@@ -195,8 +195,7 @@ function ShipInfoForm(props) {
       >
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="given-name"
@@ -212,8 +211,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="family-name"
@@ -229,25 +227,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
-        >
-          <TextField
-            autoComplete="phone-number"
-            fullWidth
-            id="recipientPhoneNumber"
-            label="Phone Number"
-            name="recipientPhoneNumber"
-            required
-            onChange={(event) => {
-              handleChange({recipientPhoneNumber : event.target.value});
-            }}
-          />
-        </Grid>
-        <Grid
-          item
-          sm={6}
-          xs={12}
+          xs={6}
         >
           <TextField
             autoComplete="email"
@@ -263,11 +243,26 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          xs={12}
+          xs={3}
+        >
+          <TextField
+            autoComplete="phone-number"
+            fullWidth
+            id="recipientPhoneNumber"
+            label="Phone Number"
+            name="recipientPhoneNumber"
+            required
+            onChange={(event) => {
+              handleChange({recipientPhoneNumber : event.target.value});
+            }}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={6}
         >
           <Autocomplete
             id="recipientAddress"
-            style={{ width: 300 }}
             getOptionSelected={(option, value) => option.name === value.name }
             getOptionLabel={(option) => option.address ? option.address : ''}
             options={options}
@@ -298,8 +293,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="shipping postal-code"
@@ -315,7 +309,13 @@ function ShipInfoForm(props) {
             }}
           />
         </Grid>
+        <Grid item xs={12}>
+          <Divider />
+        </Grid>
+        <Grid item xs={12}>
+        </Grid>
       </Grid>
+
       <Typography
         gutterBottom
         variant="h6"
@@ -324,12 +324,11 @@ function ShipInfoForm(props) {
       </Typography>
       <Grid
         container
-        spacing={3}
+        spacing={2}
       >
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="weight"
@@ -345,8 +344,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="length"
@@ -362,8 +360,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="width"
@@ -379,8 +376,7 @@ function ShipInfoForm(props) {
         </Grid>
         <Grid
           item
-          sm={6}
-          xs={12}
+          xs={3}
         >
           <TextField
             autoComplete="height"
@@ -395,7 +391,6 @@ function ShipInfoForm(props) {
           />
         </Grid>
         <FormControlLabel
-
           control={
             <Checkbox
               color='secondary'

@@ -118,18 +118,30 @@ const recommendations = [
 
 const Recommend = (props) => {
   const { handleChange } = props;
+  const recommendations = props.recommendations.sort((a, b) => 
+    (Number(a['price']) > Number(b['price']) ? 1 : -1)).map((option, index) => {
+    if (index === 0) {
+      return Object.assign(option, {
+        type: 'Cheapest',
+      })
+    } else if (index === props.recommendations.length - 1){
+      return Object.assign(option, {
+        type: 'Fastest',
+      })
+    } else {
+      return Object.assign(option, {
+        type: 'balanced',
+      })
+    }
+  });
   const classes = useStyles();
   const [selected, setSelected] = useState(1);
 
   useEffect(() => {
-    return () => handleChange({
+    handleChange({
       solution: recommendations[selected],
     });
   },[selected])
-
-  useEffect(() => {
-
-  },[])
 
   return (
     <React.Fragment>
@@ -156,7 +168,8 @@ const Recommend = (props) => {
         maxWidth="md"
       >
         <Grid
-          alignItems="flex-end"
+          alignItems="center"
+          justify="center"
           container
           spacing={5}
         >
@@ -164,7 +177,7 @@ const Recommend = (props) => {
             // Enterprise card is full width at sm breakpoint
             <Grid
               item
-              key={option.type}
+              key={index}
               md={4}
               sm={6}
               xs={12}
@@ -187,29 +200,29 @@ const Recommend = (props) => {
                       ${option.price}
                     </Typography>
                   </div>
-                    <Typography
-                      align="center"
-                      component="h2"
-                      variant="h3"
-                    >
-                      {option.time}
-                    </Typography>
-                    <Typography
-                      align="center"
-                      component="h2"
-                      variant="h3"
-                    >
-                      {option.carrier}
-                    </Typography>
+                  <Typography
+                    align="center"
+                    component="h2"
+                    variant="h3"
+                  >
+                    {option.time}
+                  </Typography>
+                  <Typography
+                    align="center"
+                    component="h2"
+                    variant="h3"
+                  >
+                    {option.carrier}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                   <Button
                     color="primary"
                     fullWidth
-                    variant={index === selected ? 'contained' : 'outlined'}
                     onClick={() => {
                       setSelected(index);
                     }}
+                    variant={index === selected ? 'contained' : 'outlined'}
                   >
                     Pick me!
                   </Button>

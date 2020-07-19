@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Grid from '@material-ui/core/Grid';
+
+import { Divider, Grid } from '@material-ui/core';
 
 const products = [
   { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
@@ -33,89 +34,186 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Checkout = () => {
+const Checkout = (props) => {
   const classes = useStyles();
+  const { orderInfo } = props;
+  const { solution } = props.orderInfo;
   return (
     <React.Fragment>
-      <Typography
-        gutterBottom
-        variant="h6"
-      >
-        Order summary
-      </Typography>
-      <List disablePadding>
-        {products.map((product) => (
-          <ListItem
-            className={classes.listItem}
-            key={product.name}
-          >
-            <ListItemText
-              primary={product.name}
-              secondary={product.desc}
-            />
-            <Typography variant="body2">{product.price}</Typography>
-          </ListItem>
-        ))}
-        <ListItem className={classes.listItem}>
-          <ListItemText primary="Total" />
+      <Grid container spacing={2}>
+
+        <Grid item>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
           <Typography
-            className={classes.total}
-            variant="subtitle1"
-          >
-            $34.06
-          </Typography>
-        </ListItem>
-      </List>
-      <Grid
-        container
-        spacing={2}
-      >
-        <Grid
-          item
-          sm={6}
-          xs={12}
-        >
-          <Typography
-            className={classes.title}
             gutterBottom
-            variant="h6"
+            variant="h5"
           >
-            Shipping
+            Sender Information
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
-        <Grid
-          container
-          direction="column"
-          item
-          sm={6}
-          xs={12}
-        >
+        <Grid item xs={12}>
           <Typography
-            className={classes.title}
             gutterBottom
             variant="h6"
           >
-            Payment details
+            Name : {orderInfo['senderFirstName'] + '' + orderInfo['senderLastName']}
           </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid
-                  item
-                  xs={6}
-                >
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                >
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
+        </Grid>
+        <Grid item xs={6}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+          Email: {orderInfo['senderEmail']}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+          Phone: {orderInfo['senderPhoneNumber']}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+          Address: {orderInfo['senderAddress']}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}><Divider/></Grid>
+      </Grid>
+        </Grid>
+      <Divider />
+      <Grid item>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <Typography
+            gutterBottom
+            variant="h5"
+          >
+            Recipient Information
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Name : {orderInfo['recipientFirstName'] + '' + orderInfo['recipientLastName']}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Email: {orderInfo['recipientEmail']}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Phone: {orderInfo['recipientPhoneNumber']}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Address: {orderInfo['recipientAddress']}
+          </Typography>
+          <Grid item xs={12}><Divider/></Grid>
+        </Grid>
+      </Grid>
+      </Grid>
+
+      <Grid item>
+      <Grid container justify='space-between' spacing={1}>
+        <Grid item xs={12}>
+          <Typography
+            gutterBottom
+            variant="h5"
+          >
+            Package Information
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Weight : {orderInfo['packageWeight']}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Length: {orderInfo['packageLength']}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Width: {orderInfo['packageWidth']}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography
+            gutterBottom
+            variant="h6"
+          >
+            Height: {orderInfo['packageHeight']}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}><Divider/></Grid>
+      </Grid>
+      </Grid>
+        <Grid item>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <Typography
+                gutterBottom
+                variant="h5"
+              >
+                Selected Solution
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography
+                gutterBottom
+                variant="h6"
+              >
+                Carrier: {solution['carrier']}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography
+                gutterBottom
+                variant="h6"
+              >
+                Cost : ${solution['price']}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                gutterBottom
+                variant="h6"
+              >
+                Delivery Time: {solution['time']} hrs
+              </Typography>
+            </Grid>
+            <Grid item xs={12}><Divider/></Grid>
           </Grid>
         </Grid>
       </Grid>
