@@ -21,7 +21,7 @@ const Dashboard = () => {
     <div className={classes.root}>
       <Grid
         container
-        spacing={4}
+        spacing={1}
       >
         <Grid
           item
@@ -39,17 +39,20 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TimeStamp />
+          <div>
+            <TimeStamp />
+            <ActiveOrderList />
+          </div>
         </Grid>
-        <Grid
-          item
-          lg={4}
-          md={6}
-          xl={3}
-          xs={12}
-        >
-          <ActiveOrderList />
-        </Grid>
+        {/*<Grid*/}
+        {/*  item*/}
+        {/*  lg={4}*/}
+        {/*  md={6}*/}
+        {/*  xl={3}*/}
+        {/*  xs={12}*/}
+        {/*>*/}
+        {/*  <ActiveOrderList />*/}
+        {/*</Grid>*/}
       </Grid>
     </div>
   );

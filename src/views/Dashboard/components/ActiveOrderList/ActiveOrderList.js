@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   chartContainer: {
     position: 'relative',
-    height: '300px'
+    height: '90px'
   },
   stats: {
     marginTop: theme.spacing(2),
@@ -51,12 +51,14 @@ function ActiveOrderList(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="order list:"
+        title="Active Order List:"
       />
       <Divider />
       <CardContent>
         <div className={classes.chartContainer}>
-        Order#1 : ...
+          Order#1 : ...
+          <br/>
+          Order#2 : ...
         </div>
         <div className={classes.stats} />
       </CardContent>
