@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   chartContainer: {
     position: 'relative',
-    height: '90px'
+    height: '140px'
   },
   stats: {
     marginTop: theme.spacing(2),

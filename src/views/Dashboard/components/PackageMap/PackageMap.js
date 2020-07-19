@@ -19,7 +19,8 @@ import { data, options } from './chart';
 const useStyles = makeStyles(() => ({
   root: {},
   chartContainer: {
-    height: 400,
+    height: 500,
+
     position: 'relative'
   },
   actions: {
@@ -52,7 +53,7 @@ const PackageMap = props => {
 
       <CardContent>
         <div className={classes.chartContainer}>
-          <img alt="map" src="/images/map.jpg"/>
+          <img alt="map" src="/images/map.jpg" width="830" height="500"/>
         </div>
       </CardContent>
 
