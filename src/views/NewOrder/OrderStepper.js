@@ -89,15 +89,32 @@ function OrderStepper () {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [orderInfo, setOrderInfo ] = useState({});
+  const [orderInfo, setOrderInfo ] = useState({
+    senderFirstName: 'Jack',
+    senderLastName: 'Chan',
+    senderAddress: '1600 Amphitheatre Parkway, Mountain View, CA, 94043',
+    senderPhoneNumber: '1111111111',
+    senderEmail: 'jack@gmail.com',
+    recipientFirstName: 'Jeff',
+    recipientLastName: 'Car',
+    recipientAddress: '1 Hacker Way, Menlo Park, CA, 94025',
+    recipientPhoneNumber: '2222222222',
+    recipientEmail: 'jeff@gmail.com',
+    packageWeight : '10',
+    packageHeight : '10',
+    packageLength : '10',
+    packageWidth : '10',
+  });
   const [paid, setPaid] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
 
- /* useEffect(() => {
-
-  }, [paid]) */
+  useEffect(() => {
+    if (paid === true) {
+      placeOrder();
+    }
+  }, [paid])
 
   function handleChange(newInfo) {
     const newOrderInfo = Object.assign(orderInfo, newInfo);
@@ -146,11 +163,10 @@ function OrderStepper () {
       })
         .then(response => {
           console.log(response.data);
-          setLoading(false);
-          setActiveStep(activeStep + 1);
           handleChange({
             paid : true,
           });
+          setPaid(true);
         })
         .catch((error) => {
           console.log(error);
@@ -162,40 +178,43 @@ function OrderStepper () {
     }
   }
 
- /* const placeOrder = async () => {
+  const placeOrder = async () => {
+    setLoading(true);
     await axios.post( 'http://localhost:5000/neworder', {
       "senderFisrtName": orderInfo['senderFisrtName'],
       "senderLastName": orderInfo['senderLastName'],
       "senderAddress": orderInfo['senderAddress'],
-      "senderPhoneNumber": orderInfo['sender-phone-number'],
-      "senderEmail": orderInfo['sender-email'],
-      "recipientFisrtName": orderInfo['receiver-first-name'],
-      "recipientLastName": orderInfo['receiver-first-name'],
-      "recipientAddress": orderInfo['receiverAddress'],
-      "recipientPhoneNumber": orderInfo['receiver-phone-number'],
-      "recipientEmail": orderInfo['receiver-email'],
-      "packageWeight" : orderInfo['package-weight'],
-      "packageHeight" : orderInfo['package-height'],
-      "packageLength" : orderInfo['package-length'],
+      "senderPhoneNumber": orderInfo['senderPhoneNumber'],
+      "senderEmail": orderInfo['senderEmail'],
+      "recipientFisrtName": orderInfo['recipientFisrtName'],
+      "recipientLastName": orderInfo['recipientLastName'],
+      "recipientAddress": orderInfo['recipientAddress'],
+      "recipientPhoneNumber": orderInfo['recipientPhoneNumber'],
+      "recipientEmail": orderInfo['recipientEmail'],
+      "packageWeight" : orderInfo['packageWeight'],
+      "packageHeight" : orderInfo['packageHeight'],
+      "packageLength" : orderInfo['packageLength'],
       "packageWidth" : orderInfo['package-width'],
-      "carrier" : recommendations[option]['carrier'],
-      "totalCost" : recommendations[option]['price'],
-      "deliveryTime": recommendations[option]['time'].concat('hr'),
+      "carrier" : orderInfo['solution']['carrier'],
+      "totalCost" : orderInfo['solution']['price'],
+      "deliveryTime": orderInfo['solution']['time'].concat('hr'),
     })
       .then((response) => {
         console.log('response from /neworder -->', response.data);
         const trackingID = response.data['tracking id'];
         if(trackingID) {
-          this.setState({
+          handleChange({
             trackingID : trackingID,
-            isConfirming: false,
           });
         }
+        setLoading(false);
+        setActiveStep(activeStep + 1);
       })
       .catch(error => {
         console.log(error);
+        setLoading(false);
       });
-  } */
+  }
 
   const getRecommendations = async () => {
     console.log('We are ready to get recommendations!');
@@ -272,9 +291,10 @@ function OrderStepper () {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
+                  Your order number is #{orderInfo['trackingID']}. We have emailed your order confirmation, and will
                   send you an update when your order has shipped.
                 </Typography>
+                <Link href="/dashboard">Track your package</Link>
               </React.Fragment>
             ) : (
               <React.Fragment>
