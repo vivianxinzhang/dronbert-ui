@@ -5,8 +5,8 @@ export default [
     id: uuid(),
     name: 'Anje Keizer',
     orderID: '97428291',
-    status: 'delivered',
-    deliveryTime: '11:35am',
+    status: 'active',
+    deliveryTime: '',
     address: {
       city: 'San Francisco',
       street: '1865  Pleasant Hill Road'

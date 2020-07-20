@@ -6,25 +6,38 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
+  Button,
   CardActions,
   CardContent,
- // Avatar,
- // Checkbox,
+  // Avatar,
+  // Checkbox,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
-  TablePagination
+  TablePagination, ListItem, colors
 } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
 
 import { getInitials } from 'helpers';
+import AddIcon from '@material-ui/icons/Add';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {},
   content: {
     padding: 0
+  },
+  button: {
+    color: colors.blue[800],
+    padding: '0px 0px',
+    justifyContent: 'flex-start',
+    letterSpacing: 0,
+    width: '100%',
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: 16
   },
   inner: {
     minWidth: 1050
@@ -154,7 +167,20 @@ const UsersTable = props => {
                     <TableCell>
                       {user.address.street}, {user.address.city}
                     </TableCell>
-                    <TableCell>{user.deliveryTime}</TableCell>
+                    <TableCell>{user.deliveryTime}
+                      {/*<Fab*/}
+                      {/*  color="secondary"*/}
+                      {/*  variant="extended">*/}
+                      {/*  Tracking*/}
+                      {/*</Fab>*/}
+                      <Button
+                        activeClassName={classes.active}
+                        className={classes.button}
+                        to={page.href}
+                      >
+                        Tracking
+                      </Button>
+                    </TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
