@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: 0,
     width: '100%',
     fontWeight: theme.typography.fontWeightBold,
-    fontSize: 16
+    fontSize: 14
   },
   inner: {
     minWidth: 1050
@@ -167,12 +167,7 @@ const UsersTable = props => {
                     <TableCell>
                       {user.address.street}, {user.address.city}
                     </TableCell>
-                    <TableCell>{user.deliveryTime}
-                      {/*<Fab*/}
-                      {/*  color="secondary"*/}
-                      {/*  variant="extended">*/}
-                      {/*  Tracking*/}
-                      {/*</Fab>*/}
+                    <TableCell>{user.deliveryTime ? user.deliveryTime :
                       <Button
                         activeClassName={classes.active}
                         className={classes.button}
@@ -180,6 +175,12 @@ const UsersTable = props => {
                       >
                         Tracking
                       </Button>
+                    }
+                      {/*<Fab*/}
+                      {/*  color="secondary"*/}
+                      {/*  variant="extended">*/}
+                      {/*  Tracking*/}
+                      {/*</Fab>*/}
                     </TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
