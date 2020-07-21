@@ -42,7 +42,7 @@ const Checkout = (props) => {
     <React.Fragment>
       <Grid container spacing={2}>
 
-        <Grid item>
+        <Grid item xs={12}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <Typography
@@ -88,7 +88,8 @@ const Checkout = (props) => {
       </Grid>
         </Grid>
       <Divider />
-      <Grid item>
+
+      <Grid item xs={12}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <Typography
@@ -134,7 +135,7 @@ const Checkout = (props) => {
       </Grid>
       </Grid>
 
-      <Grid item>
+      <Grid item xs={12}>
       <Grid container justify='space-between' spacing={1}>
         <Grid item xs={12}>
           <Typography
@@ -179,7 +180,8 @@ const Checkout = (props) => {
         <Grid item xs={12}><Divider/></Grid>
       </Grid>
       </Grid>
-        <Grid item>
+
+        <Grid item xs={12}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Typography
