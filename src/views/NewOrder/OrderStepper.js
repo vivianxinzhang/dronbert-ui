@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: '50%',
+      width: '75%',
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -124,7 +124,7 @@ function OrderStepper () {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <ShipInfoForm handleChange={handleChange}/>;
+        return <ShipInfoForm handleChange={handleChange} orderInfo={orderInfo}/>;
       case 1:
         return <Recommend
           handleChange={handleChange}
@@ -198,6 +198,7 @@ function OrderStepper () {
       "carrier" : orderInfo['solution']['carrier'],
       "totalCost" : orderInfo['solution']['price'],
       "deliveryTime": orderInfo['solution']['time'].concat('hr'),
+      "fragile": orderInfo['fragile'],
     })
       .then((response) => {
         console.log('response from /neworder -->', response.data);
@@ -244,6 +245,7 @@ function OrderStepper () {
   }
 
   const handleNext = () => {
+    console.log(activeStep);
     if (activeStep === 0) {
       getRecommendations();
     } else if (activeStep === 3) {
@@ -264,6 +266,7 @@ function OrderStepper () {
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
+          <form autoComplete="off" className={classes.form} onSubmit={e => { e.preventDefault(); handleNext() }}>
           <Typography
             align="center"
             component="h1"
@@ -312,7 +315,6 @@ function OrderStepper () {
                     className={classes.button}
                     color="primary"
                     disabled={loading}
-                    onClick={handleNext}
                     type="submit"
                     variant="contained"
                   >
@@ -328,6 +330,7 @@ function OrderStepper () {
               </React.Fragment>
             )}
           </React.Fragment>
+          </form>
         </Paper>
         <Copyright />
       </main>
