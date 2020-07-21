@@ -15,6 +15,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import { data, options } from './chart';
+import GMap from './GMap'
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -52,7 +53,8 @@ const PackageMap = props => {
 
       <CardContent>
         <div className={classes.chartContainer}>
-          <img alt="map" src="/images/map.jpg"/>
+          {/* <img alt="map" src="/images/map.jpg"/> */}
+          <GMap></GMap>
         </div>
       </CardContent>
 
