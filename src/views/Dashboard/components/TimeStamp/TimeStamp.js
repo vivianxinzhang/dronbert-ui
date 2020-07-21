@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   chartContainer: {
     position: 'relative',
     justifyContent: 'center',
+    height: 190
   },
   stats: {
     marginTop: theme.spacing(2),
@@ -88,6 +89,7 @@ const TimeStamp = props => {
           spacing={0}
           alignItems="center"
           justify="center"
+          className={classes.chartContainer}
         >
           <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeLeft={timeLeft}/>;
         </Grid>
