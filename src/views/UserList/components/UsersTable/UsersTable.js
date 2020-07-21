@@ -24,6 +24,7 @@ import Fab from '@material-ui/core/Fab';
 import { getInitials } from 'helpers';
 import AddIcon from '@material-ui/icons/Add';
 import { Link as RouterLink } from 'react-router-dom';
+import { CheckBox } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -56,9 +57,7 @@ const useStyles = makeStyles(theme => ({
 
 const UsersTable = props => {
   const { className, users, ...rest } = props;
-
   const classes = useStyles();
-
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);

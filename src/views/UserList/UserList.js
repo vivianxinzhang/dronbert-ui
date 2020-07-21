@@ -23,7 +23,6 @@ const UserList = () => {
       <div>
         <OrderDetail />
       </div>
-      <br />
       {/*<UsersToolbar />*/}
       <div className={classes.content}>
         <UsersTable users={users} />
