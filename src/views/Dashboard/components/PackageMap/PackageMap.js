@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Bar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/styles';
+
 import {
   Card,
   CardHeader,
@@ -17,21 +17,13 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { data, options } from './chart';
 import GMap from './GMap'
 
+
 const useStyles = makeStyles(() => ({
   root: {},
-  chartContainer: {
-    height: 400,
-    position: 'relative'
-  },
-  actions: {
-    justifyContent: 'flex-end'
-  }
+
 }));
 
 const PackageMap = props => {
-  const { className, ...rest } = props;
-
-  const classes = useStyles();
 
   return (
     <Card
