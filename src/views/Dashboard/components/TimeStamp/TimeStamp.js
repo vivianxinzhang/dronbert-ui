@@ -83,20 +83,6 @@ const TimeStamp = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        title="Package to Sai arrives in:"
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-      />
-      <Divider />
-      <CardContent>
         <Grid
           container
           spacing={0}
@@ -105,8 +91,6 @@ const TimeStamp = props => {
         >
           <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeLeft={timeLeft}/>;
         </Grid>
-      </CardContent>
-    </Card>
   );
 };
 

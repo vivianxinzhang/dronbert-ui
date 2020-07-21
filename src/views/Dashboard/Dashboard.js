@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
 import {
+  Box,
   Card,
   CardContent,
   CardHeader,
@@ -20,7 +20,8 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
+    height: '100%',
   },
   cardContent: {
     justifyContent: 'center',
@@ -34,10 +35,10 @@ const Dashboard = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
       <Grid
         container
         spacing={1}
+        alignItems="stretch"
       >
         <Grid
           item
@@ -46,31 +47,45 @@ const Dashboard = () => {
           xl={9}
           xs={12}
         >
-          <Card
-          >
-             <CardHeader
-        title="Order#1"
-      />
-      <Divider />
+          <Box className={classes.root}>
+          <Card >
+            <CardHeader
+              title="Order#1"
+            />
+            <Divider />
             <CardContent className={classes.cardContent}>
-              <TrackingBar />
-            </CardContent>
-            <CardContent className={classes.cardContent}>
-                <PackageMap />
+              <Grid
+                container
+                direction="column"
+              >
+                <Grid
+                  item
+                  xl={12}
+                >
+                  <TrackingBar />
+                </Grid>
+                <Grid
+                  item
+                  xl={12}
+                >
+                  <PackageMap />
+                </Grid>
+              </Grid>
             </CardContent>
 
-      <CardActions className={classes.actions}>
-        <Button
-          color="primary"
-          size="small"
-          variant="text"
-        >
+            <CardActions className={classes.actions}>
+              <Button
+                color="primary"
+                size="small"
+                variant="text"
+              >
           View details {/*<ArrowRightIcon />*/}
-        </Button>
-      </CardActions>
+              </Button>
+            </CardActions>
           </Card>
-
+          </Box>
         </Grid>
+
         <Grid
           item
           lg={4}
@@ -78,22 +93,28 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <div>
-            <TimeStamp />
-            <ActiveOrderList />
-          </div>
+          <Box className={classes.root}>
+          <Card>
+            <CardHeader title = "arrive in:"/>
+            <Divider />
+            <CardContent>
+              <TimeStamp />
+              <ActiveOrderList />
+            </CardContent>
+            <CardActions>
+              <Button
+                color="primary"
+                size="small"
+                variant="text"
+              >
+                View all history {/*<ArrowRightIcon />*/}
+              </Button>
+            </CardActions>
+          </Card>
+          </Box>
         </Grid>
-        {/*<Grid*/}
-        {/*  item*/}
-        {/*  lg={4}*/}
-        {/*  md={6}*/}
-        {/*  xl={3}*/}
-        {/*  xs={12}*/}
-        {/*>*/}
-        {/*  <ActiveOrderList />*/}
-        {/*</Grid>*/}
+
       </Grid>
-    </div>
   );
 };
 
