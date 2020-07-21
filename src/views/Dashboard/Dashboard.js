@@ -1,16 +1,32 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import clsx from 'clsx';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Button,
+  Divider,
+  CardActions,
+} from '@material-ui/core';
 
 import {
   ActiveOrderList,
   PackageMap,
-  TimeStamp
+  TimeStamp,
+  TrackingBar,
 } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
+  },
+  cardContent: {
+    justifyContent: 'center',
+  },
+  actions: {
+    justifyContent: 'flex-end',
   }
 }));
 
@@ -30,7 +46,30 @@ const Dashboard = () => {
           xl={9}
           xs={12}
         >
-          <PackageMap />
+          <Card
+          >
+             <CardHeader
+        title="Order#1"
+      />
+      <Divider />
+            <CardContent className={classes.cardContent}>
+              <TrackingBar />
+            </CardContent>
+            <CardContent className={classes.cardContent}>
+                <PackageMap />
+            </CardContent>
+
+      <CardActions className={classes.actions}>
+        <Button
+          color="primary"
+          size="small"
+          variant="text"
+        >
+          View details {/*<ArrowRightIcon />*/}
+        </Button>
+      </CardActions>
+          </Card>
+
         </Grid>
         <Grid
           item
