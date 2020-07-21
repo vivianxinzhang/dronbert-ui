@@ -5,8 +5,8 @@ export default [
     id: uuid(),
     name: 'Anje Keizer',
     orderID: '97428291',
-    status: 'delivered',
-    deliveryTime: '11:35am',
+    status: 'picked up',
+    deliveryTime: '',
     address: {
       city: 'San Francisco',
       street: '1865  Pleasant Hill Road'
@@ -18,13 +18,13 @@ export default [
     id: uuid(),
     name: 'Jone Doe',
     orderID: '98223429',
-    status: 'delivered',
+    status: 'en route',
     address: {
       city: 'San Francisco',
       street: '2343 Jeffery Ave, Apt 3'
     },
     phone: '712-351-5711',
-    deliveryTime: '4:50pm',
+    deliveryTime: '',
     createdAt: 1555016400000
   },
   {
