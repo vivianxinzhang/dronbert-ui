@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import { UsersToolbar, UsersTable, OrderDetail } from './components';
 import mockData from './data';
+import { number } from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,16 +34,22 @@ const UserList = () => {
     packageLength : '10',
     packageWidth : '10',
   });
+  const [ orderNumber, setOrderNumber ] = useState(null);
 
+  const handleSelect = number => {
+    setOrderNumber(number)
+  };
 
+  console.log(orderNumber);
   return (
     <div className={classes.root}>
       <div>
-        <OrderDetail orderDetail = {orderDetail}/>
+        {/*<OrderDetail orderDetail = {orderDetail}/>*/}
+        <OrderDetail orderNumber = {orderNumber}/>
       </div>
       {/*<UsersToolbar />*/}
       <div className={classes.content}>
-        <UsersTable users={users} />
+        <UsersTable users={users} handleSelect = { handleSelect }/>
       </div>
     </div>
   );

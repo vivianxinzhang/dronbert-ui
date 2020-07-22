@@ -56,11 +56,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UsersTable = props => {
-  const { className, users, ...rest } = props;
+  const { className, users, handleSelect, ...rest } = props;
   const classes = useStyles();
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
+  const [ orderNumber, setOrderNumber ] = useState(0);
 
   const handleSelectAll = event => {
     const { users } = props;
@@ -138,7 +139,10 @@ const UsersTable = props => {
                 {users.slice(0, rowsPerPage).map(user => (
                   <TableRow
                     className={classes.tableRow}
+                    // hover = {() => setOrderNumber(orderNumber => orderNumber = user.orderID)}
                     hover
+                    // onClick={ () => setOrderNumber(orderNumber => orderNumber + 1) }
+                    onClick={ () => handleSelect(user.orderID) }
                     key={user.id}
                     selected={selectedUsers.indexOf(user.id) !== -1}
                   >
