@@ -1,5 +1,4 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/styles';
@@ -9,12 +8,11 @@ import {
   CardContent,
   IconButton,
   Divider,
-  Typography
+  Typography,
+  CircularProgress,
+  Box,
+  Grid,
 } from '@material-ui/core';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import TabletMacIcon from '@material-ui/icons/TabletMac';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +21,8 @@ const useStyles = makeStyles(theme => ({
   },
   chartContainer: {
     position: 'relative',
-    height: '142px'
+    justifyContent: 'center',
+    height: 190
   },
   stats: {
     marginTop: theme.spacing(2),
@@ -39,80 +38,70 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function CircularProgressWithLabel(props) {
+  return (
+    <Box position="relative" display="inline-flex">
+      <CircularProgress
+        size={150}
+        thickness={2}
+        variant="static"
+        {...props} />
+      <Box
+        top={0}
+        left={0}
+        bottom={0}
+        right={0}
+        position="absolute"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+
+        <Typography variant="h4" color="textSecondary">{
+          `${Math.floor(props.timeleft/60)} hrs
+          ${props.timeleft%60} mins`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
 const TimeStamp = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const theme = useTheme();
 
-  /* const data = {
-    datasets: [
-      {
-        data: [63, 15, 22],
-        backgroundColor: [
-          theme.palette.primary.main,
-          theme.palette.error.main,
-          theme.palette.warning.main
-        ],
-        borderWidth: 8,
-        borderColor: theme.palette.white,
-        hoverBorderColor: theme.palette.white
-      }
-    ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
-  };
-  */
+  // we should fetch time data from backend in the future
+  const totalTime = 60;
+  const [timeLeft, setTimeLeft] = useState(60);
 
-  /* const options = {
-    legend: {
-      display: false
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: false,
-    cutoutPercentage: 80,
-    layout: { padding: 0 },
-    tooltips: {
-      enabled: true,
-      mode: 'index',
-      intersect: false,
-      borderWidth: 1,
-      borderColor: theme.palette.divider,
-      backgroundColor: theme.palette.white,
-      titleFontColor: theme.palette.text.primary,
-      bodyFontColor: theme.palette.text.secondary,
-      footerFontColor: theme.palette.text.secondary
-    }
-  };
-  */
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((preTimeLeft) => (preTimeLeft - 10 <= 0 ? 0 : preTimeLeft - 10));
+    }, 800);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        title="Package to Sai arrives in:"
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-      />
-      <Divider />
-      <CardContent>
-        <div className={classes.chartContainer}>
-          {/* <Doughnut
-            data={data}
-            options={options}
-          /> */}
-          0 hr 30 mins
-        </div>
-        <div className={classes.stats}>
-        </div>
-      </CardContent>
-    </Card>
+        <Grid
+          container
+          spacing={0}
+          alignItems="center"
+          justify="center"
+          className={classes.chartContainer}
+        >
+          <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>;
+        </Grid>
   );
+};
+
+CircularProgressWithLabel.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate and static variants.
+   * Value between 0 and 100.
+   */
+  value: PropTypes.number.isRequired,
 };
 
 TimeStamp.propTypes = {
@@ -120,3 +109,26 @@ TimeStamp.propTypes = {
 };
 
 export default TimeStamp;
+
+/* const options = {
+  legend: {
+    display: false
+  },
+  responsive: true,
+  maintainAspectRatio: false,
+  animation: false,
+  cutoutPercentage: 80,
+  layout: { padding: 0 },
+  tooltips: {
+    enabled: true,
+    mode: 'index',
+    intersect: false,
+    borderWidth: 1,
+    borderColor: theme.palette.divider,
+    backgroundColor: theme.palette.white,
+    titleFontColor: theme.palette.text.primary,
+    bodyFontColor: theme.palette.text.secondary,
+    footerFontColor: theme.palette.text.secondary
+  }
+};
+*/

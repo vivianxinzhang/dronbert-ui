@@ -6,7 +6,7 @@ import { Typography, Link } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(0)
   }
 }));
 
@@ -17,8 +17,6 @@ const Footer = props => {
 
   return (
     <div
-      {...rest}
-      className={clsx(classes.root, className)}
     >
       <Typography variant="body1">
         &copy;{' '}
