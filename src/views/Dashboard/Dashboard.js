@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   Box,
@@ -34,20 +34,25 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
+  const [showDetail, setShowDetail] = useState(false);
+  const [activeOrderList, setActiveOrderList] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(0);
+  const [orderInfo, setOrderInfo] = useState(activeOrderList[selectedOrder]);
+
   return (
+    <Grid
+      alignItems="stretch"
+      container
+      spacing={1}
+    >
       <Grid
-        container
-        spacing={1}
-        alignItems="stretch"
+        item
+        lg={8}
+        md={12}
+        xl={9}
+        xs={12}
       >
-        <Grid
-          item
-          lg={8}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <Box className={classes.root}>
+        <Box className={classes.root}>
           <Card >
             <CardHeader
               title="Order#1"
@@ -83,17 +88,17 @@ const Dashboard = () => {
               </Button>
             </CardActions>
           </Card>
-          </Box>
-        </Grid>
+        </Box>
+      </Grid>
 
-        <Grid
-          item
-          lg={4}
-          md={6}
-          xl={3}
-          xs={12}
-        >
-          <Box className={classes.root}>
+      <Grid
+        item
+        lg={4}
+        md={6}
+        xl={3}
+        xs={12}
+      >
+        <Box className={classes.root}>
           <Card>
             <CardHeader title = "arrive in:"/>
             <Divider />
@@ -111,10 +116,10 @@ const Dashboard = () => {
               </Button>
             </CardActions>
           </Card>
-          </Box>
-        </Grid>
-
+        </Box>
       </Grid>
+
+    </Grid>
   );
 };
 
