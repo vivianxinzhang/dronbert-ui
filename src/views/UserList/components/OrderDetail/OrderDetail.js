@@ -15,18 +15,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function OrderDetail() {
+const OrderDetail = (props) => {
   const classes = useStyles();
+  const { orderDetail } = props;
 
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            Order Detail
+            Order Detail: {orderDetail['orderNumber']}
           </Paper>
         </Grid>
       </Grid>
     </div>
   );
 }
+
+export default OrderDetail;
