@@ -6,21 +6,20 @@ import { makeStyles } from '@material-ui/styles';
 import GMap from './GMap'
 
 const useStyles = makeStyles(() => ({
-  root: {},
-  chartContainer: {
-    height: 400,
-    position: 'relative'
+  root: {
+    height: 393,
+    position: 'relative',
+    margin: 'auto',
+    paddingTop: 0,
+    paddingBottom: 0,
   },
-  actions: {
-    justifyContent: 'flex-end'
-  }
 }));
 
 const PackageMap = props => {
 
   const classes = useStyles();
   return (
-    <div className={classes.chartContainer}>
+    <div className={classes.root}>
       <GMap />
     </div>
   );

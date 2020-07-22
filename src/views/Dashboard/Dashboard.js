@@ -9,6 +9,8 @@ import {
   Button,
   Divider,
   CardActions,
+  FormControlLabel,
+  Switch,
 } from '@material-ui/core';
 
 import {
@@ -16,12 +18,13 @@ import {
   PackageMap,
   TimeStamp,
   TrackingBar,
+  OrderDetail,
 } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1),
-    height: '100%',
+    height: '75%',
   },
   cardContent: {
     justifyContent: 'center',
@@ -38,6 +41,10 @@ const Dashboard = () => {
   const [activeOrderList, setActiveOrderList] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(0);
   const [orderInfo, setOrderInfo] = useState(activeOrderList[selectedOrder]);
+
+  const toggleDetail = (event) => {
+    setShowDetail(event.target.checked)
+  }
 
   return (
     <Grid
@@ -73,19 +80,20 @@ const Dashboard = () => {
                   item
                   xl={12}
                 >
-                  <PackageMap />
+                  {showDetail ? <OrderDetail />: <PackageMap />}
                 </Grid>
               </Grid>
             </CardContent>
 
             <CardActions className={classes.actions}>
-              <Button
-                color="primary"
-                size="small"
-                variant="text"
-              >
-          View details {/*<ArrowRightIcon />*/}
-              </Button>
+              <FormControlLabel
+                control={<Switch
+                  checked={showDetail}
+                  color='secondary'
+                  onChange={toggleDetail}
+                  name="checkedA" />}
+                label="View Detail"
+              />
             </CardActions>
           </Card>
         </Box>
