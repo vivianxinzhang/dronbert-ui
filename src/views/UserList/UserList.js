@@ -34,7 +34,7 @@ const UserList = () => {
     packageLength : '10',
     packageWidth : '10',
   });
-  const [ orderNumber, setOrderNumber ] = useState(null);
+  const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
 
   const handleSelect = number => {
     setOrderNumber(number)

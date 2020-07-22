@@ -25,7 +25,9 @@ const OrderDetail = (props) => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             {/*Order Detail: {orderDetail['orderNumber']}*/}
-            Order Detail: { orderNumber }
+            Order Detail:
+            <br />
+            The current selected order is #{ orderNumber }
           </Paper>
         </Grid>
       </Grid>
