@@ -40,7 +40,6 @@ const Dashboard = () => {
   const [showDetail, setShowDetail] = useState(false);
   const [activeOrderList, setActiveOrderList] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(0);
-  const [orderInfo, setOrderInfo] = useState(activeOrderList[selectedOrder]);
 
   const toggleDetail = (event) => {
     setShowDetail(event.target.checked)
