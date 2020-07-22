@@ -58,8 +58,8 @@ function CircularProgressWithLabel(props) {
       >
 
         <Typography variant="h4" color="textSecondary">{
-          `${Math.floor(props.timeLeft/60)} hrs
-          ${props.timeLeft%60} mins`}</Typography>
+          `${Math.floor(props.timeleft/60)} hrs
+          ${props.timeleft%60} mins`}</Typography>
       </Box>
     </Box>
   );
@@ -91,7 +91,7 @@ const TimeStamp = props => {
           justify="center"
           className={classes.chartContainer}
         >
-          <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeLeft={timeLeft}/>;
+          <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>;
         </Grid>
   );
 };
