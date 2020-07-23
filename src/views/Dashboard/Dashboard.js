@@ -66,6 +66,7 @@ const Dashboard = () => {
         .catch(error => console.log(error));
   }
 
+  // get order detail as an effect of switching on showDetail
   useEffect(() => {
     if (showDetail === true) {
       getOrderDetail();
