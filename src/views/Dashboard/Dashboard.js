@@ -55,15 +55,15 @@ const Dashboard = () => {
 
   const getOrderDetail = async () => {
 
-      await axios.post('http://localhost:5000/detail', {
-        order_id : 'abc',
+    await axios.post('http://localhost:5000/detail', {
+      order_id : 'abc',
+    })
+      .then(response => {
+        console.log(response.data);
+        setOrderDetail(response.data);
+        setLoadingDetail(false);
       })
-        .then(response => {
-          console.log(response.data);
-          setOrderDetail(response.data);
-          setLoadingDetail(false);
-        })
-        .catch(error => console.log(error));
+      .catch(error => console.log(error));
   }
 
   // get order detail as an effect of switching on showDetail
