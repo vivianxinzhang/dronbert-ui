@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UsersTable = props => {
-  const { className, users, handleSelect, ...rest } = props;
+  const { className, users, handleSelect, getOrderDetail, ...rest } = props;
   const classes = useStyles();
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);

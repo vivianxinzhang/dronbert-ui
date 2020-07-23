@@ -38,49 +38,44 @@ const UserList = () => {
   // transfer order number between sibling component
   const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
   const handleSelect = number => {
-    setOrderNumber(number)
-  };
-  console.log(orderNumber);
+    setOrderNumber(number);
+    getOrderDetail();
+  }
+  // console.log(orderNumber);
 
+  const [ orderHistory, setOrderHistory ] = useState([]);
   useEffect(() => {
+    // setOrderDetail();
+    // setOrderNumber();
+    setOrderHistory();
     setOrderDetail();
+    // if (orderNumber != orderNumber.previous) {
+    //   getOrderDetail();
+    // }
+  })
 
-  }, null )
+  const getOrderDetail = async () => {
+    await axios.post('http://localhost:5000/detail', {
+      order_id : 'abc',
+    })
+      .then(response => {
+        console.log(response.data);
+        setOrderDetail(response.data);
+      })
+      .catch(error => console.log(error));
+  }
 
-  // const setOrderDetail = async () => {
-  //   await axios.post( 'http://localhost:5000/neworder', {
-    //   "senderFisrtName": orderInfo['senderFisrtName'],
-    //   "senderLastName": orderInfo['senderLastName'],
-    //   "senderAddress": orderInfo['senderAddress'],
-    //   "senderPhoneNumber": orderInfo['senderPhoneNumber'],
-    //   "senderEmail": orderInfo['senderEmail'],
-    //   "recipientFisrtName": orderInfo['recipientFisrtName'],
-    //   "recipientLastName": orderInfo['recipientLastName'],
-    //   "recipientAddress": orderInfo['recipientAddress'],
-    //   "recipientPhoneNumber": orderInfo['recipientPhoneNumber'],
-    //   "recipientEmail": orderInfo['recipientEmail'],
-    //   "packageWeight" : orderInfo['packageWeight'],
-    //   "packageHeight" : orderInfo['packageHeight'],
-    //   "packageLength" : orderInfo['packageLength'],
-    //   "packageWidth" : orderInfo['package-width'],
-    //   "carrier" : orderInfo['solution']['carrier'],
-    //   "totalCost" : orderInfo['solution']['price'],
-    //   "deliveryTime": orderInfo['solution']['time'].concat('hr'),
-    //   "fragile": orderInfo['fragile'],
-    // })
-      // .then((response) => {
-      //   console.log('response from /neworder -->', response.data);
-      //   const trackingID = response.data['tracking id'];
-      //   if(trackingID) {
-      //     handleChange({
-      //       trackingID : trackingID,
-      //     });
-      //   }
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // });
-  // }
+
+  const getOrderHistory = async () => {
+    await axios.post('http://localhost:5000/history', {
+      order_id : 'abc',
+    })
+      .then(response => {
+        console.log(response.data);
+        setOrderHistory(response.data);
+      })
+      .catch(error => console.log(error));
+  }
 
   return (
     <div className={classes.root}>
@@ -90,7 +85,7 @@ const UserList = () => {
       </div>
       {/*<UsersToolbar />*/}
       <div className={classes.content}>
-        <UsersTable users={users} handleSelect = { handleSelect }/>
+        <UsersTable users={users} handleSelect = { handleSelect } getOrderDetail = { getOrderDetail }/>
       </div>
     </div>
   );
