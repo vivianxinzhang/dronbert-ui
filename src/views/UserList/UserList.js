@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { UsersToolbar, UsersTable, OrderDetail } from './components';
 import mockData from './data';
-import { number } from 'prop-types';
+// import { number } from 'prop-types';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,13 +35,53 @@ const UserList = () => {
     packageLength : '10',
     packageWidth : '10',
   });
+  // transfer order number between sibling component
   const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
-
   const handleSelect = number => {
     setOrderNumber(number)
   };
-
   console.log(orderNumber);
+
+  useEffect(() => {
+    setOrderDetail();
+
+  }, null )
+
+  // const setOrderDetail = async () => {
+  //   await axios.post( 'http://localhost:5000/neworder', {
+    //   "senderFisrtName": orderInfo['senderFisrtName'],
+    //   "senderLastName": orderInfo['senderLastName'],
+    //   "senderAddress": orderInfo['senderAddress'],
+    //   "senderPhoneNumber": orderInfo['senderPhoneNumber'],
+    //   "senderEmail": orderInfo['senderEmail'],
+    //   "recipientFisrtName": orderInfo['recipientFisrtName'],
+    //   "recipientLastName": orderInfo['recipientLastName'],
+    //   "recipientAddress": orderInfo['recipientAddress'],
+    //   "recipientPhoneNumber": orderInfo['recipientPhoneNumber'],
+    //   "recipientEmail": orderInfo['recipientEmail'],
+    //   "packageWeight" : orderInfo['packageWeight'],
+    //   "packageHeight" : orderInfo['packageHeight'],
+    //   "packageLength" : orderInfo['packageLength'],
+    //   "packageWidth" : orderInfo['package-width'],
+    //   "carrier" : orderInfo['solution']['carrier'],
+    //   "totalCost" : orderInfo['solution']['price'],
+    //   "deliveryTime": orderInfo['solution']['time'].concat('hr'),
+    //   "fragile": orderInfo['fragile'],
+    // })
+      // .then((response) => {
+      //   console.log('response from /neworder -->', response.data);
+      //   const trackingID = response.data['tracking id'];
+      //   if(trackingID) {
+      //     handleChange({
+      //       trackingID : trackingID,
+      //     });
+      //   }
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // });
+  // }
+
   return (
     <div className={classes.root}>
       <div>
