@@ -16,7 +16,44 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import FormControl from '@material-ui/core/FormControl';
-
+import { createMuiTheme, withStyles, ThemeProvider } from '@material-ui/core/styles';
+const BootstrapButton = withStyles({
+  root: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    border: '1px solid',
+    lineHeight: 1.5,
+    backgroundColor: '#0063cc',
+    borderColor: '#0063cc',
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:hover': {
+      backgroundColor: '#0069d9',
+      borderColor: '#0062cc',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#0062cc',
+      borderColor: '#005cbf',
+    },
+    '&:focus': {
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+    },
+  },
+})(Button);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,12 +81,13 @@ function ActiveOrderList(props) {
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
-    checkedF: true,
-    checkedG: true,
+    checkedC: true,
+    // checkedG: true,
   });
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -77,13 +115,17 @@ function ActiveOrderList(props) {
             label="Active Order #1"
           />
           <FormControlLabel
-            control={<Switch checked={state.checkedA} onChange={handleChange} name="checkedA" />}
+            control={<Switch checked={state.checkedB} onChange={handleChange} name="checkedB" />}
             label="Active Order #2"
+          />
+           <FormControlLabel
+            control={<Switch checked={state.checkedC} onChange={handleChange} name="checkedC" />}
+            label="Active Order #3"
           />
       </FormGroup>
 
       {/* <FormGroup row> */}
-      <FormGroup>
+      {/* <FormGroup>
         <FormControlLabel
           control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
           label="Active Order #1"
@@ -92,9 +134,9 @@ function ActiveOrderList(props) {
           control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
           label="Active Order #2"
         />
-      </FormGroup>
+      </FormGroup> */}
 
-      <CardContent>
+      {/* <CardContent>
         <Button color="primary" href="#contained-buttons">
           Active Order #1
         </Button>
@@ -102,13 +144,18 @@ function ActiveOrderList(props) {
         <Button color="primary" href="#contained-buttons">
           Active Order #2
         </Button>
-        {/* <div className={classes.chartContainer}>
+       </CardContent> */}
+
+      
+      {/* <BootstrapButton variant="contained" color="primary" disableRipple className={classes.margin}>
+        Active Order #1
+      </BootstrapButton> */}
+      {/* <div className={classes.chartContainer}>
           Order#1 : ...
           <br/>
           Order#2 : ...
-        </div>
-        <div className={classes.stats} /> */}
-      </CardContent>
+      </div> */}
+      {/* <div className={classes.stats} /> */}
     </Card>
   );
 }
