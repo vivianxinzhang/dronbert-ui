@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  detailInfo: {
+    fontSize: 30
+  }
 }));
 
 const OrderDetail = (props) => {
@@ -25,9 +28,11 @@ const OrderDetail = (props) => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             {/*Order Detail: {orderDetail['orderNumber']}*/}
-            Order Detail:
-            <br />
-            The current selected order is #{ orderNumber }
+            <div className={classes.detailInfo}>
+              Order Detail:
+              <br />
+              The current selected order is #{ orderNumber }
+            </div>
           </Paper>
         </Grid>
       </Grid>

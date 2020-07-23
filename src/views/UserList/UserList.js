@@ -49,13 +49,11 @@ const UserList = () => {
     // setOrderNumber();
     setOrderHistory();
     setOrderDetail();
-    // if (orderNumber != orderNumber.previous) {
-    //   getOrderDetail();
-    // }
-  })
+    getOrderHistory();  // need fix: Promise returned from getOrderHistory is ignored
+  }, [])
 
   const getOrderDetail = async () => {
-    await axios.post('http://localhost:5000/detail', {
+    axios.post('http://localhost:5000/detail', {
       order_id : 'abc',
     })
       .then(response => {
@@ -67,7 +65,7 @@ const UserList = () => {
 
 
   const getOrderHistory = async () => {
-    await axios.post('http://localhost:5000/history', {
+    axios.post('http://localhost:5000/history', {
       order_id : 'abc',
     })
       .then(response => {
