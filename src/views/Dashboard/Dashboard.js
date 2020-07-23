@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   Box,
@@ -11,7 +11,10 @@ import {
   CardActions,
   FormControlLabel,
   Switch,
+  CircularProgress
 } from '@material-ui/core';
+
+import axios from 'axios';
 
 import {
   ActiveOrderList,
@@ -37,12 +40,48 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
+  const [loadingDetail, setLoadingDetail] = useState(false);
+
   const [showDetail, setShowDetail] = useState(false);
-  const [activeOrderList, setActiveOrderList] = useState([]);
+  const [activeOrderList, setActiveOrderList] = useState([{order_id: 'abc'}]);
   const [selectedOrder, setSelectedOrder] = useState(0);
+  const [trackingInfo, setTrackingInfo] = useState({});
+  const [orderDetail, setOrderDetail] = useState({});
 
   const toggleDetail = (event) => {
+    setLoadingDetail(true);
     setShowDetail(event.target.checked)
+  }
+
+  const getOrderDetail = async () => {
+
+      await axios.post('http://localhost:5000/detail', {
+        order_id : 'abc',
+      })
+        .then(response => {
+          console.log(response.data);
+          setOrderDetail(response.data);
+          setLoadingDetail(false);
+        })
+        .catch(error => console.log(error));
+  }
+
+  useEffect(() => {
+    if (showDetail === true) {
+      getOrderDetail();
+    }
+  }, [showDetail])
+
+  const renderOrderDetail = () => {
+    console.log(loadingDetail);
+    console.log(orderDetail);
+    if (activeOrderList.length === 0) {
+      return <span> You don't have any active orders! </span>;
+    }
+    if (loadingDetail) {
+      return <CircularProgress color="secondary" />;
+    }
+    return <OrderDetail orderDetail={orderDetail}/>;
   }
 
   return (
@@ -79,7 +118,7 @@ const Dashboard = () => {
                   item
                   xl={12}
                 >
-                  {showDetail ? <OrderDetail />: <PackageMap />}
+                  {showDetail ? renderOrderDetail(): <PackageMap />}
                 </Grid>
               </Grid>
             </CardContent>
@@ -88,7 +127,7 @@ const Dashboard = () => {
               <FormControlLabel
                 control={<Switch
                   checked={showDetail}
-                  color='secondary'
+                  color="secondary"
                   onChange={toggleDetail}
                   name="checkedA" />}
                 label="View Detail"

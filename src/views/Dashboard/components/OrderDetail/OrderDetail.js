@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function OrderDetail() {
+export default function OrderDetail(props) {
   const classes = useStyles();
+  const { orderDetail } = props;
 
   return (
     <div className={classes.root}>
@@ -33,33 +34,33 @@ export default function OrderDetail() {
         <Grid item xs={12}>
           <Paper className={classes.paper}>Order Detail
             <br/>
-            Total Cost:
+            Total Cost: { orderDetail['total cost'] }
             <br/>
-            Shipping Option:
+            Shipping Option: { orderDetail['machine_type']}
             <br/>
-            Estimated Delivery Time:
+            Estimated Delivery Time: { orderDetail['delivered_at'] }
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>Sender Info:
             <br/>
-            Name: xxxx     Phone: xxxx     Email: xxxx
+            Name: {orderDetail['sender_name']}     Phone: {orderDetail['sender_phone']}    Email: {orderDetail['sender_email']}
             <br/>
-            Address: xxxxxxxxxx
+            Address: {orderDetail['sender_address']}
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>Recipient Info:
             <br/>
-            Name: xxxx     Phone: xxxx     Email: xxxx
+            Name: {orderDetail['recipient_name']}     Phone: {orderDetail['recipient_phone']}    Email: {orderDetail['recipient_email']}
             <br/>
-            Address: xxxxxxxxxx
+            Address: {orderDetail['recipient_address']}
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>Package Info:
             <br/>
-            Length: xxxx     Weight: xxxx     Height: xxxx  Fragile:
+            Length: {orderDetail['package_length']}     Weight: {orderDetail['package_weight']}      Height: {orderDetail['package_height']}   Fragile:{orderDetail['package_fragile']}
           </Paper>
         </Grid>
       </Grid>
