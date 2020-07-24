@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Order Confirmed', 'Picked Up', 'In Transit', 'Delivered'];
+  return ['Order Confirmed', 'Dispatched', 'In Transit', 'Delivered'];
 }
 
 export default function CustomizedSteppers() {
