@@ -47,8 +47,10 @@ const UserList = () => {
   useEffect(() => {
     // setOrderDetail();
     // setOrderNumber();
+    console.log('useEffect called')
     setOrderHistory();
     setOrderDetail();
+    window.addEventListener('load', getOrderHistory());
     getOrderHistory();  // need fix: Promise returned from getOrderHistory is ignored
   }, [])
 

@@ -17,7 +17,7 @@ export default [
   {
     id: uuid(),
     name: 'Jone Doe',
-    orderID: '98223429',
+    orderID: '94291234',
     status: 'en route',
     address: {
       city: 'San Francisco',
@@ -29,7 +29,7 @@ export default [
   },
   {
     id: uuid(),
-    orderID: '98928239',
+    orderID: '78928922',
     status: 'delivered',
     deliveryTime: '2:35pm',
     name: 'Alexa Richardson',
@@ -46,7 +46,7 @@ export default [
   },
   {
     id: uuid(),
-    orderID: '99823324',
+    orderID: '61003324',
     status: 'delivered',
     deliveryTime: '3:50pm',
     name: 'Harry Potter',
@@ -63,7 +63,7 @@ export default [
   },
   {
     id: uuid(),
-    orderID: '87873239',
+    orderID: '59833239',
     status: 'delivered',
     deliveryTime: '12:50pm',
     name: 'Clarke Gillebert',
@@ -80,7 +80,7 @@ export default [
   },
   {
     id: uuid(),
-    orderID: '87873242',
+    orderID: '41873242',
     status: 'delivered',
     deliveryTime: '11:05am',
     name: 'Adam Denisov',
@@ -97,7 +97,7 @@ export default [
   },
   {
     id: uuid(),
-    orderID: '77873234',
+    orderID: '37834234',
     status: 'delivered',
     deliveryTime: '10:35am',
     name: 'Ava Gregoraci',
@@ -114,7 +114,7 @@ export default [
   },
   {
     id: uuid(),
-    orderID: '69283742',
+    orderID: '23723442',
     status: 'delivered',
     deliveryTime: '9:55am',
     name: 'Emilee Simchenko',
