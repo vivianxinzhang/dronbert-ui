@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderDetail = (props) => {
   const classes = useStyles();
   const { orderDetail, orderNumber } = props;
-
+  // console.log(orderNumber)
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
@@ -32,6 +32,7 @@ const OrderDetail = (props) => {
               Order Detail:
               <br />
               The current selected order is #{ orderNumber }
+              {/*Name: {orderDetail['sender_name']}     Phone: {orderDetail['sender_phone']}    Email: {orderDetail['sender_email']}*/}
             </div>
           </Paper>
         </Grid>
