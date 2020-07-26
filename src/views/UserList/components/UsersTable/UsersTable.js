@@ -21,6 +21,7 @@ import {
 } from '@material-ui/core';
 
 import { Link } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
 // import { Link as RouterLink } from 'react-router-dom';
 
 
@@ -53,13 +54,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UsersTable = props => {
-  const { className, users, handleSelect, getOrderDetail, ...rest } = props;
+const UsersTable = (props) => {
+  const { className, users, orderHistory, handleSelect, getOrderDetail, ...rest } = props;
   const classes = useStyles();
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
-  const [ orderNumber, setOrderNumber ] = useState(0);
+  // console.log(orderHistory);
 
   // const handleSelectAll = event => {
   //   const { users } = props;
@@ -133,13 +134,68 @@ const UsersTable = props => {
                   <TableCell>Order Date</TableCell>
                 </TableRow>
               </TableHead>
+              {/*<TableBody>*/}
+              {/*  { if(this.props.data) {*/}
+              {/*    orderHistory.map(order => (*/}
+              {/*    <TableRow*/}
+              {/*    className={classes.tableRow}*/}
+              {/*    hover*/}
+              {/*    // onClick={ () => handleSelect(user.orderID) }*/}
+              {/*    key={order['Tracking ID']}*/}
+              {/*    // selected={selectedUsers.indexOf(user.id) !== -1}*/}
+              {/*    >*/}
+              {/*    /!*<TableCell padding="checkbox">*!/*/}
+              {/*    /!*  <Checkbox*!/*/}
+              {/*    /!*    checked={selectedUsers.indexOf(user.id) !== -1}*!/*/}
+              {/*    /!*    color="primary"*!/*/}
+              {/*    /!*    onChange={event => handleSelectOne(event, user.id)}*!/*/}
+              {/*    /!*    value="true"*!/*/}
+              {/*    /!*  />*!/*/}
+              {/*    /!*</TableCell>*!/*/}
+              {/*    <TableCell>*/}
+              {/*    <div className={classes.nameContainer}>*/}
+              {/*    /!*<Avatar*!/*/}
+              {/*    /!*  className={classes.avatar}*!/*/}
+              {/*    /!*  src={user.avatarUrl}*!/*/}
+              {/*    /!*>*!/*/}
+              {/*    /!*  {getInitials(user.name)}*!/*/}
+              {/*    /!*</Avatar>*!/*/}
+              {/*    <Typography variant="body1">{order['Order ID']}</Typography>*/}
+              {/*    </div>*/}
+              {/*    </TableCell>*/}
+              {/*    <TableCell>{order['Order Status']}</TableCell>*/}
+              {/*    <TableCell>{order['Recipient']}</TableCell>*/}
+              {/*    <TableCell>*/}
+              {/*    {order['Delivery Address']}*/}
+              {/*    </TableCell>*/}
+              {/*    <TableCell>*/}
+              {/*    /!*{{orderhistory['Order ID']} ? {orderhistory['Order ID']} :*!/*/}
+              {/*    {order['Delivery Time']}*/}
+              {/*    <Link to="/dashboard">*/}
+              {/*    <Button*/}
+              {/*    className={classes.button}*/}
+              {/*    to={page.href}*/}
+              {/*    >*/}
+              {/*    Tracking*/}
+              {/*    </Button>*/}
+              {/*    </Link>*/}
+              {/*    }*/}
+              {/*    </TableCell>*/}
+              {/*    <TableCell>*/}
+              {/*    /!*{moment(user.createdAt).format('DD/MM/YYYY')}*!/*/}
+              {/*    /!*{moment(user.createdAt).format('DD/MM/YYYY')}*!/*/}
+              {/*    </TableCell>*/}
+              {/*    </TableRow>*/}
+              {/*    ))*/}
+              {/*    }*/}
+              {/*  }*/}
+              {/*</TableBody>*/}
+
               <TableBody>
                 {users.slice(0, rowsPerPage).map(user => (
                   <TableRow
                     className={classes.tableRow}
-                    // hover = {() => setOrderNumber(orderNumber => orderNumber = user.orderID)}
                     hover
-                    // onClick={ () => setOrderNumber(orderNumber => orderNumber + 1) }
                     onClick={ () => handleSelect(user.orderID) }
                     key={user.id}
                     selected={selectedUsers.indexOf(user.id) !== -1}
@@ -171,7 +227,6 @@ const UsersTable = props => {
                     <TableCell>{user.deliveryTime ? user.deliveryTime :
                       <Link to="/dashboard">
                         <Button
-                          // activeClassName={classes.active}
                           className={classes.button}
                           to={page.href}
                         >
