@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderDetail = (props) => {
   const classes = useStyles();
   const { orderDetail, orderNumber } = props;
-  console.log(orderNumber)
+  // console.log(orderNumber)
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
