@@ -43,10 +43,13 @@ const Dashboard = () => {
   const [loadingDetail, setLoadingDetail] = useState(false);
 
   const [showDetail, setShowDetail] = useState(false);
-  const [activeOrderList, setActiveOrderList] = useState([{order_id: 'abc'}]);
+  // const [activeorderlist, setactiveorderlist] = useState([{order_id: 'abc'}]);
+  const [activeorderlist, setactiveorderlist] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(0);
   const [trackingInfo, setTrackingInfo] = useState({});
   const [orderDetail, setOrderDetail] = useState({});
+  
+  console.log('dash selectedOrder->',selectedOrder)
 
   const toggleDetail = (event) => {
     setLoadingDetail(true);
@@ -73,10 +76,27 @@ const Dashboard = () => {
     }
   }, [showDetail])
 
+  //fetch active order list data
+  useEffect(() => {
+    console.log('useEffect called')
+    axios.post('http://localhost:5000/activeorder',{
+      user_id : 'abc'
+    })
+      .then(res => {
+        console.log('res->',res)
+        console.log('data->',res.data)
+        setactiveorderlist(res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  },[])
+  // console.log('activeorderlist->',activeorderlist)
+
   const renderOrderDetail = () => {
     console.log(loadingDetail);
     console.log(orderDetail);
-    if (activeOrderList.length === 0) {
+    if (activeorderlist.length === 0) {
       return <span> You don't have any active orders! </span>;
     }
     if (loadingDetail) {
@@ -151,7 +171,12 @@ const Dashboard = () => {
             <Divider />
             <CardContent>
               <TimeStamp />
-              <ActiveOrderList />
+              <ActiveOrderList 
+                activeorderlist={activeorderlist} 
+                selectedOrder = {selectedOrder}
+                setactiveorderlist={setactiveorderlist}
+                setSelectedOrder = {setSelectedOrder}
+              />
             </CardContent>
             <CardActions>
               <Button
