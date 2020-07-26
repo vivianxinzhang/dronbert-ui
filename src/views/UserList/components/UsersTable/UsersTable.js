@@ -140,8 +140,11 @@ const UsersTable = (props) => {
                     <TableRow
                       className={classes.tableRow}
                       hover
-                      onClick={ () => handleSelect(order['Order ID']) }
-                      key={order['Tracking ID']}
+                      onClick={ () => handleSelect(order['Order ID'],
+                        // document.getElementById(order['Order ID']).style.backgroundColor = "yellow"
+                      ) }
+                      key={order['Order ID']}
+                      id = {order['Order ID']}
                       // selected={selectedUsers.indexOf(user.id) !== -1}
                     >
                       {/*<TableCell padding="checkbox">*/}

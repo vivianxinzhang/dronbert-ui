@@ -18,13 +18,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   paper: {
-    height: 150,
-    padding: theme.spacing(2),
+    height: 145,
+    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
   detailInfo: {
-    fontSize: 20
+    height: 290,
+    fontSize: 14
   }
 }));
 
@@ -36,74 +37,70 @@ const OrderDetail = (props) => {
 
   return (
     <div className={classes.root}>
-      <Card>
-        <CardHeader
-          title="Order Details"
-        />
-        <CardContent>
-          <div className={classes.chartContainer}>
-            <Table >
-              <TableCell>
+      <Card className={classes.detailInfo}>
+        <CardHeader title="Order Details" />
+        <Table >
+          <TableCell>
+            Order Number: { orderNumber }
+          </TableCell>
+          <TableCell>
+            Total Cost: ${ orderDetail['total cost'] }
+          </TableCell>
+          <TableCell>
+            Shipping Option: { orderDetail['machine_type']}
+          </TableCell>
+          <TableCell>
+            Estimated Delivery Time: { orderDetail['delivered_at'] }
+          </TableCell>
+        </Table>
 
-              </TableCell>
-            </Table>
-            #{ orderNumber }  Total Cost: ${ orderDetail['total cost'] }
-          </div>
+        <CardContent>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            spacing={0}>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}>Sender Info:
+                <br/>
+                <br/>
+                Name: {orderDetail['sender_name']}
+                <br/>
+                Phone: {orderDetail['sender_phone']}
+                <br/>
+                Email: {orderDetail['sender_email']}
+                <br/>
+                Address: {orderDetail['sender_address']}
+              </Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}>Recipient Info:
+                <br/>
+                <br/>
+                Name: {orderDetail['recipient_name']}
+                <br/>
+                Phone: {orderDetail['recipient_phone']}
+                <br/>
+                Email: {orderDetail['recipient_email']}
+                <br/>
+                Address: {orderDetail['recipient_address']}
+              </Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}>Package Info:
+                <br/>
+                <br/>
+                Length: {orderDetail['package_length']}
+                <br/>
+                Weight: {orderDetail['package_weight']}
+                <br/>
+                Height: {orderDetail['package_height']}
+                <br/>
+                Fragile:{orderDetail['package_fragile']}
+              </Paper>
+            </Grid>
+          </Grid>
         </CardContent>
-        <Grid
-          container
-          alignItems="center"
-          justify="center"
-          spacing={0}>
-          <Grid item xs={4}>
-            <Paper className={classes.paper}>Sender Info:
-              <br/>
-              <br/>
-              Name: {orderDetail['sender_name']}
-              <br/>
-              Phone: {orderDetail['sender_phone']}
-              <br/>
-              Email: {orderDetail['sender_email']}
-              <br/>
-              Address: {orderDetail['sender_address']}
-            </Paper>
-            {/*<Paper className={classes.paper}>Order Detail*/}
-            {/*  <br/>*/}
-            {/*  <br/>*/}
-            {/*  Total Cost: { orderDetail['total cost'] }*/}
-            {/*  <br/>*/}
-            {/*  Shipping Option: { orderDetail['machine_type']}*/}
-            {/*  <br/>*/}
-            {/*  Estimated Delivery Time: { orderDetail['delivered_at'] }*/}
-            {/*</Paper>*/}
-          </Grid>
-          <Grid item xs={4}>
-            <Paper className={classes.paper}>Recipient Info:
-              <br/>
-              <br/>
-              Name: {orderDetail['recipient_name']}
-              <br/>
-              Phone: {orderDetail['recipient_phone']}
-              <br/>
-              Email: {orderDetail['recipient_email']}
-              <br/>
-              Address: {orderDetail['recipient_address']}
-            </Paper>
-          </Grid>
-          <Grid item xs={4}>
-            <Paper className={classes.paper}>Package Info:
-              <br/>
-              <br/>
-              Length: {orderDetail['package_length']}
-              <br/>
-              Weight: {orderDetail['package_weight']}
-              <br/>
-              Height: {orderDetail['package_height']}
-              <br/>
-              Fragile:{orderDetail['package_fragile']}
-            </Paper>
-          </Grid>
-        </Grid>
       </Card>
     </div>
   );
