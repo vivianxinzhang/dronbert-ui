@@ -171,7 +171,7 @@ const UsersTable = props => {
                     <TableCell>{user.deliveryTime ? user.deliveryTime :
                       <Link to="/dashboard">
                         <Button
-                          activeClassName={classes.active}
+                          // activeClassName={classes.active}
                           className={classes.button}
                           to={page.href}
                         >

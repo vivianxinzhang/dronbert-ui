@@ -35,6 +35,8 @@ const UserList = () => {
     packageLength : '10',
     packageWidth : '10',
   });
+  console.log(orderDetail);
+
   // transfer order number between sibling component
   const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
   const handleSelect = number => {
