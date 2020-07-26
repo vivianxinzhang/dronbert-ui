@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +12,9 @@ import Select from '@material-ui/core/Select';
 // import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Tooltip from '@material-ui/core/Tooltip';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +25,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+
+const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}))(Tooltip);
 
 function ShipInfoForm(props) {
   const { handleChange, orderInfo } = props;
@@ -362,8 +375,21 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="weight"
             fullWidth
+            helperText="package weight must be within 50 lbs"
             id="packageWeight"
-            label="Weight(< 50 lb)"
+            InputProps={{
+              endAdornment: (
+                <HtmlTooltip
+                  arrow
+                  placement="top"
+                  title="package heavier than 5 pounds can only be shipped by walking robots">
+                <InputAdornment position="end">
+                  <HelpOutlineIcon />
+                </InputAdornment>
+                </HtmlTooltip>
+              ),
+            }}
+            label="Weight(lbs)"
             name="packageWeight"
             onChange={(event) => {
               handleChange({packageWeight : event.target.value});
@@ -378,8 +404,21 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="length"
             fullWidth
+            helperText="Package length must be within 25 inches"
             id="packageLength"
-            label="Length(< 25 inches)"
+            InputProps={{
+              endAdornment: (
+                <HtmlTooltip
+                  arrow
+                  placement="top"
+                  title="package with any dimension larger than 13 inches can only be shipped by walking robots">
+                  <InputAdornment position="end">
+                    <HelpOutlineIcon />
+                  </InputAdornment>
+                </HtmlTooltip>
+              ),
+            }}
+            label="Length(inch)"
             name="packageLength"
             onChange={(event) => {
               handleChange({packageLength : event.target.value});
@@ -394,8 +433,21 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="width"
             fullWidth
+            helperText='Package width must be within 25 inches'
             id="packageWidth"
-            label="Width(<25 inches)"
+            InputProps={{
+              endAdornment: (
+                <HtmlTooltip
+                  arrow
+                  placement="top"
+                  title="package with any dimension larger than 13 inches can only be shipped by walking robots">
+                  <InputAdornment position="end">
+                    <HelpOutlineIcon />
+                  </InputAdornment>
+                </HtmlTooltip>
+              ),
+            }}
+            label="Width(inch)"
             name="packageWidth"
             onChange={(event) => {
               handleChange({packageWidth : event.target.value});
@@ -411,8 +463,21 @@ function ShipInfoForm(props) {
           <TextField
             autoComplete="height"
             fullWidth
+            helperText='Package length must be within 25 inches'
             id="packageHeight"
-            label="Height(<25 inches)"
+            InputProps={{
+              endAdornment: (
+                <HtmlTooltip
+                  arrow
+                  placement="top"
+                  title="package with any dimension larger than 13 inches can only be shipped by walking robots">
+                  <InputAdornment position="end">
+                    <HelpOutlineIcon />
+                  </InputAdornment>
+                </HtmlTooltip>
+              ),
+            }}
+            label="Height(inch)"
             name="packageHeight"
             onChange={(event) => {
               handleChange({packageHeight : event.target.value});
@@ -423,6 +488,10 @@ function ShipInfoForm(props) {
       <Grid item xs={3}>
         <FormControlLabel
           control={
+            <HtmlTooltip
+              arrow
+              placement="top"
+              title="Fragile items can only be shipped by walking robots">
             <Checkbox
               checked={fragile}
               color="secondary"
@@ -434,6 +503,7 @@ function ShipInfoForm(props) {
                 });
               }}
             />
+            </HtmlTooltip>
           }
           label="Fragile?"
           labelPlacement="start"

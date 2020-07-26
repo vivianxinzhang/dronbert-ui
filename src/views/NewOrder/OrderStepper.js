@@ -223,12 +223,13 @@ function OrderStepper () {
     console.log('orderInfo before send to recommendation -->', orderInfo);
     setLoading(true);
     await axios.post('http://localhost:5000/recommendation', {
-      'senderAddr': orderInfo['senderAddress'],
+      'address': orderInfo['station'],
       'receiverAddr': orderInfo['recipientAddress'],
       'height' : orderInfo['packageHeight'],
       'length' : orderInfo['packageLength'],
       'width' : orderInfo['packageWidth'],
       'weight' : orderInfo['packageWeight'],
+      'fragile' : orderInfo['fragile'],
     })
       .then((response) => {
         // It is very awkward to put two pieces of data into one object;

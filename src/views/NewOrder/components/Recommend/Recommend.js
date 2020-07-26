@@ -76,26 +76,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const recommendations = [
-  {
-    type: 'Cheapest',
-    price: '0',
-    time: '10 users included',
-    carrier: 'Sign up for free',
-  },
-  {
-    type: 'Fastest',
-    price: '15',
-    time: '20 users included',
-    carrier: 'Get started',
-  },
-  {
-    type: 'Balanced',
-    price: '30',
-    time: '50 users included',
-    carrier: 'Contact us',
-  },
-];
 
 /* const footers = [
   {
@@ -123,14 +103,15 @@ const Recommend = (props) => {
     if (index === 0) {
       return Object.assign(option, {
         type: 'Cheapest',
-      })
-    } else if (index === props.recommendations.length - 1){
+      });
+    }
+    if (option['dispatch within: '] === '30 mins'){
       return Object.assign(option, {
         type: 'Fastest',
       })
     } else {
       return Object.assign(option, {
-        type: 'balanced',
+        type: 'Balanced',
       })
     }
   });
@@ -195,25 +176,29 @@ const Recommend = (props) => {
                     <Typography
                       color="textPrimary"
                       component="h2"
-                      variant="h3"
+                      variant="h4"
                     >
                       ${option.price}
                     </Typography>
                   </div>
+                  <div className={classes.cardPricing}>
                   <Typography
                     align="center"
                     component="h2"
-                    variant="h3"
+                    variant="h4"
                   >
-                    {option.time}
+                    dispatch within: {option['dispatch within: ']}
                   </Typography>
+                  </div>
+                  <div className={classes.cardPricing}>
                   <Typography
                     align="center"
                     component="h2"
-                    variant="h3"
+                    variant="h4"
                   >
                     {option.carrier}
                   </Typography>
+                  </div>
                 </CardContent>
                 <CardActions>
                   <Button

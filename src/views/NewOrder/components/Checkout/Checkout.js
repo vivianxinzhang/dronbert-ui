@@ -1,26 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 
 import { Divider, Grid } from '@material-ui/core';
-
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -33,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+
+const stationOptions = [
+  'Sunset/Parkside',
+  'Mission District',
+  'Excelsior',
+]
 
 const Checkout = (props) => {
   const classes = useStyles();
@@ -150,7 +138,7 @@ const Checkout = (props) => {
             gutterBottom
             variant="h6"
           >
-            Weight : {orderInfo['packageWeight']}
+            Weight : {orderInfo['packageWeight']} lbs
           </Typography>
         </Grid>
         <Grid item xs={3}>
@@ -158,7 +146,7 @@ const Checkout = (props) => {
             gutterBottom
             variant="h6"
           >
-            Length: {orderInfo['packageLength']}
+            Length: {orderInfo['packageLength']} inches
           </Typography>
         </Grid>
         <Grid item xs={3}>
@@ -166,7 +154,7 @@ const Checkout = (props) => {
             gutterBottom
             variant="h6"
           >
-            Width: {orderInfo['packageWidth']}
+            Width: {orderInfo['packageWidth']} inches
           </Typography>
         </Grid>
         <Grid item xs={3}>
@@ -174,7 +162,7 @@ const Checkout = (props) => {
             gutterBottom
             variant="h6"
           >
-            Height: {orderInfo['packageHeight']}
+            Height: {orderInfo['packageHeight']} inches
           </Typography>
         </Grid>
         <Grid item xs={12}><Divider/></Grid>
@@ -207,12 +195,20 @@ const Checkout = (props) => {
                 Cost : ${solution['price']}
               </Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Typography
                 gutterBottom
                 variant="h6"
               >
-                Delivery Time: {solution['time']} hrs
+                Dispatch within: {solution['dispatch within: ']}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography
+                gutterBottom
+                variant="h6"
+              >
+                Station: {stationOptions[orderInfo['station'] - 1]}
               </Typography>
             </Grid>
             <Grid item xs={12}><Divider/></Grid>
