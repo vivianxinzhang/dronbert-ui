@@ -50,6 +50,12 @@ function ShipInfoForm(props) {
   const [recipientZip, setRecipientZip] = useState('94043');
   const [fragile, setFragile] = useState(false);
   const [station, setStation] = useState('1');
+  const [error, setError] = useState({
+    weightError: false,
+    lengthError: false,
+    heightError: false,
+    widthError: false,
+  })
 
   console.log('options -->', options);
 
@@ -374,6 +380,7 @@ function ShipInfoForm(props) {
         >
           <TextField
             autoComplete="weight"
+            error={error['weightError']}
             fullWidth
             helperText="package weight must be within 50 lbs"
             id="packageWeight"
@@ -392,6 +399,9 @@ function ShipInfoForm(props) {
             label="Weight(lbs)"
             name="packageWeight"
             onChange={(event) => {
+              if (Number(event.target.value) > 50) {
+                setError({...error, weightError: true})
+              } else {setError({...error, weightError: false})}
               handleChange({packageWeight : event.target.value});
             }}
             required
@@ -403,6 +413,7 @@ function ShipInfoForm(props) {
         >
           <TextField
             autoComplete="length"
+            error={error['lengthError']}
             fullWidth
             helperText="Package length must be within 25 inches"
             id="packageLength"
@@ -421,6 +432,7 @@ function ShipInfoForm(props) {
             label="Length(inch)"
             name="packageLength"
             onChange={(event) => {
+              setError({...error, lengthError: event.target.value > 25});
               handleChange({packageLength : event.target.value});
             }}
             required
@@ -432,6 +444,7 @@ function ShipInfoForm(props) {
         >
           <TextField
             autoComplete="width"
+            error={error['widthError']}
             fullWidth
             helperText='Package width must be within 25 inches'
             id="packageWidth"
@@ -450,6 +463,7 @@ function ShipInfoForm(props) {
             label="Width(inch)"
             name="packageWidth"
             onChange={(event) => {
+              setError({...error, widthError: event.target.value > 25});
               handleChange({packageWidth : event.target.value});
             }}
             required
@@ -462,6 +476,7 @@ function ShipInfoForm(props) {
         >
           <TextField
             autoComplete="height"
+            error={error['heightError']}
             fullWidth
             helperText='Package length must be within 25 inches'
             id="packageHeight"
@@ -480,6 +495,7 @@ function ShipInfoForm(props) {
             label="Height(inch)"
             name="packageHeight"
             onChange={(event) => {
+              setError({...error, heightError: event.target.value > 25});
               handleChange({packageHeight : event.target.value});
             }}
             required
