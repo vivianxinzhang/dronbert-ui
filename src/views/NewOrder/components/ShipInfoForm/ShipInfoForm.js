@@ -49,7 +49,7 @@ function ShipInfoForm(props) {
   const [recipientAddress, setRecipientAddress] = useState('1600 Amphitheatre Parkway, Mountain View');
   const [recipientZip, setRecipientZip] = useState('94043');
   const [fragile, setFragile] = useState(false);
-  const [station, setStation] = useState(1);
+  const [station, setStation] = useState('1');
 
   console.log('options -->', options);
 
@@ -546,9 +546,9 @@ function ShipInfoForm(props) {
             });
           }}
         >
-          <MenuItem value={1}>Sunset/Parkside</MenuItem>
-          <MenuItem value={2}>Mission District</MenuItem>
-          <MenuItem value={3}>Excelsior</MenuItem>
+          <MenuItem value="1">Sunset/Parkside</MenuItem>
+          <MenuItem value="2">Mission District</MenuItem>
+          <MenuItem value="3">Excelsior</MenuItem>
         </Select>
       </FormControl>
         </Grid>

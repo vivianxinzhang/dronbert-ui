@@ -208,7 +208,7 @@ const Checkout = (props) => {
                 gutterBottom
                 variant="h6"
               >
-                Station: {stationOptions[orderInfo['station'] - 1]}
+                Station: {stationOptions[Number(orderInfo['station']) - 1]}
               </Typography>
             </Grid>
             <Grid item xs={12}><Divider/></Grid>
