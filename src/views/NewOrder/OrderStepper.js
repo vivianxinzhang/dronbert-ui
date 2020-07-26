@@ -104,6 +104,7 @@ function OrderStepper () {
     packageHeight : '10',
     packageLength : '10',
     packageWidth : '10',
+    station: 1,
   });
   const [paid, setPaid] = useState(false);
 

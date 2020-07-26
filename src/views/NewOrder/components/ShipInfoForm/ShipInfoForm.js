@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 // import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 function ShipInfoForm(props) {
   const { handleChange, orderInfo } = props;
+  const classes = useStyles();
 
   const [options, setOptions] = useState([{
     address: '1600 Amphitheatre Parkway, Mountain View',
@@ -21,6 +36,7 @@ function ShipInfoForm(props) {
   const [recipientAddress, setRecipientAddress] = useState('1600 Amphitheatre Parkway, Mountain View');
   const [recipientZip, setRecipientZip] = useState('94043');
   const [fragile, setFragile] = useState(false);
+  const [station, setStation] = useState(1);
 
   console.log('options -->', options);
 
@@ -347,7 +363,7 @@ function ShipInfoForm(props) {
             autoComplete="weight"
             fullWidth
             id="packageWeight"
-            label="Weight"
+            label="Weight(< 50 lb)"
             name="packageWeight"
             onChange={(event) => {
               handleChange({packageWeight : event.target.value});
@@ -363,7 +379,7 @@ function ShipInfoForm(props) {
             autoComplete="length"
             fullWidth
             id="packageLength"
-            label="Length"
+            label="Length(< 25 inches)"
             name="packageLength"
             onChange={(event) => {
               handleChange({packageLength : event.target.value});
@@ -379,7 +395,7 @@ function ShipInfoForm(props) {
             autoComplete="width"
             fullWidth
             id="packageWidth"
-            label="Width"
+            label="Width(<25 inches)"
             name="packageWidth"
             onChange={(event) => {
               handleChange({packageWidth : event.target.value});
@@ -387,6 +403,7 @@ function ShipInfoForm(props) {
             required
           />
         </Grid>
+
         <Grid
           item
           xs={3}
@@ -395,7 +412,7 @@ function ShipInfoForm(props) {
             autoComplete="height"
             fullWidth
             id="packageHeight"
-            label="Height"
+            label="Height(<25 inches)"
             name="packageHeight"
             onChange={(event) => {
               handleChange({packageHeight : event.target.value});
@@ -403,6 +420,7 @@ function ShipInfoForm(props) {
             required
           />
         </Grid>
+      <Grid item xs={3}>
         <FormControlLabel
           control={
             <Checkbox
@@ -420,6 +438,50 @@ function ShipInfoForm(props) {
           label="Fragile?"
           labelPlacement="start"
         />
+      </Grid>
+        <Grid
+          item
+          xs={12}
+        ><Divider /></Grid>
+        <Grid
+          item
+          xs={12}
+        />
+      </Grid>
+
+      <Typography
+        gutterBottom
+        variant="h6"
+      >
+        Select dispatch station
+      </Typography>
+      <Grid
+        container
+        spacing={2}
+      >
+        <Grid
+          item
+          xs={3}
+        >
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Station</InputLabel>
+        <Select
+          labelId="StationLabelID"
+          id="stationID"
+          value={station}
+          onChange={event => {
+            setStation(event.target.value);
+            handleChange({
+              station: event.target.value,
+            });
+          }}
+        >
+          <MenuItem value={1}>Sunset/Parkside</MenuItem>
+          <MenuItem value={2}>Mission District</MenuItem>
+          <MenuItem value={3}>Excelsior</MenuItem>
+        </Select>
+      </FormControl>
+        </Grid>
       </Grid>
     </React.Fragment>
   );
