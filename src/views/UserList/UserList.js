@@ -50,9 +50,9 @@ const UserList = () => {
     // setOrderDetail();
     // setOrderNumber();
     console.log('useEffect called')
-    setOrderHistory();
-    setOrderDetail();
-    getOrderHistory();  // need fix: Promise returned from getOrderHistory is ignored
+    // setOrderHistory();
+    // setOrderDetail();
+    getOrderHistory().then(data => setOrderHistory(data));  // need fix: Promise returned from getOrderHistory is ignored
   }, [])
   console.log('orderHistory -->', orderHistory);
 
@@ -99,7 +99,7 @@ const UserList = () => {
       <div className={classes.content}>
         <UsersTable
           users={users}
-          orderhistory = { orderHistory }
+          orderHistory = { orderHistory }
           handleSelect = { handleSelect }
           getOrderDetail = { getOrderDetail }
         />
