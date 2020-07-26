@@ -37,6 +37,7 @@ const UserList = () => {
   });
 
   // transfer order number between sibling component
+  // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
   const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
 
   const handleSelect = number => {
@@ -54,7 +55,7 @@ const UserList = () => {
     // setOrderDetail();
     getOrderHistory().then(data => setOrderHistory(data));  // need fix: Promise returned from getOrderHistory is ignored
   }, [])
-  console.log('orderHistory -->', orderHistory);
+  // console.log('orderHistory -->', orderHistory);
 
   const getOrderDetail = () => {
     axios.post('http://localhost:5000/detail', {
@@ -93,7 +94,7 @@ const UserList = () => {
     <div className={classes.root}>
       <div>
         {/*<OrderDetail orderDetail = {orderDetail}/>*/}
-        <OrderDetail orderNumber = {orderNumber}/>
+        <OrderDetail orderDetail = { orderDetail } orderNumber = {orderNumber}/>
       </div>
       {/*<UsersToolbar />*/}
       <div className={classes.content}>

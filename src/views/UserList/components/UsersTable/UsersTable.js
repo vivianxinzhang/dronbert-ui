@@ -60,7 +60,7 @@ const UsersTable = (props) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
-  console.log(orderHistory);
+  // console.log(orderHistory);
 
   // const handleSelectAll = event => {
   //   const { users } = props;
@@ -180,14 +180,9 @@ const UsersTable = (props) => {
                         </Link>
                       }
                       </TableCell>
-
                       <TableCell>
-                        {/*{{orderhistory['Order ID']} ? {orderhistory['Order ID']} :*/}
+                        {/*{moment(user.createdAt).format('DD/MM/YYYY')}*/}
                         {order['Order Date']}
-                      </TableCell>
-                      <TableCell>
-                        {/*{moment(user.createdAt).format('DD/MM/YYYY')}*/}
-                        {/*{moment(user.createdAt).format('DD/MM/YYYY')}*/}
                       </TableCell>
                     </TableRow>
                   ))
