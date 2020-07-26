@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { UsersToolbar, UsersTable, OrderDetail } from './components';
+import { UsersTable, OrderDetail } from './components';
 import mockData from './data';
 // import { number } from 'prop-types';
 import axios from 'axios';
@@ -50,9 +50,10 @@ const UserList = () => {
     console.log('useEffect called')
     setOrderHistory();
     setOrderDetail();
-    window.addEventListener('load', getOrderHistory());
+    // window.addEventListener('load', getOrderHistory());
     getOrderHistory();  // need fix: Promise returned from getOrderHistory is ignored
   }, [])
+  console.log(orderHistory);
 
   const getOrderDetail = async () => {
     axios.post('http://localhost:5000/detail', {
@@ -65,10 +66,9 @@ const UserList = () => {
       .catch(error => console.log(error));
   }
 
-
-  const getOrderHistory = async () => {
+  async function getOrderHistory() {
     axios.post('http://localhost:5000/history', {
-      order_id : 'abc',
+      user_id : 'abc',
     })
       .then(response => {
         console.log(response.data);
@@ -76,6 +76,17 @@ const UserList = () => {
       })
       .catch(error => console.log(error));
   }
+
+  // const getOrderHistory = async () => {
+  //   axios.post('http://localhost:5000/history', {
+  //     user_id : 'abc',
+  //   })
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setOrderHistory(response.data);
+  //     })
+  //     .catch(error => console.log(error));
+  // }
 
   return (
     <div className={classes.root}>
@@ -85,7 +96,12 @@ const UserList = () => {
       </div>
       {/*<UsersToolbar />*/}
       <div className={classes.content}>
-        <UsersTable users={users} handleSelect = { handleSelect } getOrderDetail = { getOrderDetail }/>
+        <UsersTable
+          users={users}
+          orderhistory = { orderHistory }
+          handleSelect = { handleSelect }
+          getOrderDetail = { getOrderDetail }
+        />
       </div>
     </div>
   );

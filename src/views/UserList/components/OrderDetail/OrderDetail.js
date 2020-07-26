@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderDetail = (props) => {
   const classes = useStyles();
   const { orderDetail, orderNumber } = props;
+  console.log(orderDetail);
 
   return (
     <div className={classes.root}>
