@@ -77,56 +77,56 @@ export default [
   //   phone: '972-333-4106',
   //   avatarUrl: '/images/avatars/avatar_6.png',
   //   createdAt: 1554757200000
+  // // },
+  // {
+  //   id: uuid(),
+  //   orderID: '41873242',
+  //   status: 'complete',
+  //   deliveryTime: '11:05am',
+  //   name: 'Adam Denisov',
+  //   address: {
+  //     country: 'USA',
+  //     state: 'California',
+  //     city: 'San Francisco',
+  //     street: '317 Angus Road, Apt D1'
+  //   },
+  //   email: 'adam.denisov@devias.io',
+  //   phone: '858-602-3409',
+  //   avatarUrl: '/images/avatars/avatar_1.png',
+  //   createdAt: 1554670800000
   // },
-  {
-    id: uuid(),
-    orderID: '41873242',
-    status: 'complete',
-    deliveryTime: '11:05am',
-    name: 'Adam Denisov',
-    address: {
-      country: 'USA',
-      state: 'California',
-      city: 'San Francisco',
-      street: '317 Angus Road, Apt D1'
-    },
-    email: 'adam.denisov@devias.io',
-    phone: '858-602-3409',
-    avatarUrl: '/images/avatars/avatar_1.png',
-    createdAt: 1554670800000
-  },
-  {
-    id: uuid(),
-    orderID: '37834234',
-    status: 'complete',
-    deliveryTime: '10:35am',
-    name: 'Ava Gregoraci',
-    address: {
-      country: 'USA',
-      state: 'California',
-      city: 'San Francisco',
-      street: '2188  Armbrester Drive'
-    },
-    email: 'ava.gregoraci@devias.io',
-    avatarUrl: '/images/avatars/avatar_7.png',
-    phone: '415-907-2647',
-    createdAt: 1554325200000
-  },
-  {
-    id: uuid(),
-    orderID: '23723442',
-    status: 'complete',
-    deliveryTime: '9:55am',
-    name: 'Emilee Simchenko',
-    address: {
-      country: 'USA',
-      state: 'Nevada',
-      city: 'San Francisco',
-      street: '1798  Hickory Ridge Drive'
-    },
-    email: 'emilee.simchenko@devias.io',
-    phone: '702-661-1654',
-    avatarUrl: '/images/avatars/avatar_8.png',
-    createdAt: 1523048400000
-  },
+  // {
+  //   id: uuid(),
+  //   orderID: '37834234',
+  //   status: 'complete',
+  //   deliveryTime: '10:35am',
+  //   name: 'Ava Gregoraci',
+  //   address: {
+  //     country: 'USA',
+  //     state: 'California',
+  //     city: 'San Francisco',
+  //     street: '2188  Armbrester Drive'
+  //   },
+  //   email: 'ava.gregoraci@devias.io',
+  //   avatarUrl: '/images/avatars/avatar_7.png',
+  //   phone: '415-907-2647',
+  //   createdAt: 1554325200000
+  // },
+  // {
+  //   id: uuid(),
+  //   orderID: '23723442',
+  //   status: 'complete',
+  //   deliveryTime: '9:55am',
+  //   name: 'Emilee Simchenko',
+  //   address: {
+  //     country: 'USA',
+  //     state: 'Nevada',
+  //     city: 'San Francisco',
+  //     street: '1798  Hickory Ridge Drive'
+  //   },
+  //   email: 'emilee.simchenko@devias.io',
+  //   phone: '702-661-1654',
+  //   avatarUrl: '/images/avatars/avatar_8.png',
+  //   createdAt: 1523048400000
+  // },
 ];

@@ -22,11 +22,12 @@ const UserList = () => {
 
   // transfer order number between sibling component
   // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
-  const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
+  const [ orderNumber, setOrderNumber ] = useState([]);
+  // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
 
   const handleSelect = number => {
     setOrderNumber(number);
-    getOrderDetail();
+    getOrderDetail(number);
   }
   // console.log(orderNumber);
 
@@ -37,13 +38,14 @@ const UserList = () => {
     console.log('useEffect called')
     // setOrderHistory();
     // setOrderDetail();
-    getOrderHistory().then(data => setOrderHistory(data));  // need fix: Promise returned from getOrderHistory is ignored
+    getOrderHistory().then(data => setOrderHistory(data),);  // need fix: Promise returned from getOrderHistory is ignored
   }, [])
   // console.log('orderHistory -->', orderHistory);
 
-  const getOrderDetail = () => {
+  const getOrderDetail = (number) => {
     axios.post('http://localhost:5000/detail', {
-      order_id : 'abc',
+      // order_id : 'number',
+      order_id : number,
     })
       .then(response => {
         console.log(response.data);

@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   paper: {
-    height: 145,
+    height: 130,
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
   },
   detailInfo: {
-    height: 290,
+    height: 270,
     fontSize: 14
   }
 }));
