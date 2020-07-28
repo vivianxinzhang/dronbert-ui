@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -40,6 +40,24 @@ function ShipInfoForm(props) {
   const { handleChange, orderInfo } = props;
   const classes = useStyles();
 
+  const [stationOptions, setStationOptions] = useState([
+    {
+      station : '1',
+      address : 'Sunset/Parkside',
+      duration: Infinity,
+    },
+    {
+      station: '2',
+      address : 'Mission District',
+      duration: Infinity,
+    },
+    {
+      station: '3',
+      address: 'Excelsior',
+      duration: Infinity,
+    }
+  ])
+
   const [options, setOptions] = useState([{
     address: '1600 Amphitheatre Parkway, Mountain View',
     zipCode: '94043',
@@ -57,7 +75,7 @@ function ShipInfoForm(props) {
     widthError: false,
   })
 
-  console.log('options -->', options);
+  //console.log('options -->', options);
 
   async function getOptions(address) {
     if(!address) { return; }
@@ -65,8 +83,49 @@ function ShipInfoForm(props) {
       address : address,
     });
     const data = response.data;
-    console.log('data from /autocomplete -->', data);
+    //console.log('data from /autocomplete -->', data);
     setOptions(data);
+  }
+
+  async function getDurations(origins, destinations) {
+    const originsArr = origins.map(origin => {
+      return {
+        address : origin
+      }
+    });
+    const destinationsArr = destinations.map(destination => {
+      return {
+        address: destination + 'San Francisco, CA',
+      }
+    });
+
+      await axios.post('http://localhost:5000/duration',{
+        origins: originsArr,
+        destinations: destinationsArr,
+      }).
+      then(response => {
+        const durations = response.data
+          .map((duration, index) => {
+          return {
+            duration: duration.status === 'OK' ? duration.duration : Infinity,
+            station: (index + 1).toString(),
+          }
+        })
+        console.log('durations back from node -->', durations);
+        const newStationArray = stationOptions.map((option, index) => {
+          return {
+            ...option,
+            duration: durations[index].duration,
+          };
+        }).sort((a, b) => a.duration - b.duration);
+        setStationOptions(newStationArray);
+        setStation(newStationArray[0].station);
+        handleChange({
+          station: newStationArray[0].station,
+        });
+        console.log('newStationArray -->', newStationArray);
+        console.log('newStation -->', newStationArray[0].station);
+      })
   }
 
   function handleAddressInput(event, value) {
@@ -76,6 +135,13 @@ function ShipInfoForm(props) {
 
   console.log('senderAddress -->', senderAddress);
 
+  useEffect(() => {
+    const origins = [ senderAddress.address + ', CA, ' + senderAddress.zipCode ];
+    const destinations = stationOptions.map(option => option.address);
+    getDurations(origins, destinations);
+  }, [])
+
+  console.log('station -->', station);
   return (
     <React.Fragment>
       <Typography
@@ -191,6 +257,11 @@ function ShipInfoForm(props) {
                   ...params.InputProps,
                 }}
                 label="Address"
+                onMouseOut={() => {
+                  const origins = [ senderAddress.address + ', CA, ' + senderAddress.zipCode ];
+                  const destinations = stationOptions.map(option => option.address);
+                  getDurations(origins, destinations);
+                }}
               />
             )}
           />
@@ -216,6 +287,25 @@ function ShipInfoForm(props) {
             required
           />
         </Grid>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-simple-select-label">Station</InputLabel>
+          <Select
+            labelId="StationLabelID"
+            id="stationID"
+            value={station}
+            onChange={event => {
+              setStation(event.target.value);
+              handleChange({
+                station: event.target.value,
+              });
+            }}
+          >
+            {
+              stationOptions.map((option, index) =>
+                <MenuItem key={index} value={option.station}>{option.address}</MenuItem>)
+            }
+          </Select>
+        </FormControl>
         <Grid
           item
           xs={12}
@@ -535,40 +625,6 @@ function ShipInfoForm(props) {
         />
       </Grid>
 
-      <Typography
-        gutterBottom
-        variant="h6"
-      >
-        Select dispatch station
-      </Typography>
-      <Grid
-        container
-        spacing={2}
-      >
-        <Grid
-          item
-          xs={3}
-        >
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Station</InputLabel>
-        <Select
-          labelId="StationLabelID"
-          id="stationID"
-          value={station}
-          onChange={event => {
-            setStation(event.target.value);
-            handleChange({
-              station: event.target.value,
-            });
-          }}
-        >
-          <MenuItem value="1">Sunset/Parkside</MenuItem>
-          <MenuItem value="2">Mission District</MenuItem>
-          <MenuItem value="3">Excelsior</MenuItem>
-        </Select>
-      </FormControl>
-        </Grid>
-      </Grid>
     </React.Fragment>
   );
 }
