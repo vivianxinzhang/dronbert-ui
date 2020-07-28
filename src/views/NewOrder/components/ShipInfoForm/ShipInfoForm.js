@@ -37,8 +37,7 @@ const HtmlTooltip = withStyles((theme) => ({
 }))(Tooltip);
 
 function ShipInfoForm(props) {
-  const { handleChange, orderInfo } = props;
-  const classes = useStyles();
+  const { handleChange, orderInfo, toggleError } = props;
 
   const [stationOptions, setStationOptions] = useState([
     {
@@ -65,7 +64,7 @@ function ShipInfoForm(props) {
 
   const [senderAddress, setSenderAddress] = useState(options[0]);
   const [recipientAddress, setRecipientAddress] = useState('1600 Amphitheatre Parkway, Mountain View');
-  const [recipientZip, setRecipientZip] = useState('94043');
+  const [recipientZip, setRecipientZip] = useState('');
   const [fragile, setFragile] = useState(false);
   const [station, setStation] = useState('1');
   const [error, setError] = useState({
@@ -111,7 +110,7 @@ function ShipInfoForm(props) {
             station: (index + 1).toString(),
           }
         })
-        console.log('durations back from node -->', durations);
+      //  console.log('durations back from node -->', durations);
         const newStationArray = stationOptions.map((option, index) => {
           return {
             ...option,
@@ -123,8 +122,8 @@ function ShipInfoForm(props) {
         handleChange({
           station: newStationArray[0].station,
         });
-        console.log('newStationArray -->', newStationArray);
-        console.log('newStation -->', newStationArray[0].station);
+   //     console.log('newStationArray -->', newStationArray);
+   //     console.log('newStation -->', newStationArray[0].station);
       })
   }
 
@@ -133,15 +132,19 @@ function ShipInfoForm(props) {
     setTimeout(() => { getOptions(address); }, 500);
   }
 
-  console.log('senderAddress -->', senderAddress);
-
   useEffect(() => {
     const origins = [ senderAddress.address + ', CA, ' + senderAddress.zipCode ];
     const destinations = stationOptions.map(option => option.address);
     getDurations(origins, destinations);
   }, [])
 
-  console.log('station -->', station);
+  useEffect(() => {
+    toggleError(error);
+  },[error])
+  // console.log('station -->', station);
+
+  // console.log(error);
+
   return (
     <React.Fragment>
       <Typography
@@ -287,11 +290,18 @@ function ShipInfoForm(props) {
             required
           />
         </Grid>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Station</InputLabel>
-          <Select
-            labelId="StationLabelID"
+        <Grid
+          item
+          xs={3}
+        >
+          <HtmlTooltip
+            arrow
+            placement="top"
+            title="The option list is sorted by default from nearest to farthest from the provided sender address">
+          <TextField
             id="stationID"
+            label='Station'
+            select
             value={station}
             onChange={event => {
               setStation(event.target.value);
@@ -299,13 +309,15 @@ function ShipInfoForm(props) {
                 station: event.target.value,
               });
             }}
+            helperText='The default selection is the nearest to your sender address'
           >
             {
               stationOptions.map((option, index) =>
                 <MenuItem key={index} value={option.station}>{option.address}</MenuItem>)
             }
-          </Select>
-        </FormControl>
+          </TextField>
+          </HtmlTooltip>
+        </Grid>
         <Grid
           item
           xs={12}
@@ -489,7 +501,7 @@ function ShipInfoForm(props) {
             label="Weight(lbs)"
             name="packageWeight"
             onChange={(event) => {
-              if (Number(event.target.value) > 50) {
+              if (Number(event.target.value) > 20) {
                 setError({...error, weightError: true})
               } else {setError({...error, weightError: false})}
               handleChange({packageWeight : event.target.value});
@@ -600,7 +612,7 @@ function ShipInfoForm(props) {
               title="Fragile items can only be shipped by walking robots">
             <Checkbox
               checked={fragile}
-              color="secondary"
+              color='secondary'
               name="fragile"
               onChange={(event) => {
                 setFragile(Boolean(event.target.checked));
@@ -612,7 +624,6 @@ function ShipInfoForm(props) {
             </HtmlTooltip>
           }
           label="Fragile?"
-          labelPlacement="start"
         />
       </Grid>
         <Grid
@@ -624,7 +635,6 @@ function ShipInfoForm(props) {
           xs={12}
         />
       </Grid>
-
     </React.Fragment>
   );
 }

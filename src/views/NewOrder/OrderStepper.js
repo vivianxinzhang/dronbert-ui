@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { CircularProgress } from '@material-ui/core';
+import Popover from '@material-ui/core/Popover';
+import Alert from '@material-ui/lab/Alert';
 
 import axios from 'axios';
 
@@ -106,8 +108,19 @@ function OrderStepper () {
     packageWidth : '10',
     station: '1',
   });
+  const [error, setError] = useState({
+    weightError: false,
+    lengthError: false,
+    heightError: false,
+    widthError: false,
+  })
+  const [hasError, setHasError] = useState(true);
   const [paid, setPaid] = useState(false);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const open = hasError && Boolean(anchorEl);
+  const id = open ? 'next' : undefined;
   const stripe = useStripe();
   const elements = useElements();
 
@@ -117,15 +130,32 @@ function OrderStepper () {
     }
   }, [paid])
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   function handleChange(newInfo) {
     const newOrderInfo = Object.assign(orderInfo, newInfo);
     setOrderInfo(newOrderInfo);
   }
 
+  function toggleError(error) {
+    setError(error);
+  }
+
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <ShipInfoForm handleChange={handleChange} orderInfo={orderInfo}/>;
+        return <ShipInfoForm
+          handleChange={handleChange}
+          orderInfo={orderInfo}
+          error={error}
+          toggleError={toggleError}
+        />;
       case 1:
         return <Recommend
           handleChange={handleChange}
@@ -218,6 +248,12 @@ function OrderStepper () {
       });
   }
 
+  const validateInputs = () => {
+    const newHasError = !Object.values(error).includes(true);
+    setHasError(!newHasError);
+    return newHasError;
+  }
+
   const getRecommendations = async () => {
     console.log('We are ready to get recommendations!');
     console.log('orderInfo before send to recommendation -->', orderInfo);
@@ -249,6 +285,9 @@ function OrderStepper () {
   const handleNext = () => {
     console.log(activeStep);
     if (activeStep === 0) {
+      if(!validateInputs()) {
+        return;
+      }
       getRecommendations();
     } else if (activeStep === 3) {
       pay();
@@ -260,8 +299,6 @@ function OrderStepper () {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
-  console.log('orderInfo -->', orderInfo);
 
   return (
     <React.Fragment>
@@ -313,12 +350,15 @@ function OrderStepper () {
                       Back
                     </Button>
                   )}
+
                   <Button
+                    aria-describedby={id}
                     className={classes.button}
                     color="primary"
                     disabled={loading}
                     type="submit"
                     variant="contained"
+                    onClick={handleClick}
                   >
                     {
                       loading
@@ -328,6 +368,22 @@ function OrderStepper () {
                         activeStep === steps.length - 1 ? 'Place your order' : 'Next'
                     }
                   </Button>
+                  <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'center',
+                    }}
+                  >
+                    <Alert severity="error">Please correct the information before moving on!</Alert>
+                  </Popover>
                 </div>
               </React.Fragment>
             )}
