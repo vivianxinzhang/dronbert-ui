@@ -57,7 +57,6 @@ const useStyles = makeStyles(theme => ({
     // '&:hover': { backgroundColor: '#8c9eff'},
     '&:hover': { backgroundColor: '#e3f2fd'},
   }
-
 }));
 
 const UsersTable = (props) => {
@@ -145,11 +144,9 @@ const UsersTable = (props) => {
                   orderHistory.map(order => (
                     <TableRow
                       className={classes.tableRow}
-                      onClick={ () => handleSelect(order['Order ID'],
-                        // document.getElementById(order['Order ID']).style.backgroundColor = "yellow"
-                      ) }
+                      onClick={ () => handleSelect(order['Order ID']) }
                       key={order['Order ID']}
-                      id = {order['Order ID']}
+                      // id = {order['Order ID']}
                       // selected={selectedUsers.indexOf(user.id) !== -1}
                     >
                       {/*<TableCell padding="checkbox">*/}
@@ -177,7 +174,7 @@ const UsersTable = (props) => {
                         {order['Delivery Address']}
                       </TableCell>
 
-                      <TableCell>{order['Delivery Time'] ? order['Delivery Time']:
+                      <TableCell>{order['Order Status'] == 'complete' ? order['Delivery Time']:
                         <Link to="/dashboard">
                           <Button
                             className={classes.button}

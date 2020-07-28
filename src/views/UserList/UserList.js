@@ -22,8 +22,9 @@ const UserList = () => {
 
   // transfer order number between sibling component
   // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
-  const [ orderNumber, setOrderNumber ] = useState([]);
   // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
+
+  const [ orderNumber, setOrderNumber ] = useState([]);
 
   const handleSelect = number => {
     setOrderNumber(number);
@@ -45,7 +46,8 @@ const UserList = () => {
   const getOrderDetail = (number) => {
     axios.post('http://localhost:5000/detail', {
       // order_id : 'number',
-      order_id : number,
+      // order_id : number,
+      order_id : 1,
     })
       .then(response => {
         console.log(response.data);
