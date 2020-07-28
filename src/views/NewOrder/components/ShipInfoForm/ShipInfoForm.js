@@ -44,16 +44,19 @@ function ShipInfoForm(props) {
       station : '1',
       address : 'Sunset/Parkside',
       duration: Infinity,
+      distance: '',
     },
     {
       station: '2',
       address : 'Mission District',
       duration: Infinity,
+      distance: '',
     },
     {
       station: '3',
       address: 'Excelsior',
       duration: Infinity,
+      distance: '',
     }
   ])
 
@@ -106,7 +109,8 @@ function ShipInfoForm(props) {
         const durations = response.data
           .map((duration, index) => {
           return {
-            duration: duration.status === 'OK' ? duration.duration : Infinity,
+            duration: duration.duration,
+            distance: duration.distance,
             station: (index + 1).toString(),
           }
         })
@@ -114,7 +118,9 @@ function ShipInfoForm(props) {
         const newStationArray = stationOptions.map((option, index) => {
           return {
             ...option,
+            address: option.address,
             duration: durations[index].duration,
+            distance: durations[index].distance,
           };
         }).sort((a, b) => a.duration - b.duration);
         setStationOptions(newStationArray);
@@ -313,7 +319,7 @@ function ShipInfoForm(props) {
           >
             {
               stationOptions.map((option, index) =>
-                <MenuItem key={index} value={option.station}>{option.address}</MenuItem>)
+                <MenuItem key={index} value={option.station}>{option.address}({option.distance}) </MenuItem>)
             }
           </TextField>
           </HtmlTooltip>
