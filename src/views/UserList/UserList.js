@@ -47,7 +47,7 @@ const UserList = () => {
     axios.post('http://localhost:5000/detail', {
       // order_id : 'number',
       // order_id : number,
-      order_id : 1,
+      order_id : 'kLAXUDmP',
     })
       .then(response => {
         console.log(response.data);
@@ -58,7 +58,7 @@ const UserList = () => {
 
   async function getOrderHistory() {
     axios.post('http://localhost:5000/history', {
-      user_id : 'abc',
+      user_id : 'vincent',
     })
       .then(response => {
         // console.log(response.data);
