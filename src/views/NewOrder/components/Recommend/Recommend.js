@@ -62,7 +62,25 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'baseline',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    marginRight: 'auto',
+    marginLeft: 'auto',
+  },
+  cardType: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'baseline',
+    margin: 'auto',
+  },
+  optionType: {
+    color: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  optionNoType: {
+    color: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   footer: {
     borderTop: `1px solid ${theme.palette.divider}`,
@@ -105,13 +123,13 @@ const Recommend = (props) => {
         type: 'Cheapest',
       });
     }
-    if (option['dispatch within: '] === '30 mins'){
+    if (option['dispatch within: '] === '30 mins' && option['carrier'] === 'drone'){
       return Object.assign(option, {
         type: 'Fastest',
       })
     } else {
       return Object.assign(option, {
-        type: 'Balanced',
+        type: 'none',
       })
     }
   });
@@ -164,14 +182,31 @@ const Recommend = (props) => {
               xs={12}
             >
               <Card>
-                <CardHeader
-                  className={classes.cardHeader}
-                  subheader={option.subheader}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  title={option.type}
-                  titleTypographyProps={{ align: 'center' }}
-                />
                 <CardContent>
+                  <Grid container>
+                    <Grid item xs={12} xl={12}>
+                  <div className={classes.cardPricing}>
+                    <Typography
+                      align="center"
+                      component="h2"
+                      variant="h5"
+                    >
+                      dispatch within:
+                    </Typography>
+                  </div>
+                    </Grid>
+                    <Grid item xs={12} xl={12}>
+                  <div className={classes.cardPricing}>
+                    <Typography
+                      align="center"
+                      component="h2"
+                      variant="h4"
+                    >
+                      {option['dispatch within: ']}
+                    </Typography>
+                  </div>
+                      </Grid>
+                    <Grid item xs={12} xl={12}>
                   <div className={classes.cardPricing}>
                     <Typography
                       color="textPrimary"
@@ -181,15 +216,8 @@ const Recommend = (props) => {
                       ${option.price}
                     </Typography>
                   </div>
-                  <div className={classes.cardPricing}>
-                  <Typography
-                    align="center"
-                    component="h2"
-                    variant="h4"
-                  >
-                    dispatch within: {option['dispatch within: ']}
-                  </Typography>
-                  </div>
+                    </Grid>
+                    <Grid item xs={12} xl={12}>
                   <div className={classes.cardPricing}>
                   <Typography
                     align="center"
@@ -199,6 +227,17 @@ const Recommend = (props) => {
                     {option.carrier}
                   </Typography>
                   </div>
+                    </Grid>
+                    <div className={classes.cardType}>
+                      <Typography
+                        component="h2"
+                        variant="h4"
+                        className={option.type === 'none' ? classes.optionNoType: classes.optionType}
+                      >
+                        {option.type}
+                      </Typography>
+                    </div>
+                  </Grid>
                 </CardContent>
                 <CardActions>
                   <Button
