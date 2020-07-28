@@ -191,57 +191,56 @@ const UsersTable = (props) => {
                   ))
                 }
               </TableBody>
-
-              <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
-                  <TableRow
-                    className={classes.tableRow}
-                    hover
-                    onClick={ () => handleSelect(user.orderID) }
-                    key={user.id}
-                    selected={selectedUsers.indexOf(user.id) !== -1}
-                  >
-                    {/*<TableCell padding="checkbox">*/}
-                    {/*  <Checkbox*/}
-                    {/*    checked={selectedUsers.indexOf(user.id) !== -1}*/}
-                    {/*    color="primary"*/}
-                    {/*    onChange={event => handleSelectOne(event, user.id)}*/}
-                    {/*    value="true"*/}
-                    {/*  />*/}
-                    {/*</TableCell>*/}
-                    <TableCell>
-                      <div className={classes.nameContainer}>
-                        {/*<Avatar*/}
-                        {/*  className={classes.avatar}*/}
-                        {/*  src={user.avatarUrl}*/}
-                        {/*>*/}
-                        {/*  {getInitials(user.name)}*/}
-                        {/*</Avatar>*/}
-                        <Typography variant="body1">{user.orderID}</Typography>
-                      </div>
-                    </TableCell>
-                    <TableCell>{user.status}</TableCell>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>
-                      {user.address.street}, {user.address.city}
-                    </TableCell>
-                    <TableCell>{user.deliveryTime ? user.deliveryTime :
-                      <Link to="/dashboard">
-                        <Button
-                          className={classes.button}
-                          to={page.href}
-                        >
-                          Tracking
-                        </Button>
-                      </Link>
-                    }
-                    </TableCell>
-                    <TableCell>
-                      {moment(user.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+              {/*<TableBody>*/}
+              {/*  {users.slice(0, rowsPerPage).map(user => (*/}
+              {/*    <TableRow*/}
+              {/*      className={classes.tableRow}*/}
+              {/*      hover*/}
+              {/*      onClick={ () => handleSelect(user.orderID) }*/}
+              {/*      key={user.id}*/}
+              {/*      selected={selectedUsers.indexOf(user.id) !== -1}*/}
+              {/*    >*/}
+              {/*      /!*<TableCell padding="checkbox">*!/*/}
+              {/*      /!*  <Checkbox*!/*/}
+              {/*      /!*    checked={selectedUsers.indexOf(user.id) !== -1}*!/*/}
+              {/*      /!*    color="primary"*!/*/}
+              {/*      /!*    onChange={event => handleSelectOne(event, user.id)}*!/*/}
+              {/*      /!*    value="true"*!/*/}
+              {/*      /!*  />*!/*/}
+              {/*      /!*</TableCell>*!/*/}
+              {/*      <TableCell>*/}
+              {/*        <div className={classes.nameContainer}>*/}
+              {/*          /!*<Avatar*!/*/}
+              {/*          /!*  className={classes.avatar}*!/*/}
+              {/*          /!*  src={user.avatarUrl}*!/*/}
+              {/*          /!*>*!/*/}
+              {/*          /!*  {getInitials(user.name)}*!/*/}
+              {/*          /!*</Avatar>*!/*/}
+              {/*          <Typography variant="body1">{user.orderID}</Typography>*/}
+              {/*        </div>*/}
+              {/*      </TableCell>*/}
+              {/*      <TableCell>{user.status}</TableCell>*/}
+              {/*      <TableCell>{user.name}</TableCell>*/}
+              {/*      <TableCell>*/}
+              {/*        {user.address.street}, {user.address.city}*/}
+              {/*      </TableCell>*/}
+              {/*      <TableCell>{user.deliveryTime ? user.deliveryTime :*/}
+              {/*        <Link to="/dashboard">*/}
+              {/*          <Button*/}
+              {/*            className={classes.button}*/}
+              {/*            to={page.href}*/}
+              {/*          >*/}
+              {/*            Tracking*/}
+              {/*          </Button>*/}
+              {/*        </Link>*/}
+              {/*      }*/}
+              {/*      </TableCell>*/}
+              {/*      <TableCell>*/}
+              {/*        {moment(user.createdAt).format('DD/MM/YYYY')}*/}
+              {/*      </TableCell>*/}
+              {/*    </TableRow>*/}
+              {/*  ))}*/}
+              {/*</TableBody>*/}
             </Table>
           </div>
         </PerfectScrollbar>
