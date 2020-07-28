@@ -51,7 +51,13 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     justifyContent: 'flex-end'
+  },
+  tableRow: {
+    // '&:hover': { backgroundColor: '#c5cae9'},
+    // '&:hover': { backgroundColor: '#8c9eff'},
+    '&:hover': { backgroundColor: '#e3f2fd'},
   }
+
 }));
 
 const UsersTable = (props) => {
@@ -139,7 +145,6 @@ const UsersTable = (props) => {
                   orderHistory.map(order => (
                     <TableRow
                       className={classes.tableRow}
-                      hover
                       onClick={ () => handleSelect(order['Order ID'],
                         // document.getElementById(order['Order ID']).style.backgroundColor = "yellow"
                       ) }
