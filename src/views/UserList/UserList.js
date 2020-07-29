@@ -23,7 +23,6 @@ const UserList = () => {
   // transfer order number between sibling component
   // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
   const [ orderNumber, setOrderNumber ] = useState([]);
-  // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
 
   const handleSelect = orderNumber => {
     setOrderNumber(orderNumber);
@@ -33,13 +32,9 @@ const UserList = () => {
 
   const [ orderHistory, setOrderHistory ] = useState([]);
   useEffect(() => {
-    // setOrderDetail();
-    // setOrderNumber();
     console.log('useEffect called')
-    // setOrderHistory();
-    // setOrderDetail();
     getOrderHistory()
-      .then(data => setOrderHistory(data));  // need fix: Promise returned from getOrderHistory is ignored
+      .then(data => setOrderHistory(data));
   }, []);
 
   // console.log('orderHistory -->', orderHistory);
@@ -51,9 +46,16 @@ const UserList = () => {
       .then(response => {
         console.log('order history data -->', response.data);
         setOrderHistory(response.data);
-        console.log('order history data last one -->', response.data[0].order_id);
-        setOrderNumber(response.data[0].order_id);
-        getOrderDetail(response.data[0].order_id);
+        return response.data[0];
+      })
+      .then(data => {
+        console.log('last response -> ', data['Order ID']);
+        setOrderNumber(data['Order ID']);
+        return data['Order ID'];
+      })
+      .then(data => {
+        console.log(data);
+        getOrderDetail(data);
       })
       .catch(error => console.log(error));
   }
