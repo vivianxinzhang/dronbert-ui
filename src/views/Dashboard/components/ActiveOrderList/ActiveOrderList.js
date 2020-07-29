@@ -79,55 +79,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ActiveOrderList(props) {
-  console.log("props->",props)
-  const [state, setState] = useState({
-    checkedA: false,
-    checkedB: false,
-    checkedC: false,
-  });
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
-  const { className, ...rest } = props;
+  const { className, toggleActive, ...rest } = props;
 
   const classes = useStyles();
   const theme = useTheme();
 
-  function updateList(){
-    console.log('activeorderlist',props.activeorderlist)
-    // props.updateList([]);
-    // props.setactiveorderlist(props.activeorderlist)
-  }
-  const toggleActive=(selectedOrder) =>{
-    console.log('toggleActive called')
-    // const postsCopy = [...posts];
-    console.log('props.activeorderlist->',props.activeorderlist)
-    
-    // console.log("old toggled->",newPost[index].toggled)
-    // newPost[index].toggled === true
-    //     ?(newPost[index].toggled = false)
-    //     :(newPost[index].toggled = true)
-    // console.log("new toggled->",newPost[index].toggled)
-    console.log('props.activeorderlist [selectedOrder]',props.activeorderlist[selectedOrder])
-    console.log('AL selectedOrder->',selectedOrder)
-    props.setactiveorderlist(props.activeorderlist);
-    props.setSelectedOrder(selectedOrder)
-    // console.log("props.index->",props.index)
-    // setPosts(...newPost,newPost[index].toggled);
-    // setPosts(prevState => {
-    //     return {...prevState, toggled:prevState.toggled}
-    // });
-    
-}
   return ( 
-    <div >
-      {/* {
-        <Button onClick={() => { updateList() }} variant="contained" color="secondary">click to update   
-        </Button>
-      } */}
-       
-
+    <div>
     <Card
       {...rest}
       className={clsx(classes.root, className)}
@@ -144,72 +103,16 @@ function ActiveOrderList(props) {
 
       {/* <FormGroup row> */}
       <FormGroup>
-          {/* <FormControlLabel
-            control={<Switch checked={state.checkedA} onChange={handleChange} name="checkedA" />}
-            label="Active Order #1"
-          />
-          <FormControlLabel
-            control={<Switch checked={state.checkedB} onChange={handleChange} name="checkedB" />}
-            label="Active Order #2"
-          />
-           <FormControlLabel
-            control={<Switch checked={state.checkedC} onChange={handleChange} name="checkedC" />}
-            label="Active Order #3"
-          /> */}
-
           {
-          // Array.from(posts).map((element,index) =>
-            props.activeorderlist.map((element,selectedOrder) =>
+            props.list.map((element,index) =>
               <Button 
                 color="primary"
-                key={selectedOrder}   
-                onClick={() => { toggleActive(selectedOrder) }}>{element['Tracking ID']}
+                key={index}
+                onClick={() => { toggleActive(index) }}>{element['Tracking ID']}
               </Button>)
           // posts.map(post => <Button variant="contained" color="primary" key={post.id}>{post.name}</Button>)
           }
         </FormGroup>
-        {/* {
-          // Array.from(posts).map((element,index) =>
-          props.activeorderlist.map((element,index) =>
-            <Button color="primary"
-              onClick={() => { toggleActive(index) }}   
-              key={index}>{element.Recipient}
-            </Button>)
-          // posts.map(post => <Button variant="contained" color="primary" key={post.id}>{post.name}</Button>)
-        } */}
-
-      {/* <FormGroup row> */}
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
-          label="Active Order #1"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
-          label="Active Order #2"
-        />
-      </FormGroup> */}
-
-      {/* <CardContent>
-        <Button color="primary" href="#contained-buttons">
-          Active Order #1
-        </Button>
-        <br/>
-        <Button color="primary" href="#contained-buttons">
-          Active Order #2
-        </Button>
-       </CardContent> */}
-
-      
-      {/* <BootstrapButton variant="contained" color="primary" disableRipple className={classes.margin}>
-        Active Order #1
-      </BootstrapButton> */}
-      {/* <div className={classes.chartContainer}>
-          Order#1 : ...
-          <br/>
-          Order#2 : ...
-      </div> */}
-      {/* <div className={classes.stats} /> */}
     </Card>
     </div>
   );

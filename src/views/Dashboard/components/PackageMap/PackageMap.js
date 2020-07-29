@@ -18,9 +18,10 @@ const useStyles = makeStyles(() => ({
 const PackageMap = props => {
 
   const classes = useStyles();
+  const { info } = props;
   return (
     <div className={classes.root}>
-      <GMap />
+      <GMap info={info}/>
     </div>
   );
 };

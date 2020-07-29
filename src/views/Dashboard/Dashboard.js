@@ -43,8 +43,7 @@ const Dashboard = () => {
   const [loadingDetail, setLoadingDetail] = useState(false);
 
   const [showDetail, setShowDetail] = useState(false);
-  // const [activeorderlist, setactiveorderlist] = useState([{order_id: 'abc'}]);
-  const [activeorderlist, setactiveorderlist] = useState([]);
+  const [activeOrderList, setActiveOrderList] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(0);
   const [trackingInfo, setTrackingInfo] = useState({});
   const [orderDetail, setOrderDetail] = useState({});
@@ -76,6 +75,10 @@ const Dashboard = () => {
     }
   }, [showDetail])
 
+  const toggleActive=(index) =>{
+    setSelectedOrder(index);
+  }
+
   //fetch active order list data
   useEffect(() => {
     console.log('useEffect called')
@@ -85,18 +88,35 @@ const Dashboard = () => {
       .then(res => {
         console.log('res->',res)
         console.log('data->',res.data)
-        setactiveorderlist(res.data)
+        setActiveOrderList(res.data)
       })
       .catch(err =>{
         console.log(err)
       })
   },[])
-  // console.log('activeorderlist->',activeorderlist)
+
+  //fetch tracking info
+  useEffect(() => {
+    // console.log('Tracking useEffect called')
+    if(activeOrderList.length === 0) {return;}
+    const tracking_id=activeOrderList[selectedOrder]['Tracking ID'];
+    // console.log('tracking_id',tracking_id)
+    axios.post('http://localhost:5000/tracking',{
+      tracking_id : tracking_id
+    })
+      .then(res => {
+        setTrackingInfo(res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  },[selectedOrder,activeOrderList])
+
 
   const renderOrderDetail = () => {
     console.log(loadingDetail);
     console.log(orderDetail);
-    if (activeorderlist.length === 0) {
+    if (activeOrderList.length === 0) {
       return <span> You don't have any active orders! </span>;
     }
     if (loadingDetail) {
@@ -104,6 +124,8 @@ const Dashboard = () => {
     }
     return <OrderDetail orderDetail={orderDetail}/>;
   }
+
+  console.log('trackingInfo dashboard -->', trackingInfo);
 
   return (
     <Grid
@@ -139,7 +161,7 @@ const Dashboard = () => {
                   item
                   xl={12}
                 >
-                  {showDetail ? renderOrderDetail(): <PackageMap />}
+                  {showDetail ? renderOrderDetail(): <PackageMap info={trackingInfo}/>}
                 </Grid>
               </Grid>
             </CardContent>
@@ -172,10 +194,9 @@ const Dashboard = () => {
             <CardContent>
               <TimeStamp />
               <ActiveOrderList 
-                activeorderlist={activeorderlist} 
-                selectedOrder = {selectedOrder}
-                setactiveorderlist={setactiveorderlist}
-                setSelectedOrder = {setSelectedOrder}
+                list={activeOrderList}
+                selected={selectedOrder}
+                toggleActive={toggleActive}
               />
             </CardContent>
             <CardActions>
