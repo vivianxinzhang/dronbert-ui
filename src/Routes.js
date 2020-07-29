@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
@@ -18,6 +18,12 @@ import {
 } from './views';
 
 const Routes = () => {
+
+  // user information after login will be saved here
+  // and pass to user profile and shipInfo
+
+  const [userInfo, setUserInfo] = useState();
+
   return (
     <Switch>
       <Redirect
