@@ -47,8 +47,10 @@ const Dashboard = () => {
   const [selectedOrder, setSelectedOrder] = useState(0);
   const [trackingInfo, setTrackingInfo] = useState({});
   const [orderDetail, setOrderDetail] = useState({});
+  const [currentTime, setCurrentTime] = useState(new Date());
   
-  console.log('dash selectedOrder->',selectedOrder)
+  console.log('dash selectedOrder->',selectedOrder);
+  console.log('dash trackingInfo->', trackingInfo);
 
   const toggleDetail = (event) => {
     setLoadingDetail(true);
@@ -68,6 +70,15 @@ const Dashboard = () => {
       .catch(error => console.log(error));
   }
 
+  // set a timer to record time for this page; update once per minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+     // console.log(new Date());
+      setCurrentTime(new Date());
+    }, 2 * 1000);
+    return () => clearInterval(timer);
+  }, [])
+
   // get order detail as an effect of switching on showDetail
   useEffect(() => {
     if (showDetail === true) {
@@ -86,32 +97,36 @@ const Dashboard = () => {
       user_id : 'abc'
     })
       .then(res => {
-        console.log('res->',res)
-        console.log('data->',res.data)
+      //  console.log('res->',res)
+      //  console.log('data->',res.data)
         setActiveOrderList(res.data)
       })
       .catch(err =>{
         console.log(err)
-      })
-  },[])
+      });
+  }, []);
 
   //fetch tracking info
+ const getTrackingInfo = async () => {
+   if(activeOrderList.length === 0) {return;}
+   const tracking_id=activeOrderList[selectedOrder]['Tracking ID'];
+   // console.log('tracking_id',tracking_id)
+   await axios.post('http://localhost:5000/tracking',{
+     tracking_id : tracking_id
+   })
+     .then(res => {
+       setTrackingInfo(res.data)
+     })
+     .catch(err =>{
+       console.log(err)
+     });
+   console.log('trackingInfo -->', trackingInfo);
+  }
+
   useEffect(() => {
     // console.log('Tracking useEffect called')
-    if(activeOrderList.length === 0) {return;}
-    const tracking_id=activeOrderList[selectedOrder]['Tracking ID'];
-    // console.log('tracking_id',tracking_id)
-    axios.post('http://localhost:5000/tracking',{
-      tracking_id : tracking_id
-    })
-      .then(res => {
-        setTrackingInfo(res.data)
-      })
-      .catch(err =>{
-        console.log(err)
-      })
-  },[selectedOrder,activeOrderList])
-
+    getTrackingInfo();
+  },[selectedOrder,activeOrderList, currentTime])
 
   const renderOrderDetail = () => {
     console.log(loadingDetail);
@@ -125,10 +140,20 @@ const Dashboard = () => {
     return <OrderDetail orderDetail={orderDetail}/>;
   }
 
-  console.log('trackingInfo dashboard -->', trackingInfo);
+ // console.log('activeOrderList -->', activeOrderList);
+
   const orderNumber = activeOrderList.length !== 0 ? activeOrderList[selectedOrder]['Tracking ID'] : undefined;
   const recipient = activeOrderList.length !== 0 ? activeOrderList[selectedOrder]['Recipient'] : undefined;
   const status = trackingInfo ? trackingInfo.status : undefined;
+
+  const deliveryTimeMS = Date.parse(trackingInfo['estimated delivered time']);
+  const currentTimeMS = Date.parse(currentTime);
+  const timeLeftMS = deliveryTimeMS - currentTimeMS;
+  const timeLeft = {
+    hours: Math.floor(timeLeftMS / (1000 * 60 * 60) % 24),
+    minutes: Math.floor(timeLeftMS / (1000 * 60) % 60),
+  }
+
   return (
     <Grid
       alignItems="stretch"
@@ -196,7 +221,7 @@ const Dashboard = () => {
             <CardHeader title = "arrive in:"/>
             <Divider />
             <CardContent>
-              <TimeStamp info={trackingInfo}/>
+              <TimeStamp time={timeLeft}/>
               <ActiveOrderList 
                 list={activeOrderList}
                 selected={selectedOrder}

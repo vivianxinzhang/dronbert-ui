@@ -63,17 +63,8 @@ function CircularProgressWithLabel(props) {
 }
 
 const TimeStamp = props => {
-  const { info, className, ...rest } = props;
+  const { time, className, ...rest } = props;
   const classes = useStyles();
-
-  const deliveryTimeMS = Date.parse(info['estimated delivered time']);
-  const currentTimeMS = Date.parse(new Date());
-  const timeLeftMS = deliveryTimeMS - currentTimeMS;
-  const hoursLeft = Math.floor(timeLeftMS / (1000 * 60 * 60) % 24);
-  const minutesLeft = Math.floor(timeLeftMS / (1000 * 60) % 60);
-
-  console.log('hours ', hoursLeft);
-  console.log('minutes ', minutesLeft);
 
  /* React.useEffect(() => {
     const timer = setInterval(() => {
@@ -93,7 +84,7 @@ const TimeStamp = props => {
           className={classes.chartContainer}
         >
           {/* <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>; */}
-          <div className={classes.time}>{hoursLeft} hrs {minutesLeft} minutes</div>
+          <div className={classes.time}>{time.hours} hrs {time.minutes} minutes</div>
         </Grid>
   );
 };
