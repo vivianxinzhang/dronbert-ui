@@ -92,6 +92,7 @@ function OrderStepper () {
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [orderInfo, setOrderInfo ] = useState({
+    userId: 'test1',
     senderFirstName: 'Jack',
     senderLastName: 'Chan',
     senderAddress: '1600 Amphitheatre Parkway, Mountain View, CA, 94043',
@@ -107,6 +108,7 @@ function OrderStepper () {
     packageLength : '10',
     packageWidth : '10',
     station: '1',
+    fragile: false,
   });
   const [error, setError] = useState({
     weightError: false,
@@ -211,25 +213,34 @@ function OrderStepper () {
 
   const placeOrder = async () => {
     setLoading(true);
+    const appointmentMap = {
+      '30 mins' : '0.5hr',
+      '1 hour' : '1hr',
+      '2 hours' : '2hr',
+    }
+
     await axios.post( 'http://localhost:5000/neworder', {
-      "senderFisrtName": orderInfo['senderFisrtName'],
-      "senderLastName": orderInfo['senderLastName'],
-      "senderAddress": orderInfo['senderAddress'],
-      "senderPhoneNumber": orderInfo['senderPhoneNumber'],
-      "senderEmail": orderInfo['senderEmail'],
-      "recipientFisrtName": orderInfo['recipientFisrtName'],
-      "recipientLastName": orderInfo['recipientLastName'],
-      "recipientAddress": orderInfo['recipientAddress'],
-      "recipientPhoneNumber": orderInfo['recipientPhoneNumber'],
-      "recipientEmail": orderInfo['recipientEmail'],
-      "packageWeight" : orderInfo['packageWeight'],
-      "packageHeight" : orderInfo['packageHeight'],
-      "packageLength" : orderInfo['packageLength'],
-      "packageWidth" : orderInfo['package-width'],
-      "carrier" : orderInfo['solution']['carrier'],
-      "totalCost" : orderInfo['solution']['price'],
-      "deliveryTime": orderInfo['solution']['time'].concat('hr'),
-      "fragile": orderInfo['fragile'],
+      userId: orderInfo['userId'],
+      senderFirstName: orderInfo['senderFirstName'],
+      senderLastName: orderInfo['senderLastName'],
+      senderAddress: orderInfo['senderAddress'],
+      senderPhoneNumber: orderInfo['senderPhoneNumber'],
+      senderEmail: orderInfo['senderEmail'],
+      recipientFirstName: orderInfo['recipientFirstName'],
+      recipientLastName: orderInfo['recipientLastName'],
+      recipientAddress: orderInfo['recipientAddress'],
+      recipientPhoneNumber: orderInfo['recipientPhoneNumber'],
+      recipientEmail: orderInfo['recipientEmail'],
+      packageWeight: orderInfo['packageWeight'],
+      packageHeight: orderInfo['packageHeight'],
+      packageLength: orderInfo['packageLength'],
+      packageWidth: orderInfo['packageWidth'],
+      carrier: orderInfo['solution']['carrier'],
+      totalCost: orderInfo['solution']['price'],
+      appointmentTime: appointmentMap[orderInfo['solution']['dispatch within: ']],
+      active:true,
+      isFragile: orderInfo['fragile'],
+      stationId: Number(orderInfo['station']),
     })
       .then((response) => {
         console.log('response from /neworder -->', response.data);
@@ -259,13 +270,13 @@ function OrderStepper () {
     console.log('orderInfo before send to recommendation -->', orderInfo);
     setLoading(true);
     await axios.post('http://localhost:5000/recommendation', {
-      'address': orderInfo['station'],
-      'receiverAddr': orderInfo['recipientAddress'],
-      'height' : orderInfo['packageHeight'],
-      'length' : orderInfo['packageLength'],
-      'width' : orderInfo['packageWidth'],
-      'weight' : orderInfo['packageWeight'],
-      'fragile' : orderInfo['fragile'],
+      address: orderInfo['station'],
+      receiverAddr: orderInfo['recipientAddress'],
+      height : orderInfo['packageHeight'],
+      length : orderInfo['packageLength'],
+      width : orderInfo['packageWidth'],
+      weight : orderInfo['packageWeight'],
+      fragile : orderInfo['fragile'],
     })
       .then((response) => {
         // It is very awkward to put two pieces of data into one object;

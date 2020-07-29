@@ -84,7 +84,7 @@ const Dashboard = () => {
     if (showDetail === true) {
       getOrderDetail();
     }
-  }, [showDetail])
+  }, [showDetail, selectedOrder])
 
   const toggleActive=(index) =>{
     setSelectedOrder(index);
@@ -94,12 +94,16 @@ const Dashboard = () => {
   useEffect(() => {
     console.log('useEffect called')
     axios.post('http://localhost:5000/activeorder',{
-      user_id : 'abc'
+      user_id : 'test1',
     })
       .then(res => {
       //  console.log('res->',res)
       //  console.log('data->',res.data)
-        setActiveOrderList(res.data)
+        const orderArraySorted = res.data.sort(
+          (a, b) => Date.parse(b['Order Date']) - Date.parse(a['Order Date'])
+        );
+        console.log(orderArraySorted);
+        setActiveOrderList(orderArraySorted);
       })
       .catch(err =>{
         console.log(err)

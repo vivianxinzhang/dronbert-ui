@@ -454,7 +454,7 @@ function ShipInfoForm(props) {
             name="zip"
             onChange={(event) => {
               setRecipientZip(event.target.value);
-              handleChange({recipientAddress : recipientAddress + ', CA, ' + event.target.value});
+              handleChange({recipientAddress : recipientAddress + ', San Francisco, CA, ' + event.target.value});
             }}
             required
             value={recipientZip}
