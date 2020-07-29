@@ -32,7 +32,11 @@ export class GMap extends Component {
     }
     const { info } = this.props;
   //  console.log('tracking info GMap-->', info);
-    const locationString = info['current location'].split(',');
+    let locationString = [];
+    if (info['current location'] != undefined) {
+      locationString = info['current location'].split(',');
+    }
+    // const locationString = info['current location'].split(',');
     const location = {
       lat: parseFloat(locationString[0]),
       lng: parseFloat(locationString[1]),
