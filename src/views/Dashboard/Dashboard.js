@@ -126,7 +126,9 @@ const Dashboard = () => {
   }
 
   console.log('trackingInfo dashboard -->', trackingInfo);
-
+  const orderNumber = activeOrderList.length !== 0 ? activeOrderList[selectedOrder]['Tracking ID'] : undefined;
+  const recipient = activeOrderList.length !== 0 ? activeOrderList[selectedOrder]['Recipient'] : undefined;
+  const status = trackingInfo ? trackingInfo.status : undefined;
   return (
     <Grid
       alignItems="stretch"
@@ -143,7 +145,9 @@ const Dashboard = () => {
         <Box className={classes.root}>
           <Card >
             <CardHeader
-              title="Order#1"
+              style={{ textAlign: 'center' }}
+              title={ !trackingInfo ? `Loading ...` :
+                `Your package #${orderNumber} to ${recipient} is ${status}`}
             />
             <Divider />
             <CardContent className={classes.cardContent}>
