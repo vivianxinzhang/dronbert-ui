@@ -63,10 +63,10 @@ const OrderDetail = (props) => {
                 <TableCell>
                   Shipping Option: { orderDetail['machine_type']}
                 </TableCell>
+                <TableCell>
+                  Delivered at: { orderDetail['delivered_at'] }
+                </TableCell>
               </TableRow>
-              {/*<TableCell>*/}
-              {/*  Estimated Delivery Time: { orderDetail['delivered_at'] }*/}
-              {/*</TableCell>*/}
             </TableBody>
           </Table>
         </TableContainer>
