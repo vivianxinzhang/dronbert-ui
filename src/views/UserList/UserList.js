@@ -23,48 +23,69 @@ const UserList = () => {
   // transfer order number between sibling component
   // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
   const [ orderNumber, setOrderNumber ] = useState([]);
-  // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
 
-  const handleSelect = number => {
-    setOrderNumber(number);
-    getOrderDetail(number);
+  const handleSelect = orderNumber => {
+    setOrderNumber(orderNumber);
+    getOrderDetail(orderNumber);
   }
-  // console.log(orderNumber);
+  console.log(orderNumber);
 
   const [ orderHistory, setOrderHistory ] = useState([]);
   useEffect(() => {
-    // setOrderDetail();
-    // setOrderNumber();
     console.log('useEffect called')
-    // setOrderHistory();
-    // setOrderDetail();
-    getOrderHistory().then(data => setOrderHistory(data),);  // need fix: Promise returned from getOrderHistory is ignored
-  }, [])
-  // console.log('orderHistory -->', orderHistory);
+    getOrderHistory()
+      .then(data => setOrderHistory(data));
+  }, []);
 
-  const getOrderDetail = (number) => {
-    axios.post('http://localhost:5000/detail', {
-      // order_id : 'number',
-      order_id : number,
-    })
-      .then(response => {
-        console.log(response.data);
-        setOrderDetail(response.data);
-      })
-      .catch(error => console.log(error));
-  }
+  // console.log('orderHistory -->', orderHistory);
 
   async function getOrderHistory() {
     axios.post('http://localhost:5000/history', {
       user_id : 'abc',
     })
       .then(response => {
-        // console.log(response.data);
+        console.log('order history data -->', response.data);
         setOrderHistory(response.data);
-        getOrderDetail();
+        return response.data[0];
+      })
+      .then(data => {
+        console.log('last response -> ', data['Order ID']);
+        setOrderNumber(data['Order ID']);
+        return data['Order ID'];
+      })
+      .then(data => {
+        console.log(data);
+        getOrderDetail(data);
       })
       .catch(error => console.log(error));
   }
+
+  async function getOrderDetail() {
+    axios.post('http://localhost:5000/detail', {
+      // order_id : 'number',
+      order_id : 'number',
+    })
+      .then(response => {
+        console.log(response.data);
+        // setOrderNumber(orderNumber);
+        setOrderDetail(response.data);
+      })
+      .catch(error => console.log(error));
+  }
+
+  // const getOrderDetail = (number) => {
+  //   console.log(number);
+  //   axios.post('http://localhost:5000/detail', {
+  //     // order_id : 'number',
+  //     order_id : number,
+  //   })
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setOrderDetail(response.data);
+  //     })
+  //     .catch(error => console.log(error));
+  // }
+
 
   // const getOrderHistory = async () => {
   //   axios.post('http://localhost:5000/history', {
