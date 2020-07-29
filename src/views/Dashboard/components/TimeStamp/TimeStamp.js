@@ -29,12 +29,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center'
   },
-  device: {
-    textAlign: 'center',
-    padding: theme.spacing(1)
-  },
-  deviceIcon: {
-    color: theme.palette.icon
+  time: {
+    margin: 'auto',
+    fontSize: 'xx-large',
   }
 }));
 
@@ -66,22 +63,26 @@ function CircularProgressWithLabel(props) {
 }
 
 const TimeStamp = props => {
-  const { className, ...rest } = props;
-
+  const { info, className, ...rest } = props;
   const classes = useStyles();
 
-  // we should fetch time data from backend in the future
-  const totalTime = 60;
-  const [timeLeft, setTimeLeft] = useState(60);
+  const deliveryTimeMS = Date.parse(info['estimated delivered time']);
+  const currentTimeMS = Date.parse(new Date());
+  const timeLeftMS = deliveryTimeMS - currentTimeMS;
+  const hoursLeft = Math.floor(timeLeftMS / (1000 * 60 * 60) % 24);
+  const minutesLeft = Math.floor(timeLeftMS / (1000 * 60) % 60);
 
-  React.useEffect(() => {
+  console.log('hours ', hoursLeft);
+  console.log('minutes ', minutesLeft);
+
+ /* React.useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((preTimeLeft) => (preTimeLeft - 10 <= 0 ? 0 : preTimeLeft - 10));
     }, 800);
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, []); */
 
   return (
         <Grid
@@ -91,7 +92,8 @@ const TimeStamp = props => {
           justify="center"
           className={classes.chartContainer}
         >
-          <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>;
+          {/* <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>; */}
+          <div className={classes.time}>{hoursLeft} hrs {minutesLeft} minutes</div>
         </Grid>
   );
 };

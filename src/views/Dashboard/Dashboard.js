@@ -192,7 +192,7 @@ const Dashboard = () => {
             <CardHeader title = "arrive in:"/>
             <Divider />
             <CardContent>
-              <TimeStamp />
+              <TimeStamp info={trackingInfo}/>
               <ActiveOrderList 
                 list={activeOrderList}
                 selected={selectedOrder}
