@@ -112,13 +112,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Order Confirmed', 'Dispatched', 'In Transit', 'Delivered'];
+  return ['ordered', 'dispatched', 'in transit', 'delivered'];
 }
 
-export default function CustomizedSteppers() {
+export default function CustomizedSteppers(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
   const steps = getSteps();
+
+  const { info } = props;
+  const status = info.status;
+
+  const activeStep = steps.findIndex((step) => step === status);
 
   return (
     <div className={classes.root}>

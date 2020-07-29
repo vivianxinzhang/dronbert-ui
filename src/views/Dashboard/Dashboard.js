@@ -155,7 +155,7 @@ const Dashboard = () => {
                   item
                   xl={12}
                 >
-                  <TrackingBar />
+                  <TrackingBar info={trackingInfo}/>
                 </Grid>
                 <Grid
                   item
