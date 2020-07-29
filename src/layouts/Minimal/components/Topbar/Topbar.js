@@ -8,7 +8,15 @@ import { AppBar, Toolbar } from '@material-ui/core';
 const useStyles = makeStyles(() => ({
   root: {
     boxShadow: 'none'
-  }
+  },
+  logo : {
+    width: '10%',
+    height: 'auto',
+  },
+  logoText : {
+    color: '#F0FFFF',
+    fontFamily: 'Aclonica',
+  },
 }));
 
 const Topbar = props => {
@@ -27,8 +35,10 @@ const Topbar = props => {
         <RouterLink to="/">
           <img
             alt="Logo"
-            src="/images/logos/logo--white.svg"
+            src="/images/logos/robot-dribbble.jpg"
+            className={classes.logo}
           />
+          <span className={classes.logoText}> Dronbert </span>
         </RouterLink>
       </Toolbar>
     </AppBar>
