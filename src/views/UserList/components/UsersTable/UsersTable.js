@@ -51,11 +51,6 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     justifyContent: 'flex-end'
-  },
-  tableRow: {
-    // '&:hover': { backgroundColor: '#c5cae9'},
-    // '&:hover': { backgroundColor: '#8c9eff'},
-    '&:hover': { backgroundColor: '#e3f2fd'},
   }
 }));
 
@@ -141,108 +136,61 @@ const UsersTable = (props) => {
               </TableHead>
               <TableBody>
                 { orderHistory &&
-                  orderHistory.map(order => (
-                    <TableRow
-                      className={classes.tableRow}
-                      onClick={ () => handleSelect(order['Order ID']) }
-                      key={order['Order ID']}
-                      // id = {order['Order ID']}
-                      // selected={selectedUsers.indexOf(user.id) !== -1}
-                    >
-                      {/*<TableCell padding="checkbox">*/}
-                      {/*  <Checkbox*/}
-                      {/*    checked={selectedUsers.indexOf(user.id) !== -1}*/}
-                      {/*    color="primary"*/}
-                      {/*    onChange={event => handleSelectOne(event, user.id)}*/}
-                      {/*    value="true"*/}
-                      {/*  />*/}
-                      {/*</TableCell>*/}
-                      <TableCell>
-                        <div className={classes.nameContainer}>
-                          {/*<Avatar*/}
-                          {/*  className={classes.avatar}*/}
-                          {/*  src={user.avatarUrl}*/}
-                          {/*>*/}
-                          {/*  {getInitials(user.name)}*/}
-                          {/*</Avatar>*/}
-                          <Typography variant="body1">{order['Order ID']}</Typography>
-                        </div>
-                      </TableCell>
-                      <TableCell>{order['Order Status']}</TableCell>
-                      <TableCell>{order['Recipient']}</TableCell>
-                      <TableCell>
-                        {order['Delivery Address']}
-                      </TableCell>
+                orderHistory.map(order => (
+                  <TableRow
+                    className={classes.row}
+                    hover
+                    onClick={ () => handleSelect(order['Order ID'],
+                      // document.getElementById(order['Order ID']).style.backgroundColor = "yellow"
+                    ) }
+                    key={order['Order ID']}
+                    id = {order['Order ID']}
+                    // selected={selectedUsers.indexOf(user.id) !== -1}
+                  >
+                    {/*<TableCell padding="checkbox">*/}
+                    {/*  <Checkbox*/}
+                    {/*    checked={selectedUsers.indexOf(user.id) !== -1}*/}
+                    {/*    color="primary"*/}
+                    {/*    onChange={event => handleSelectOne(event, user.id)}*/}
+                    {/*    value="true"*/}
+                    {/*  />*/}
+                    {/*</TableCell>*/}
+                    <TableCell>
+                      <div className={classes.nameContainer}>
+                        {/*<Avatar*/}
+                        {/*  className={classes.avatar}*/}
+                        {/*  src={user.avatarUrl}*/}
+                        {/*>*/}
+                        {/*  {getInitials(user.name)}*/}
+                        {/*</Avatar>*/}
+                        <Typography variant="body1">{order['Order ID']}</Typography>
+                      </div>
+                    </TableCell>
+                    <TableCell>{order['Order Status']}</TableCell>
+                    <TableCell>{order['Recipient']}</TableCell>
+                    <TableCell>
+                      {order['Delivery Address']}
+                    </TableCell>
 
-                      <TableCell>{order['Order Status'] == 'complete' ? order['Delivery Time']:
-                        <Link to="/dashboard">
-                          <Button
-                            className={classes.button}
-                            to={page.href}
-                          >
-                            Tracking
-                          </Button>
-                        </Link>
-                      }
-                      </TableCell>
-                      <TableCell>
-                        {/*{moment(user.createdAt).format('DD/MM/YYYY')}*/}
-                        {order['Order Date']}
-                      </TableCell>
-                    </TableRow>
-                  ))
+                    <TableCell>{order['Delivery Time'] ? order['Delivery Time']:
+                      <Link to="/dashboard">
+                        <Button
+                          className={classes.button}
+                          to={page.href}
+                        >
+                          Tracking
+                        </Button>
+                      </Link>
+                    }
+                    </TableCell>
+                    <TableCell>
+                      {/*{moment(user.createdAt).format('DD/MM/YYYY')}*/}
+                      {order['Order Date']}
+                    </TableCell>
+                  </TableRow>
+                ))
                 }
               </TableBody>
-              {/*<TableBody>*/}
-              {/*  {users.slice(0, rowsPerPage).map(user => (*/}
-              {/*    <TableRow*/}
-              {/*      className={classes.tableRow}*/}
-              {/*      hover*/}
-              {/*      onClick={ () => handleSelect(user.orderID) }*/}
-              {/*      key={user.id}*/}
-              {/*      selected={selectedUsers.indexOf(user.id) !== -1}*/}
-              {/*    >*/}
-              {/*      /!*<TableCell padding="checkbox">*!/*/}
-              {/*      /!*  <Checkbox*!/*/}
-              {/*      /!*    checked={selectedUsers.indexOf(user.id) !== -1}*!/*/}
-              {/*      /!*    color="primary"*!/*/}
-              {/*      /!*    onChange={event => handleSelectOne(event, user.id)}*!/*/}
-              {/*      /!*    value="true"*!/*/}
-              {/*      /!*  />*!/*/}
-              {/*      /!*</TableCell>*!/*/}
-              {/*      <TableCell>*/}
-              {/*        <div className={classes.nameContainer}>*/}
-              {/*          /!*<Avatar*!/*/}
-              {/*          /!*  className={classes.avatar}*!/*/}
-              {/*          /!*  src={user.avatarUrl}*!/*/}
-              {/*          /!*>*!/*/}
-              {/*          /!*  {getInitials(user.name)}*!/*/}
-              {/*          /!*</Avatar>*!/*/}
-              {/*          <Typography variant="body1">{user.orderID}</Typography>*/}
-              {/*        </div>*/}
-              {/*      </TableCell>*/}
-              {/*      <TableCell>{user.status}</TableCell>*/}
-              {/*      <TableCell>{user.name}</TableCell>*/}
-              {/*      <TableCell>*/}
-              {/*        {user.address.street}, {user.address.city}*/}
-              {/*      </TableCell>*/}
-              {/*      <TableCell>{user.deliveryTime ? user.deliveryTime :*/}
-              {/*        <Link to="/dashboard">*/}
-              {/*          <Button*/}
-              {/*            className={classes.button}*/}
-              {/*            to={page.href}*/}
-              {/*          >*/}
-              {/*            Tracking*/}
-              {/*          </Button>*/}
-              {/*        </Link>*/}
-              {/*      }*/}
-              {/*      </TableCell>*/}
-              {/*      <TableCell>*/}
-              {/*        {moment(user.createdAt).format('DD/MM/YYYY')}*/}
-              {/*      </TableCell>*/}
-              {/*    </TableRow>*/}
-              {/*  ))}*/}
-              {/*</TableBody>*/}
             </Table>
           </div>
         </PerfectScrollbar>

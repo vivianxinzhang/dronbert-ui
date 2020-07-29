@@ -6,7 +6,11 @@ import {
   Card,
   CardHeader,
   CardContent,
+  TableContainer,
   Table,
+  TableBody,
+  TableHead,
+  TableRow,
   TableCell,
   IconButton,
   Divider,
@@ -39,21 +43,33 @@ const OrderDetail = (props) => {
     <div className={classes.root}>
       <Card className={classes.detailInfo}>
         <CardHeader title="Order Details" />
-        <Table >
-          <TableCell>
-            Order Number: { orderNumber }
-          </TableCell>
-          <TableCell>
-            Total Cost: ${ orderDetail['total cost'] }
-          </TableCell>
-          <TableCell>
-            Shipping Option: { orderDetail['machine_type']}
-          </TableCell>
-          <TableCell>
-            Estimated Delivery Time: { orderDetail['delivered_at'] }
-          </TableCell>
-        </Table>
-
+        <TableContainer>
+          <Table >
+            {/*<TableHead>*/}
+            {/*  <TableRow>*/}
+            {/*    <TableCell>  </TableCell>*/}
+            {/*    <TableCell> Total Cost </TableCell>*/}
+            {/*    <TableCell> Shipping Option </TableCell>*/}
+            {/*  </TableRow>*/}
+            {/*</TableHead>*/}
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  Order Number: { orderNumber }
+                </TableCell>
+                <TableCell>
+                  Total Cost: ${ orderDetail['total cost'] }
+                </TableCell>
+                <TableCell>
+                  Shipping Option: { orderDetail['machine_type']}
+                </TableCell>
+              </TableRow>
+              {/*<TableCell>*/}
+              {/*  Estimated Delivery Time: { orderDetail['delivered_at'] }*/}
+              {/*</TableCell>*/}
+            </TableBody>
+          </Table>
+        </TableContainer>
         <CardContent>
           <Grid
             container
