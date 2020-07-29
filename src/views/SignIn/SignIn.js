@@ -12,8 +12,10 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from 'axios';
 
 import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
+import theme from 'theme';
 
 const schema = {
   email: {
@@ -50,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
+    backgroundImage: 'url(/images/Golden_Gate_for_Login.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -173,6 +175,18 @@ const SignIn = props => {
   const handleSignIn = event => {
     event.preventDefault();
     history.push('/');
+
+    console.log(schema.email);
+    axios.post('http://localhost:5000/login', {
+      "user_id": formState.values.email,
+      "password": formState.values.password
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   };
 
   const hasError = field =>
