@@ -18,21 +18,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 const AccountDetails = props => {
-  const { className, ...rest } = props;
+  const { className, profile, updateProfile, ...rest  } = props;
 
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@devias.io',
-    phone: '3529321352',
-    address: '343 Jefferson Ave, Apt 12',
-    city:'San Francisco',
-    zipcode:'94129',
-    state: 'CA',
-    country: 'USA'
-  });
+  const [values, setValues] = useState(profile);
 
   const handleChange = event => {
     setValues({
@@ -55,6 +45,8 @@ const AccountDetails = props => {
       label: 'San Francisco'
     }
   ];
+
+  console.log(values);
 
   return (
     <Card
@@ -149,10 +141,10 @@ const AccountDetails = props => {
                 fullWidth
                 label="Primary address"
                 margin="dense"
-                name="address"
+                name="primaryAddress"
                 onChange={handleChange}
                 required
-                value={values.address}
+                value={values.primaryAddress}
                 variant="outlined"
               />
             </Grid>
@@ -209,10 +201,10 @@ const AccountDetails = props => {
                 fullWidth
                 label="zip-code"
                 margin="dense"
-                name="zip-code"
+                name="zipCode"
                 onChange={handleChange}
                 required
-                value={values.zipcode}
+                value={values.zipCode}
                 variant="outlined"
               />
             </Grid>
@@ -223,6 +215,11 @@ const AccountDetails = props => {
           <Button
             color="primary"
             variant="contained"
+            onClick={() => {
+              updateProfile(values);
+              // we should post the updated profile information to /userprofile in the future
+            }
+            }
           >
             Save details
           </Button>

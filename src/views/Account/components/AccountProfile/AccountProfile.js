@@ -39,14 +39,8 @@ const AccountProfile = props => {
 
   const classes = useStyles();
 
-  const user = {
-    name: 'Shen Zhi',
-    city: 'San Francisco',
-    country: 'USA',
-    timezone: 'GTM-7',
-    //avatar: '/images/avatars/avatar_11.png'
-  };
-
+  const { profile } = props;
+  console.log('profile at profile.js -->', profile);
   return (
     <Card
       {...rest}
@@ -59,7 +53,7 @@ const AccountProfile = props => {
               gutterBottom
               variant="h1"
             >
-              John Doe
+              {profile.firstName} {profile.lastName}
             </Typography>
             <br/>
             <Typography
@@ -67,14 +61,14 @@ const AccountProfile = props => {
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              {profile.city}
             </Typography>
             <Typography
               className={classes.dateText}
               color="textSecondary"
               variant="body1"
             >
-              {moment().format('hh:mm A')} ({user.timezone})
+              {moment().format('hh:mm A')}
             </Typography>
           </div>
           {/*<Avatar*/}

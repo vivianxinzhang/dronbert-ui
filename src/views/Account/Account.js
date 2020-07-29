@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState, useEffect}from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
@@ -12,6 +12,23 @@ const useStyles = makeStyles(theme => ({
 
 const Account = () => {
   const classes = useStyles();
+  // we should get this information from login in the future
+  const [profile, setProfile] = useState({
+    user_id: '123',
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@devias.io',
+    phoneNumber: '3529321352',
+    primaryAddress: '343 Jefferson Ave, Apt 12',
+    city:'San Francisco',
+    zipCode:'94129',
+  });
+
+  function updateProfile(info) {
+    setProfile(info);
+  }
+
+  console.log('profile-->', profile);
 
   return (
     <div className={classes.root}>
@@ -26,7 +43,7 @@ const Account = () => {
           xl={4}
           xs={12}
         >
-          <AccountProfile />
+          <AccountProfile profile={profile}/>
         </Grid>
         <Grid
           item
@@ -35,7 +52,7 @@ const Account = () => {
           xl={8}
           xs={12}
         >
-          <AccountDetails />
+          <AccountDetails profile={profile} updateProfile={updateProfile}/>
            </Grid>
        </Grid>
     </div>
