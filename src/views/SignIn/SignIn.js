@@ -18,9 +18,8 @@ import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 import theme from 'theme';
 
 const schema = {
-  email: {
+  user_id: {
     presence: { allowEmpty: false, message: 'is required' },
-    email: true,
     length: {
       maximum: 64
     }
@@ -175,14 +174,33 @@ const SignIn = props => {
   const handleSignIn = event => {
     event.preventDefault();
     history.push('/');
-
-    console.log(schema.email);
+    console.log(formState.values.user_id);
     axios.post('http://localhost:5000/login', {
-      "user_id": formState.values.email,
+      "user_id": formState.values.user_id,
       "password": formState.values.password
     })
     .then((response) => {
-      console.log(response.data);
+      const data = response.data;
+      const user_id = data['user_id'];
+      const first_name = data['first_name'];
+      const last_name = data['last_name'];
+      const phone_number = data['phone_number'];
+      const email = data['email_address'];
+      const status = data['status'];
+
+      //address
+      const locationInfo = data['primary_address'].split(' ');
+      var address = data['primary_address'].slice(0, -11) || "";
+      var zipCode = locationInfo[locationInfo.length - 1] || "";
+      if (zipCode.match(/\d{5}\-\d{4}/)) {
+        const address = data['primary_address'].slice(0, -11) || "";
+      }
+      else {
+        zipCode = "";
+        address = data['primary_address']
+      }
+      console.log(address);
+      console.log(zipCode);
     })
     .catch((error) => {
       console.log(error);
@@ -295,16 +313,16 @@ const SignIn = props => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('email')}
+                  error={hasError('user_id')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('user_id') ? formState.errors.user_id[0] : null
                   }
-                  label="Email address"
-                  name="email"
+                  label="user id"
+                  name="user_id"  
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.user_id || ''}
                   variant="outlined"
                 />
                 <TextField
