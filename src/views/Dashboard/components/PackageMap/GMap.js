@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
- 
+import RedRob from './RedRob.svg'
+import R1 from './R1.png'
+import PurpleRob from './PurpleRob.svg'
+// import blue from './blue.svg'
+import mapStyles from './mapStyles'
+import customStyles from './customStlyes.css'
 export class GMap extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +26,20 @@ export class GMap extends Component {
        lat: store.lat,
        lng: store.lng
      }}
+     icon={{
+      url: RedRob,
+      scaledSize: new window.google.maps.Size(40,40),
+    }}
      onClick={() => console.log("You clicked me!")} />
     })
   }
+  //customized map style 
+  _mapLoaded(mapProps, map) {
+    map.setOptions({
+      styles: mapStyles
+    })
+  }
+ 
 
   render() {
     const mapStyles = {
@@ -43,16 +59,57 @@ export class GMap extends Component {
     };
     console.log('location -->', location);
     return (
+      <div>
+      <customHead>
+        Dronbot{" "} 
+        <span role = "img" aria-label = "robot" >
+          🤖️📦
+        </span>
+      </customHead>
         <Map
           google={this.props.google}
           zoom={12}
           style={mapStyles}
-          initialCenter={{ lat: 37.7749, lng: -122.4194}}
+          disableDefaultUI={true}//remove the default upper left coner MAP Satellite switch
+          zoomControl={true}
+          initialCenter={{ lat: 37.765, lng: -122.44}}
+          onReady={(mapProps, map) => this._mapLoaded(mapProps, map)}
         >
          {/* <Marker position={{ lat: 48.00, lng: -122.00}} /> */}
          {this.displayMarkers([location])}
-         </Map>
+
+        {/* <Marker
+          position={{lat: 37.78, lng: -122.439192}}
+          icon={{
+            url: RedRob,
+            scaledSize: new window.google.maps.Size(40,40),
+          }} 
+        />
+        <Marker
+          position={{lat: 37.78, lng: -122.41}}
+          icon={{
+            url: PurpleRob,
+            scaledSize: new window.google.maps.Size(40,40),
+          }} 
+        />
+        <Marker
+          position={{lat: 37.75, lng: -122.42}}
+          icon={{
+            url: R1,
+            scaledSize: new window.google.maps.Size(40,40),
+          }} 
+        />
+        <Marker
+          position={{lat: 37.74, lng: -122.46}}
+          icon={{
+            url: blue,
+            scaledSize: new window.google.maps.Size(40,40),
+          }} 
+        /> */}
+      </Map>
+      </div>
     );
+    
   }
 }
  
