@@ -44,6 +44,12 @@ const Routes = () => {
         path="/users"
       />
       <RouteWithLayout
+        component={UserListView}
+        exact
+        layout={MainLayout}
+        path="/history"
+      />
+      <RouteWithLayout
         component={ProductListView}
         exact
         layout={MainLayout}

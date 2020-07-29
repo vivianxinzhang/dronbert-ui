@@ -52,7 +52,7 @@ const Sidebar = props => {
     },
     {
       title: 'Order history',
-      href: '/users',
+      href: '/history',
       icon: <PeopleIcon />
     },
     {

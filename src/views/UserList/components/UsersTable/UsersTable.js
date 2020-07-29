@@ -144,11 +144,11 @@ const UsersTable = (props) => {
                 orderHistory.map(order => (
                   <TableRow
                     className={classes.row}
+                    key={order['Order ID']}
                     onClick={ () => handleSelect(order['Order ID'],
                       // document.getElementById(order['Order ID']).style.backgroundColor = "yellow"
-                    ) }
-                    key={order['Order ID']}
-                    id = {order['Order ID']}
+                    )}
+                    // id = {order['Order ID']}
                     // selected={selectedUsers.indexOf(user.id) !== -1}
                   >
                     {/*<TableCell padding="checkbox">*/}

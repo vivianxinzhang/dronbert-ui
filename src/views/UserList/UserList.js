@@ -24,13 +24,34 @@ const UserList = () => {
   // const [ orderNumber, setOrderNumber ] = useState(mockData[0].orderID);
   const [ orderNumber, setOrderNumber ] = useState([]);
 
-  const handleSelect = orderNumber => {
-    setOrderNumber(orderNumber);
-    getOrderDetail(orderNumber);
-  }
-  console.log(orderNumber);
-
   const [ orderHistory, setOrderHistory ] = useState([]);
+  // useEffect(() => {
+  //   console.log('useEffect called')
+  //   async function getOrderHistory() {
+  //     axios.post('http://localhost:5000/history', {
+  //       user_id : 'test1',
+  //     })
+  //       .then(response => {
+  //         console.log('order history data -->', response.data);
+  //         setOrderHistory(response.data);
+  //         return response.data[0];
+  //       })
+  //       .then(data => {
+  //         console.log('last response -> ', data['Order ID']);
+  //         setOrderNumber(data['Order ID']);
+  //         return data['Order ID'];
+  //       })
+  //       .then(data => {
+  //         console.log(data);
+  //         getOrderDetail(data);
+  //       })
+  //       .catch(error => console.log(error));
+  //   }
+  // }, []);
+
+  console.log('orderHistory -->', orderHistory);
+
+
   useEffect(() => {
     console.log('useEffect called')
     getOrderHistory()
@@ -41,7 +62,7 @@ const UserList = () => {
 
   async function getOrderHistory() {
     axios.post('http://localhost:5000/history', {
-      user_id : 'abc',
+      user_id : 'test1',
     })
       .then(response => {
         console.log('order history data -->', response.data);
@@ -54,16 +75,16 @@ const UserList = () => {
         return data['Order ID'];
       })
       .then(data => {
-        console.log(data);
+        console.log('Order ID -> ', data);
         getOrderDetail(data);
       })
       .catch(error => console.log(error));
   }
 
-  async function getOrderDetail() {
+  async function getOrderDetail(orderID) {
     axios.post('http://localhost:5000/detail', {
-      // order_id : 'number',
-      order_id : 'number',
+      order_id : orderID,
+      // order_id : 'test1',
     })
       .then(response => {
         console.log(response.data);
@@ -72,6 +93,12 @@ const UserList = () => {
       })
       .catch(error => console.log(error));
   }
+
+  const handleSelect = orderNumber => {
+    setOrderNumber(orderNumber);
+    getOrderDetail(orderNumber);
+  }
+  console.log(orderNumber);
 
   // const getOrderDetail = (number) => {
   //   console.log(number);
