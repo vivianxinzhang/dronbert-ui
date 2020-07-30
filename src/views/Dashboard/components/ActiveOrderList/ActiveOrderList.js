@@ -26,8 +26,10 @@ const BootstrapButton = withStyles({
     padding: '6px 12px',
     border: '1px solid',
     lineHeight: 1.5,
-    backgroundColor: '#0063cc',
-    borderColor: '#0063cc',
+    // backgroundColor: '#0063cc',
+    // borderColor: '#0063cc',
+    backgroundColor: '#7ccccc',
+    borderColor: 'white',
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -105,11 +107,11 @@ function ActiveOrderList(props) {
       <FormGroup>
           {
             props.list.map((element,index) =>
-              <Button 
+              <BootstrapButton 
                 color="primary"
                 key={index}
                 onClick={() => { toggleActive(index) }}>{element['Tracking ID']}
-              </Button>)
+              </BootstrapButton>)
           // posts.map(post => <Button variant="contained" color="primary" key={post.id}>{post.name}</Button>)
           }
         </FormGroup>
