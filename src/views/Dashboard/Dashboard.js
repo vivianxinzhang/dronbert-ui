@@ -223,11 +223,14 @@ const Dashboard = () => {
       >
         <Box className={classes.root}>
           <Card>
-            <CardHeader title = "arrive in:"/>
+            <CardHeader title = "arrive in:"
+             style={{maxHeight: 150, overflow: 'auto'}}
+             />
             <Divider />
             <CardContent className={classes.cardContent}>
               <TimeStamp time={timeLeft}/>
               <ActiveOrderList 
+                style={{maxHeight:180, overflow: 'auto'}}
                 list={activeOrderList}
                 selected={selectedOrder}
                 toggleActive={toggleActive}
