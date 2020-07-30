@@ -41,12 +41,13 @@ const Dashboard = () => {
   const classes = useStyles();
 
   const user_id = localStorage.getItem('userID');
+  const selected = localStorage.getItem('selected');
 
   const [loadingDetail, setLoadingDetail] = useState(false);
 
   const [showDetail, setShowDetail] = useState(false);
   const [activeOrderList, setActiveOrderList] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(0);
+  const [selectedOrder, setSelectedOrder] = useState( 0);
   const [trackingInfo, setTrackingInfo] = useState({});
   const [orderDetail, setOrderDetail] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());

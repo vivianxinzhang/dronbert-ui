@@ -181,6 +181,7 @@ const UsersTable = (props) => {
                         <Button
                           className={classes.button}
                           to={page.href}
+                          onClick={() => {localStorage.setItem('selected', order['Order ID'])}}
                         >
                           Tracking
                         </Button>
