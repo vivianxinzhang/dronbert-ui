@@ -490,7 +490,7 @@ function ShipInfoForm(props) {
             autoComplete="weight"
             error={error['weightError']}
             fullWidth
-            helperText="package weight must be within 50 lbs"
+            helperText="package weight must be within 20 lbs"
             id="packageWeight"
             InputProps={{
               endAdornment: (
