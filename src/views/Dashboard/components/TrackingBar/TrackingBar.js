@@ -109,6 +109,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  label: {
+    fontSize: 'large',
+  },
 }));
 
 function getSteps() {
@@ -129,7 +132,8 @@ export default function CustomizedSteppers(props) {
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel
+              StepIconComponent={ColorlibStepIcon}><span className={classes.label}>{label}</span></StepLabel>
           </Step>
         ))}
       </Stepper>

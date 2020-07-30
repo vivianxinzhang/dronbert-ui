@@ -46,7 +46,7 @@ export default function OrderDetail(props) {
             <br/>
             Name: {orderDetail['sender_name']}     Phone: {orderDetail['sender_phone']}    Email: {orderDetail['sender_email']}
             <br/>
-            Address: {orderDetail['sender_address']}
+            Station: {orderDetail['sender_address']}
           </Paper>
         </Grid>
         <Grid item xs={6}>

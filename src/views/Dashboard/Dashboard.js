@@ -54,6 +54,16 @@ const Dashboard = () => {
   console.log('dash selectedOrder->',selectedOrder);
   console.log('dash trackingInfo->', trackingInfo);
 
+  const getTrackingTitle = () => {
+    if (!trackingInfo) {
+      return 'Loading ...';
+    }
+    if (activeOrderList.length === 0) {
+      return "You don't have any active orders.";
+    }
+    return `Your package #${orderNumber} to ${recipient} is ${status}`;
+  }
+
   const toggleDetail = (event) => {
     setLoadingDetail(true);
     setShowDetail(event.target.checked)
@@ -100,13 +110,15 @@ const Dashboard = () => {
       user_id : user_id,
     })
       .then(res => {
-      //  console.log('res->',res)
-      //  console.log('data->',res.data)
-        const orderArraySorted = res.data.sort(
-          (a, b) => Date.parse(b['Order Date']) - Date.parse(a['Order Date'])
-        );
-        console.log(orderArraySorted);
-        setActiveOrderList(orderArraySorted);
+        const data = res.data;
+        if (data[0].alert) {
+          setActiveOrderList([]);
+        } else {
+          const orderArraySorted = data.sort(
+            (a, b) => Date.parse(b['Order Date']) - Date.parse(a['Order Date'])
+          );
+          setActiveOrderList(orderArraySorted);
+        }
       })
       .catch(err =>{
         console.log(err)
@@ -161,6 +173,9 @@ const Dashboard = () => {
     minutes: Math.floor(timeLeftMS / (1000 * 60) % 60),
   }
 
+  console.log('activeOrderList -->', activeOrderList);
+  console.log('activeOrderList length -->', activeOrderList.length);
+
   return (
     <Grid
       alignItems="stretch"
@@ -178,8 +193,7 @@ const Dashboard = () => {
           <Card >
             <CardHeader
               style={{ textAlign: 'center' }}
-              title={ !trackingInfo ? `Loading ...` :
-                `Your package #${orderNumber} to ${recipient} is ${status}`}
+              title={ getTrackingTitle()}
             />
             <Divider />
             <CardContent className={classes.cardContent}>
