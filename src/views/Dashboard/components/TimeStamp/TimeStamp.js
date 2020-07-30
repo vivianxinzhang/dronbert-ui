@@ -84,6 +84,7 @@ const TimeStamp = props => {
 
   return (
     <Grid
+    style={{height: 250, overflow: 'auto'}}
       alignItems="center"
       className={classes.chartContainer}
       container
