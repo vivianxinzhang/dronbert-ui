@@ -240,13 +240,21 @@ const Dashboard = () => {
         <Box className={classes.root}>
           <Card>
             <CardHeader title = "Arrive in:"
+<<<<<<< HEAD
              style={{maxHeight: 150, overflow: 'auto'}}
+=======
+            //  style={{height: 50, overflow: 'auto'}}
+>>>>>>> eb4788c009720dacb43b636d31108520885fdc5f
              />
             <Divider />
             <CardContent className={classes.cardContent}>
-              <TimeStamp time={timeLeft}/>
+              <TimeStamp 
+              time={timeLeft}/>
               <ActiveOrderList 
+<<<<<<< HEAD
                 // style={{maxHeight:180, minHeight: 180, overflow: 'auto'}}
+=======
+>>>>>>> eb4788c009720dacb43b636d31108520885fdc5f
                 style={{height:285, overflow: 'auto'}}
                 list={activeOrderList}
                 selected={selectedOrder}
