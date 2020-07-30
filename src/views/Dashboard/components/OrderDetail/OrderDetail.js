@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0,
   },
   paper: {
-    height: 120,
+    // height: 120,
     padding: theme.spacing(2),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
   },
 }));
 
@@ -34,6 +34,7 @@ export default function OrderDetail(props) {
         <Grid item xs={12}>
           <Paper className={classes.paper}>Order Detail
             <br/>
+            <br/>
             Total Cost: { orderDetail['total cost'] }
             <br/>
             Shipping Option: { orderDetail['machine_type']}
@@ -44,7 +45,12 @@ export default function OrderDetail(props) {
         <Grid item xs={6}>
           <Paper className={classes.paper}>Sender Info:
             <br/>
-            Name: {orderDetail['sender_name']}     Phone: {orderDetail['sender_phone']}    Email: {orderDetail['sender_email']}
+            <br/>
+            Name: {orderDetail['sender_name']}
+            <br/>
+            Phone: {orderDetail['sender_phone']}
+            <br/>
+            Email: {orderDetail['sender_email']}
             <br/>
             Station: {orderDetail['sender_address']}
           </Paper>
@@ -52,13 +58,19 @@ export default function OrderDetail(props) {
         <Grid item xs={6}>
           <Paper className={classes.paper}>Recipient Info:
             <br/>
-            Name: {orderDetail['recipient_name']}     Phone: {orderDetail['recipient_phone']}    Email: {orderDetail['recipient_email']}
+            <br/>
+            Name: {orderDetail['recipient_name']}
+            <br/>
+            Phone: {orderDetail['recipient_phone']}
+            <br/>
+            Email: {orderDetail['recipient_email']}
             <br/>
             Address: {orderDetail['recipient_address']}
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>Package Info:
+            <br/>
             <br/>
             Length: {orderDetail['package_length']}     Weight: {orderDetail['package_weight']}      Height: {orderDetail['package_height']}   Fragile:{orderDetail['package_fragile']}
           </Paper>
