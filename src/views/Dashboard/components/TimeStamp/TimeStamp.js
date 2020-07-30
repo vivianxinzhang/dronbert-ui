@@ -37,25 +37,32 @@ const useStyles = makeStyles(theme => ({
 
 function CircularProgressWithLabel(props) {
   return (
-    <Box position="relative" display="inline-flex">
+    <Box
+      display="inline-flex"
+      position="relative"
+    >
       <CircularProgress
         size={150}
         thickness={2}
         variant="static"
-        {...props} />
+        {...props}
+      />
       <Box
-        top={0}
-        left={0}
-        bottom={0}
-        right={0}
-        position="absolute"
-        display="flex"
         alignItems="center"
+        bottom={0}
+        display="flex"
         justifyContent="center"
+        left={0}
+        position="absolute"
+        right={0}
+        top={0}
       >
 
-        <Typography variant="h4" color="textSecondary">{
-          `${Math.floor(props.timeleft/60)} hrs
+        <Typography
+          color="textSecondary"
+          variant="h4"
+        >{
+            `${Math.floor(props.timeleft/60)} hrs
           ${props.timeleft%60} mins`}</Typography>
       </Box>
     </Box>
@@ -66,7 +73,7 @@ const TimeStamp = props => {
   const { time, className, ...rest } = props;
   const classes = useStyles();
 
- /* React.useEffect(() => {
+  /* React.useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((preTimeLeft) => (preTimeLeft - 10 <= 0 ? 0 : preTimeLeft - 10));
     }, 800);
@@ -76,16 +83,20 @@ const TimeStamp = props => {
   }, []); */
 
   return (
-        <Grid
-          container
-          spacing={0}
-          alignItems="center"
-          justify="center"
-          className={classes.chartContainer}
-        >
-          {/* <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>; */}
+    <Grid
+      alignItems="center"
+      className={classes.chartContainer}
+      container
+      justify="center"
+      spacing={0}
+    >
+      {/* <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>; */}
+      {
+        isNaN(time.hours) || isNaN(time.minutes) ?
+          <div className={classes.time}> Delivery time will be available after the package is dispatched</div> :
           <div className={classes.time}>{time.hours} hrs {time.minutes} minutes</div>
-        </Grid>
+      }
+    </Grid>
   );
 };
 

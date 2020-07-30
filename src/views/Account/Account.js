@@ -14,7 +14,7 @@ const Account = () => {
   const classes = useStyles();
   // we should get this information from login in the future
   const [profile, setProfile] = useState({
-    user_id: '123',
+    user_id: 'test1',
     firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@devias.io',

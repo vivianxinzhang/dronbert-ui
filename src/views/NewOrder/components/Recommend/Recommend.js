@@ -134,7 +134,7 @@ const Recommend = (props) => {
     }
   });
   const classes = useStyles();
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(0);
 
   useEffect(() => {
     handleChange({

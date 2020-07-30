@@ -344,7 +344,7 @@ function OrderStepper () {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #{orderInfo['trackingID']}. We have emailed your order confirmation, and will
+                  Your tracking ID is #{orderInfo['trackingID']}. We have emailed your order confirmation, and will
                   send you an update when your order has shipped.
                 </Typography>
                 <Link href="/dashboard">Track your package</Link>

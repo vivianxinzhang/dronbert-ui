@@ -60,7 +60,7 @@ const Dashboard = () => {
   const getOrderDetail = async () => {
 
     await axios.post('http://localhost:5000/detail', {
-      order_id : 'abc',
+      order_id : activeOrderList[selectedOrder]['Order ID'],
     })
       .then(response => {
         console.log(response.data);
@@ -81,6 +81,7 @@ const Dashboard = () => {
 
   // get order detail as an effect of switching on showDetail
   useEffect(() => {
+    console.log(showDetail);
     if (showDetail === true) {
       getOrderDetail();
     }
@@ -112,7 +113,7 @@ const Dashboard = () => {
 
   //fetch tracking info
  const getTrackingInfo = async () => {
-   if(activeOrderList.length === 0) {return;}
+   if(activeOrderList.length === 0 || showDetail === true) {return;}
    const tracking_id=activeOrderList[selectedOrder]['Tracking ID'];
    // console.log('tracking_id',tracking_id)
    await axios.post('http://localhost:5000/tracking',{
@@ -224,7 +225,7 @@ const Dashboard = () => {
           <Card>
             <CardHeader title = "arrive in:"/>
             <Divider />
-            <CardContent>
+            <CardContent className={classes.cardContent}>
               <TimeStamp time={timeLeft}/>
               <ActiveOrderList 
                 list={activeOrderList}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -30,6 +31,25 @@ const AccountDetails = props => {
       [event.target.name]: event.target.value
     });
   };
+
+  const postProfile = () => {
+    axios.post('http://localhost:5000/userprofile',{
+      user_id : values['user_id'],
+      email: values['email'],
+      last_name: values['lastName'],
+      first_name: values['firstName'],
+      phoneNumber: values['phoneNumber'],
+      primaryAddress: values['primaryAddress'],
+      zipCode: values['zipCode'],
+    })
+      .then(response => {
+        const updated = response.data.updated;
+        console.log(updated);
+      })
+      .then(error => {
+        console.log(error);
+      });
+  }
 
   const states = [
     {
@@ -125,10 +145,10 @@ const AccountDetails = props => {
                 fullWidth
                 label="Phone Number"
                 margin="dense"
-                name="phone"
+                name="phoneNumber"
                 onChange={handleChange}
                 type="number"
-                value={values.phone}
+                value={values.phoneNumber}
                 variant="outlined"
               />
             </Grid>
@@ -218,6 +238,7 @@ const AccountDetails = props => {
             onClick={() => {
               updateProfile(values);
               // we should post the updated profile information to /userprofile in the future
+              postProfile();
             }
             }
           >
