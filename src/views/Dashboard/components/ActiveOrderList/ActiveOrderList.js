@@ -30,6 +30,7 @@ const BootstrapButton = withStyles({
     // borderColor: '#0063cc',
     backgroundColor: '#7ccccc',
     borderColor: 'white',
+    color: '#FFFFFF',
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -54,6 +55,7 @@ const BootstrapButton = withStyles({
     },
     '&:focus': {
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+      backgroundColor: '#0069d9',
     },
   },
 })(Button);
@@ -94,11 +96,12 @@ function ActiveOrderList(props) {
       className={clsx(classes.root, className)}
     >
       <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        style={{minHeight:65, overflow: 'auto'}}
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title="Active Order List:"
       />
       <Divider />
@@ -110,7 +113,8 @@ function ActiveOrderList(props) {
               <BootstrapButton 
                 color="primary"
                 key={index}
-                onClick={() => { toggleActive(index) }}>{element['Tracking ID']}
+                // onClick={() => { toggleActive(index) }}>{element['Tracking ID']}
+                onClick={() => { toggleActive(index) }}>{'Tracking# ' + element['Tracking ID'] + ', '+'send to '+element['Recipient'] }
               </BootstrapButton>)
           // posts.map(post => <Button variant="contained" color="primary" key={post.id}>{post.name}</Button>)
           }
