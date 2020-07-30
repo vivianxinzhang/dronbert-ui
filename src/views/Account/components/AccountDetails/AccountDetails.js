@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -20,11 +20,11 @@ const useStyles = makeStyles(() => ({
 
 const AccountDetails = props => {
   const { className, profile, updateProfile, ...rest  } = props;
+  console.log('profile in detail -->', profile);
 
   const classes = useStyles();
-
   const [values, setValues] = useState(profile);
-
+  console.log('values-->', values);
   const handleChange = event => {
     setValues({
       ...values,
@@ -51,20 +51,9 @@ const AccountDetails = props => {
       });
   }
 
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama'
-    },
-    {
-      value: 'new-york',
-      label: 'New York'
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco'
-    }
-  ];
+  useEffect(() => {
+    setValues(profile);
+  }, [profile])
 
   console.log(values);
 
@@ -100,8 +89,8 @@ const AccountDetails = props => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
                 variant="outlined"
+                value={values.firstName}
               />
             </Grid>
             <Grid

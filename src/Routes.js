@@ -16,6 +16,7 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView
 } from './views';
+import { initial } from 'underscore';
 
 const Routes = () => {
 
@@ -23,6 +24,10 @@ const Routes = () => {
   // and pass to user profile and shipInfo
 
   const [userInfo, setUserInfo] = useState();
+
+  const initialUserInfo = (info) => {
+    setUserInfo(info);
+  }
 
   return (
     <Switch>

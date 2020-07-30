@@ -139,6 +139,8 @@ const SignIn = props => {
     errors: {}
   });
 
+  const [userInfo, setUserInfo] = useState({});
+
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
@@ -174,7 +176,6 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    history.push('/');
     console.log(formState.values.user_id);
     axios.post('http://localhost:5000/login', {
       "user_id": formState.values.user_id,
@@ -182,26 +183,29 @@ const SignIn = props => {
     })
     .then((response) => {
       const data = response.data;
-      const user_id = data['user_id'];
-      const first_name = data['first_name'];
-      const last_name = data['last_name'];
-      const phone_number = data['phone_number'];
-      const email = data['email_address'];
-      const status = data['status'];
+      console.log(data);
+      // this should be replaced with token in the future
+      if (data.status === 'OK') {localStorage.setItem('userID', data.user_id);}
 
-      //address
-      const locationInfo = data['primary_address'].split(' ');
-      var address = data['primary_address'].slice(0, -11) || "";
-      var zipCode = locationInfo[locationInfo.length - 1] || "";
-      if (zipCode.match(/\d{5}\-\d{4}/)) {
-        const address = data['primary_address'].slice(0, -11) || "";
+      //parse address and zip
+      const locationInfo = data['primary_address'];
+      let index;
+      for (let i = locationInfo.length -1; i >= 0; i--) {
+        if (locationInfo[i] === ' ') {index = i; break}
       }
-      else {
-        zipCode = "";
-        address = data['primary_address']
-      }
-      console.log(address);
-      console.log(zipCode);
+      const zipCode = locationInfo.slice(index + 1);
+      const address = data['primary_address'].slice(0, index);
+      console.log('address-->', address);
+      console.log('zipCode-->', zipCode);
+
+      localStorage.setItem('userInfo', {
+        user_id: data['user_id'],
+        firstName: data['first_name'],
+        lastName: data['last_name'],
+        primaryAddress: address,
+        zipCode: zipCode,
+      });
+      history.push('/dashboard');
     })
     .catch((error) => {
       console.log(error);
@@ -210,7 +214,7 @@ const SignIn = props => {
 
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
-
+  console.log('userinfo-->', userInfo)
   return (
     <div className={classes.root}>
       <Grid

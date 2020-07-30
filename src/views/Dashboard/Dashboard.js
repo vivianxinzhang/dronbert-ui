@@ -40,6 +40,8 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
+  const user_id = localStorage.getItem('userID');
+
   const [loadingDetail, setLoadingDetail] = useState(false);
 
   const [showDetail, setShowDetail] = useState(false);
@@ -95,7 +97,7 @@ const Dashboard = () => {
   useEffect(() => {
     console.log('useEffect called')
     axios.post('http://localhost:5000/activeorder',{
-      user_id : 'test1',
+      user_id : user_id,
     })
       .then(res => {
       //  console.log('res->',res)

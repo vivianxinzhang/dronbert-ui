@@ -54,13 +54,13 @@ export class GMap extends Component {
     if (info['current location'] != undefined) {
       locationString = info['current location'].split(',');
     }
-    // const locationString = info['current location'].split(',');
+
     const location = {
       lat: parseFloat(locationString[0]),
       lng: parseFloat(locationString[1]),
     };
     console.log('location -->', location);
-////////////////////////////////////////////////////////
+
     let desLocationString = [];
     if (info['destination'] != undefined) {
       desLocationString = info['destination'].split(',');
@@ -71,7 +71,7 @@ export class GMap extends Component {
       desLng: parseFloat(desLocationString[1]),
     };
     console.log('desLocation -->', desLocation);
-////////////////////////////////////////////////////////
+
     return (
       <div>
       <customHead>
