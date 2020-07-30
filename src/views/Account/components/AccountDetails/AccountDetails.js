@@ -25,6 +25,7 @@ const AccountDetails = props => {
   const classes = useStyles();
   const [values, setValues] = useState(profile);
   console.log('values-->', values);
+
   const handleChange = event => {
     setValues({
       ...values,
@@ -38,9 +39,9 @@ const AccountDetails = props => {
       email: values['emailAddress'] ? values['emailAddress'] : '',
       last_name: values['lastName'] ? values['lastName'] : '',
       first_name: values['firstName'] ? values['firstName'] : '',
-      phoneNumber: values['phoneNumber'] ? values['firstName'] : '',
-      primaryAddress: values['primaryAddress'] ? values['firstName'] : '',
-      zipCode: values['zipCode'] ? values['firstName'] : '',
+      phoneNumber: values['phoneNumber'] ? values['phoneNumber'] : '',
+      primaryAddress: values['primaryAddress'] ? values['primaryAddress'] : '',
+      zipCode: values['zipCode'] ? values['zipCode'] : '',
     })
       .then(response => {
         const updated = response.data.updated;
@@ -50,10 +51,6 @@ const AccountDetails = props => {
         console.log(error);
       });
   }
-
-  useEffect(() => {
-    setValues(profile);
-  }, [profile])
 
   console.log(values);
 
@@ -112,12 +109,12 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
+                label="Last name"
                 margin="dense"
-                name="emailAddress"
+                name="email"
                 onChange={handleChange}
                 required
-                value={values.emailAddress}
+                value={values.email}
                 variant="outlined"
               />
             </Grid>
@@ -168,34 +165,6 @@ const AccountDetails = props => {
                 variant="outlined"
               />
             </Grid>
-            {/*<Grid*/}
-            {/*  item*/}
-            {/*  md={6}*/}
-            {/*  xs={12}*/}
-            {/*>*/}
-            {/*  <TextField*/}
-            {/*    fullWidth*/}
-            {/*    label="Select State"*/}
-            {/*    margin="dense"*/}
-            {/*    name="state"*/}
-            {/*    onChange={handleChange}*/}
-            {/*    required*/}
-            {/*    select*/}
-            {/*    // eslint-disable-next-line react/jsx-sort-props*/}
-            {/*    SelectProps={{ native: true }}*/}
-            {/*    value={values.state}*/}
-            {/*    variant="outlined"*/}
-            {/*  >*/}
-            {/*    {states.map(option => (*/}
-            {/*      <option*/}
-            {/*        key={option.value}*/}
-            {/*        value={option.value}*/}
-            {/*      >*/}
-            {/*        {option.label}*/}
-            {/*      </option>*/}
-            {/*    ))}*/}
-            {/*  </TextField>*/}
-            {/*</Grid>*/}
             <Grid
               item
               md={6}

@@ -14,58 +14,18 @@ const useStyles = makeStyles(theme => ({
 const Account = () => {
   const classes = useStyles();
 
-  const user_id = localStorage.getItem('userID');
-  const password = localStorage.getItem('passWord');
   const [profile, setProfile] = useState({
-    user_id: '',
-    firstName: '',
-    lastName: '',
-    primaryAddress: '',
-    city: '',
-    zipCode: '',
+    user_id: localStorage.getItem('userID'),
+    firstName: localStorage.getItem('firstName'),
+    lastName: localStorage.getItem('lastName'),
+    email: localStorage.getItem('email'),
+    phoneNumber: localStorage.getItem('phoneNumber'),
+    primaryAddress: localStorage.getItem('primaryAddress'),
+    city: localStorage.getItem('city'),
+    zipCode: localStorage.getItem('zipCode'),
   });
 
   // we should get this information from login in the future
-
-  useEffect(() => {
-    axios.post('http://localhost:5000/login', {
-      "user_id": user_id,
-      "password": password,
-    })
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        // this should be replaced with token in the future
-        if (data.status === 'OK') {
-          localStorage.setItem('userID', data.user_id);
-        }
-
-        //parse address and zip
-        const locationInfo = data['primary_address'];
-        let index;
-        for (let i = locationInfo.length - 1; i >= 0; i--) {
-          if (locationInfo[i] === ' ') {
-            index = i;
-            break
-          }
-        }
-        const zipCode = locationInfo.slice(index + 1);
-        const address = data['primary_address'].slice(0, index);
-        console.log('address-->', address);
-        console.log('zipCode-->', zipCode);
-        console.log('email-->', data['email_address']);
-        setProfile({
-          user_id: data['user_id'],
-          firstName: data['first_name'],
-          lastName: data['last_name'],
-          primaryAddress: address,
-          city: 'San Fransisco',
-          zipCode: zipCode,
-          emailAddress: data['email_address'],
-          phoneNumber: data['phone_number'],
-        });
-      })
-  }, [])
 
   function updateProfile(info) {
     setProfile(info);

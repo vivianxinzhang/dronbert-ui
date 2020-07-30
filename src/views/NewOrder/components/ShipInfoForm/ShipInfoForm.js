@@ -61,8 +61,8 @@ function ShipInfoForm(props) {
   ])
 
   const [options, setOptions] = useState([{
-    address: '1600 Amphitheatre Parkway, Mountain View',
-    zipCode: '94043',
+    address: localStorage.getItem('primaryAddress'),
+    zipCode: localStorage.getItem('zipCode'),
   }]);
 
   const [senderAddress, setSenderAddress] = useState(options[0]);

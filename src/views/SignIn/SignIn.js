@@ -186,8 +186,28 @@ const SignIn = props => {
       console.log(data);
       // this should be replaced with token in the future
       if (data.status === 'OK') {
-        localStorage.setItem('userID', data.user_id);
-        localStorage.setItem('passWord', formState.values.password);
+        //parse address and zip
+        const locationInfo = data['primary_address'];
+        let index;
+        for (let i = locationInfo.length - 1; i >= 0; i--) {
+          if (locationInfo[i] === ' ') {
+            index = i;
+            break
+          }
+        }
+        const zipCode = locationInfo.slice(index + 1) || '';
+        const address = data['primary_address'].slice(0, index) || '';
+        console.log('address-->', address);
+        console.log('zipCode-->', zipCode);
+        console.log('email-->', data['email_address'] || '');
+        localStorage.setItem('userID', data.user_id || '');
+        localStorage.setItem('firstName', data['first_name'] || '');
+        localStorage.setItem('lastName', data['last_name'] || '');
+        localStorage.setItem('email', data['email_address'] || '');
+        localStorage.setItem('phoneNumber', data['phone_number'] || '');
+        localStorage.setItem('primaryAddress', address);
+        localStorage.setItem('city', data['city'] || 'San Fransisco');
+        localStorage.setItem('zipCode', zipCode);
       }
       history.push('/dashboard');
     })

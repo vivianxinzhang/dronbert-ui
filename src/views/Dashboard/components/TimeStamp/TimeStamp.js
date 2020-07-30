@@ -93,7 +93,7 @@ const TimeStamp = props => {
       {/* <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>; */}
       {
         isNaN(time.hours) || isNaN(time.minutes) ?
-          <div className={classes.time}> Delivery time will be available after the package is dispatched</div> :
+          <div className={classes.time}> Delivery time will be available shortly after the package get in transit </div> :
           <div className={classes.time}>{time.hours} hrs {time.minutes} minutes</div>
       }
     </Grid>
