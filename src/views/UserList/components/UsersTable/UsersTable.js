@@ -176,7 +176,7 @@ const UsersTable = (props) => {
                       {order['Delivery Address']}
                     </TableCell>
 
-                    <TableCell>{order['Order Status'] == 'complete' ? order['Delivery Time']:
+                    <TableCell>{order['Order Status'] == 'delivered' ? order['Delivery Time']:
                       <Link to="/dashboard">
                         <Button
                           className={classes.button}
