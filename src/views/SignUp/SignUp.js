@@ -14,6 +14,7 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from 'axios';
 
 const schema = {
   firstName: {
@@ -28,17 +29,23 @@ const schema = {
       maximum: 32
     }
   },
-  email: {
+  username: {
     presence: { allowEmpty: false, message: 'is required' },
-    email: true,
     length: {
-      maximum: 64
+      maximum: 32
     }
   },
   password: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 128
+    }
+  },
+  email: {
+    presence: { allowEmpty: false, message: 'is required' },
+    email: true,
+    length: {
+      maximum: 64
     }
   },
   policy: {
@@ -66,7 +73,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
+    // backgroundImage: 'url(/images/Golden_Gate_for_Login.jpg)',
+    backgroundImage: 'url(/images/drone.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -188,6 +196,24 @@ const SignUp = props => {
   const handleSignUp = event => {
     event.preventDefault();
     history.push('/');
+    console.log(formState.values);
+    axios.post('http://localhost:5000/register', {
+      "user_id": formState.values.username,
+      "password": formState.values.password,
+      "last_name": formState.values.lastName,
+      "first_name": formState.values.firstName,
+      "email_address": formState.values.email,
+      "phone_number": formState.values.phone,
+      "address": formState.values.address
+    })
+      .then((response) => {
+        console.log(response)
+        const data = response.data;
+        return data;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   };
 
   const hasError = field =>
@@ -210,21 +236,21 @@ const SignUp = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
+                {/*Hella narwhal Cosby sweater McSweeney's, salvia kitsch before*/}
+                {/*they sold out High Life.*/}
               </Typography>
               <div className={classes.person}>
                 <Typography
                   className={classes.name}
                   variant="body1"
                 >
-                  Takamaru Ayako
+                  {/*Takamaru Ayako*/}
                 </Typography>
                 <Typography
                   className={classes.bio}
                   variant="body2"
                 >
-                  Manager at inVision
+                  {/*Manager at inVision*/}
                 </Typography>
               </div>
             </div>
@@ -257,8 +283,36 @@ const SignUp = props => {
                   color="textSecondary"
                   gutterBottom
                 >
-                  Use your email to create new account
+                  {/*Use your email to create new account*/}
                 </Typography>
+                <TextField
+                  className={classes.textField}
+                  error={hasError('username')}
+                  fullWidth
+                  helperText={
+                    hasError('username') ? formState.errors.username[0] : null
+                  }
+                  label="Username"
+                  name="username"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.username || ''}
+                  variant="outlined"
+                />
+                <TextField
+                  className={classes.textField}
+                  error={hasError('password')}
+                  fullWidth
+                  helperText={
+                    hasError('password') ? formState.errors.password[0] : null
+                  }
+                  label="Password"
+                  name="password"
+                  onChange={handleChange}
+                  type="password"
+                  value={formState.values.password || ''}
+                  variant="outlined"
+                />
                 <TextField
                   className={classes.textField}
                   error={hasError('firstName')}
@@ -294,7 +348,7 @@ const SignUp = props => {
                   helperText={
                     hasError('email') ? formState.errors.email[0] : null
                   }
-                  label="Email address"
+                  label="Email"
                   name="email"
                   onChange={handleChange}
                   type="text"
@@ -303,16 +357,28 @@ const SignUp = props => {
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('password')}
+                  error={hasError('phone')}
                   fullWidth
                   helperText={
-                    hasError('password') ? formState.errors.password[0] : null
+                    hasError('phone') ? formState.errors.phone[0] : null
                   }
-                  label="Password"
-                  name="password"
+                  label="Phone Number"
+                  name="phone"
                   onChange={handleChange}
-                  type="password"
-                  value={formState.values.password || ''}
+                  value={formState.values.phone || ''}
+                  variant="outlined"
+                />
+                <TextField
+                  className={classes.textField}
+                  error={hasError('address')}
+                  fullWidth
+                  helperText={
+                    hasError('address') ? formState.errors.address[0] : null
+                  }
+                  label="Sender Address"
+                  name="address"
+                  onChange={handleChange}
+                  value={formState.values.address || ''}
                   variant="outlined"
                 />
                 <div className={classes.policy}>
