@@ -35,7 +35,7 @@ const AccountDetails = props => {
   const postProfile = () => {
     axios.post('http://localhost:5000/userprofile',{
       user_id : profile['user_id'],
-      email: values['email'] ? values['email'] : '',
+      email: values['emailAddress'] ? values['emailAddress'] : '',
       last_name: values['lastName'] ? values['lastName'] : '',
       first_name: values['firstName'] ? values['firstName'] : '',
       phoneNumber: values['phoneNumber'] ? values['firstName'] : '',
@@ -62,10 +62,6 @@ const AccountDetails = props => {
       {...rest}
       className={clsx(classes.root, className)}
     >
-      <form
-        autoComplete="off"
-        noValidate
-      >
         <CardHeader
           subheader="The information can be edited"
           title="Profile"
@@ -118,10 +114,10 @@ const AccountDetails = props => {
                 fullWidth
                 label="Email Address"
                 margin="dense"
-                name="email"
+                name="emailAddress"
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={values.emailAddress}
                 variant="outlined"
               />
             </Grid>
@@ -233,7 +229,6 @@ const AccountDetails = props => {
             Save details
           </Button>
         </CardActions>
-      </form>
     </Card>
   );
 };

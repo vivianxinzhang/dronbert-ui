@@ -61,7 +61,7 @@ const Account = () => {
           primaryAddress: address,
           city: 'San Fransisco',
           zipCode: zipCode,
-          //  email: data['email_address'],
+          emailAddress: data['email_address'],
           phoneNumber: data['phone_number'],
         });
       })
