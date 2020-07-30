@@ -189,7 +189,7 @@ function OrderStepper () {
       const price = 10;
 
       console.log('already generate paymentMethod!');
-      axios.post('http://localhost:5000/pay', {
+      axios.post('http://3.15.25.220:5000/pay', {
         price: price,
         currency: 'usd',
         paymentMethodId: paymentMethod['id'],
@@ -219,7 +219,7 @@ function OrderStepper () {
       '2 hours' : '2hr',
     }
 
-    await axios.post( 'http://localhost:5000/neworder', {
+    await axios.post( 'http://3.15.25.220:5000/neworder', {
       userId: orderInfo['userId'],
       senderFirstName: orderInfo['senderFirstName'],
       senderLastName: orderInfo['senderLastName'],
@@ -269,7 +269,7 @@ function OrderStepper () {
     console.log('We are ready to get recommendations!');
     console.log('orderInfo before send to recommendation -->', orderInfo);
     setLoading(true);
-    await axios.post('http://localhost:5000/recommendation', {
+    await axios.post('http://3.15.25.220:5000/recommendation', {
       address: orderInfo['station'],
       receiverAddr: orderInfo['recipientAddress'],
       height : orderInfo['packageHeight'],
