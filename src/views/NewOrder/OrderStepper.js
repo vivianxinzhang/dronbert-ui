@@ -95,7 +95,7 @@ function OrderStepper () {
     userId: localStorage.getItem('userID'),
     senderFirstName: localStorage.getItem('firstName'),
     senderLastName: localStorage.getItem('lastName'),
-    senderAddress: localStorage.getItem('primaryAddress') + 'San Fransisco, CA, ' + localStorage.getItem('zipCode'),
+    senderAddress: localStorage.getItem('primaryAddress') + ' San Fransisco, CA, ' + localStorage.getItem('zipCode'),
     senderPhoneNumber: localStorage.getItem('phoneNumber'),
     senderEmail: localStorage.getItem('email'),
     recipientFirstName: '',
