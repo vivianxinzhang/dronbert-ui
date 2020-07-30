@@ -222,6 +222,7 @@ const Dashboard = () => {
                 control={<Switch
                   checked={showDetail}
                   color="secondary"
+                  disabled={!activeOrderList || activeOrderList.length === 0}
                   onChange={toggleDetail}
                   name="checkedA" />}
                 label="View Detail"
