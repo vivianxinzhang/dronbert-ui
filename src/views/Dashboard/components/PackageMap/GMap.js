@@ -3,7 +3,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import RedRob from './RedRob.svg'
 import R1 from './R1.png'
 import PurpleRob from './PurpleRob.svg'
-// import blue from './blue.svg'
+import blueMarker from './blue-marker.svg'
+import drone from './drone.png'
+
 import mapStyles from './mapStyles'
 import customStyles from './customStlyes.css'
 export class GMap extends Component {
@@ -28,7 +30,7 @@ export class GMap extends Component {
      }}
      icon={{
       url: RedRob,
-      scaledSize: new window.google.maps.Size(40,40),
+      scaledSize: new window.google.maps.Size(35,35),
     }}
      onClick={() => console.log("You clicked me!")} />
     })
@@ -40,13 +42,13 @@ export class GMap extends Component {
     })
   }
  
-
   render() {
     const mapStyles = {
       width: '100%',
       height: '100%'
     }
     const { info } = this.props;
+    console.log('GMap info -->', info);
   //  console.log('tracking info GMap-->', info);
     let locationString = [];
     if (info['current location'] != undefined) {
@@ -58,6 +60,18 @@ export class GMap extends Component {
       lng: parseFloat(locationString[1]),
     };
     console.log('location -->', location);
+////////////////////////////////////////////////////////
+    let desLocationString = [];
+    if (info['destination'] != undefined) {
+      desLocationString = info['destination'].split(',');
+    }
+    // const locationString = info['current location'].split(',');
+    const desLocation = {
+      desLat: parseFloat(desLocationString[0]),
+      desLng: parseFloat(desLocationString[1]),
+    };
+    console.log('desLocation -->', desLocation);
+////////////////////////////////////////////////////////
     return (
       <div>
       <customHead>
@@ -78,28 +92,28 @@ export class GMap extends Component {
          {/* <Marker position={{ lat: 48.00, lng: -122.00}} /> */}
          {this.displayMarkers([location])}
 
-        {/* <Marker
-          position={{lat: 37.78, lng: -122.439192}}
+        <Marker
+          position={{lat: desLocation.desLat, lng: desLocation.desLng}}
           icon={{
-            url: RedRob,
-            scaledSize: new window.google.maps.Size(40,40),
+            url: blueMarker,
+            scaledSize: new window.google.maps.Size(20,35),
           }} 
         />
-        <Marker
-          position={{lat: 37.78, lng: -122.41}}
+        {/* <Marker
+          position={{lat: 37.77325570, lng: -122.43554290}}
           icon={{
             url: PurpleRob,
             scaledSize: new window.google.maps.Size(40,40),
           }} 
-        />
-        <Marker
+        /> */}
+        {/* <Marker
           position={{lat: 37.75, lng: -122.42}}
           icon={{
             url: R1,
             scaledSize: new window.google.maps.Size(40,40),
           }} 
-        />
-        <Marker
+        /> */}
+        {/* <Marker
           position={{lat: 37.74, lng: -122.46}}
           icon={{
             url: blue,
