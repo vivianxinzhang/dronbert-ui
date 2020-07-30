@@ -132,7 +132,17 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginTop: theme.spacing(3)
   },
-  textField: {
+  halfViewLeft: {
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(1),
+    width: 242
+  },
+  halfViewRight: {
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(1),
+    width: 242
+  },
+  fullView: {
     marginTop: theme.spacing(2)
   },
   policy: {
@@ -286,7 +296,7 @@ const SignUp = props => {
                   {/*Use your email to create new account*/}
                 </Typography>
                 <TextField
-                  className={classes.textField}
+                  className={classes.fullView}
                   error={hasError('username')}
                   fullWidth
                   helperText={
@@ -300,7 +310,7 @@ const SignUp = props => {
                   variant="outlined"
                 />
                 <TextField
-                  className={classes.textField}
+                  className={classes.fullView}
                   error={hasError('password')}
                   fullWidth
                   helperText={
@@ -314,7 +324,7 @@ const SignUp = props => {
                   variant="outlined"
                 />
                 <TextField
-                  className={classes.textField}
+                  className={classes.halfViewLeft}
                   error={hasError('firstName')}
                   fullWidth
                   helperText={
@@ -328,7 +338,7 @@ const SignUp = props => {
                   variant="outlined"
                 />
                 <TextField
-                  className={classes.textField}
+                  className={classes.halfViewRight}
                   error={hasError('lastName')}
                   fullWidth
                   helperText={
@@ -342,7 +352,7 @@ const SignUp = props => {
                   variant="outlined"
                 />
                 <TextField
-                  className={classes.textField}
+                  className={classes.halfViewLeft}
                   error={hasError('email')}
                   fullWidth
                   helperText={
@@ -356,7 +366,7 @@ const SignUp = props => {
                   variant="outlined"
                 />
                 <TextField
-                  className={classes.textField}
+                  className={classes.halfViewRight}
                   error={hasError('phone')}
                   fullWidth
                   helperText={
@@ -369,7 +379,7 @@ const SignUp = props => {
                   variant="outlined"
                 />
                 <TextField
-                  className={classes.textField}
+                  className={classes.fullView}
                   error={hasError('address')}
                   fullWidth
                   helperText={
