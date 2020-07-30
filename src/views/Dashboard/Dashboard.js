@@ -232,7 +232,7 @@ const Dashboard = () => {
             <CardContent className={classes.cardContent}>
               <TimeStamp time={timeLeft}/>
               <ActiveOrderList 
-                style={{maxHeight:180, overflow: 'auto'}}
+                style={{maxHeight:180, minHeight: 180, overflow: 'auto'}}
                 list={activeOrderList}
                 selected={selectedOrder}
                 toggleActive={toggleActive}

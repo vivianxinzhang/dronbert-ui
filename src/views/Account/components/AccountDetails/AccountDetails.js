@@ -34,13 +34,13 @@ const AccountDetails = props => {
 
   const postProfile = () => {
     axios.post('http://localhost:5000/userprofile',{
-      user_id : values['user_id'],
-      email: values['email'],
-      last_name: values['lastName'],
-      first_name: values['firstName'],
-      phoneNumber: values['phoneNumber'],
-      primaryAddress: values['primaryAddress'],
-      zipCode: values['zipCode'],
+      user_id : profile['user_id'],
+      email: values['email'] ? values['email'] : '',
+      last_name: values['lastName'] ? values['lastName'] : '',
+      first_name: values['firstName'] ? values['firstName'] : '',
+      phoneNumber: values['phoneNumber'] ? values['firstName'] : '',
+      primaryAddress: values['primaryAddress'] ? values['firstName'] : '',
+      zipCode: values['zipCode'] ? values['firstName'] : '',
     })
       .then(response => {
         const updated = response.data.updated;
@@ -136,7 +136,6 @@ const AccountDetails = props => {
                 margin="dense"
                 name="phoneNumber"
                 onChange={handleChange}
-                type="number"
                 value={values.phoneNumber}
                 variant="outlined"
               />

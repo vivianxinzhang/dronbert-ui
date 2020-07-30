@@ -185,26 +185,10 @@ const SignIn = props => {
       const data = response.data;
       console.log(data);
       // this should be replaced with token in the future
-      if (data.status === 'OK') {localStorage.setItem('userID', data.user_id);}
-
-      //parse address and zip
-      const locationInfo = data['primary_address'];
-      let index;
-      for (let i = locationInfo.length -1; i >= 0; i--) {
-        if (locationInfo[i] === ' ') {index = i; break}
+      if (data.status === 'OK') {
+        localStorage.setItem('userID', data.user_id);
+        localStorage.setItem('passWord', formState.values.password);
       }
-      const zipCode = locationInfo.slice(index + 1);
-      const address = data['primary_address'].slice(0, index);
-      console.log('address-->', address);
-      console.log('zipCode-->', zipCode);
-
-      localStorage.setItem('userInfo', {
-        user_id: data['user_id'],
-        firstName: data['first_name'],
-        lastName: data['last_name'],
-        primaryAddress: address,
-        zipCode: zipCode,
-      });
       history.push('/dashboard');
     })
     .catch((error) => {

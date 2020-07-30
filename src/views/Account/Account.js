@@ -15,6 +15,7 @@ const Account = () => {
   const classes = useStyles();
 
   const user_id = localStorage.getItem('userID');
+  const password = localStorage.getItem('passWord');
   const [profile, setProfile] = useState({
     user_id: '',
     firstName: '',
@@ -29,7 +30,7 @@ const Account = () => {
   useEffect(() => {
     axios.post('http://localhost:5000/login', {
       "user_id": user_id,
-      "password": "1111",
+      "password": password,
     })
       .then((response) => {
         const data = response.data;
@@ -52,6 +53,7 @@ const Account = () => {
         const address = data['primary_address'].slice(0, index);
         console.log('address-->', address);
         console.log('zipCode-->', zipCode);
+        console.log('email-->', data['email_address']);
         setProfile({
           user_id: data['user_id'],
           firstName: data['first_name'],
@@ -59,6 +61,8 @@ const Account = () => {
           primaryAddress: address,
           city: 'San Fransisco',
           zipCode: zipCode,
+          //  email: data['email_address'],
+          phoneNumber: data['phone_number'],
         });
       })
   }, [])

@@ -61,8 +61,9 @@ const UserList = () => {
   // console.log('orderHistory -->', orderHistory);
 
   async function getOrderHistory() {
+    const user_id = localStorage.getItem('userID');
     axios.post('http://localhost:5000/history', {
-      user_id : 'test1',
+      user_id : user_id,
     })
       .then(response => {
         console.log('order history data -->', response.data);
