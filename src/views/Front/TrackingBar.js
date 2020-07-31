@@ -4,9 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedInputBase() {
+const TrackingBar = (props) => {
   const classes = useStyles();
-
   const [value, setValue] = useState('');
+  const { history } = props;
 
   const handleChange = (event) => {
     console.log(event.target.name, event.target.value);
@@ -40,6 +39,8 @@ export default function CustomizedInputBase() {
 
   const handleSubmit = () => {
     console.log('submit value -->', value);
+    const url = './tracking/' + value;
+    history.push(url);
   }
 
   return (
@@ -59,3 +60,5 @@ export default function CustomizedInputBase() {
     </Paper>
   );
 }
+
+export default TrackingBar;
