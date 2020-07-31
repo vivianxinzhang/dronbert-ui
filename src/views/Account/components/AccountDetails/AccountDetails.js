@@ -36,7 +36,7 @@ const AccountDetails = props => {
   const postProfile = () => {
     axios.post('http://3.15.25.220:5000/userprofile',{
       user_id : profile['user_id'],
-      email: values['emailAddress'] ? values['emailAddress'] : '',
+      email: values['email'] ? values['email'] : '',
       last_name: values['lastName'] ? values['lastName'] : '',
       first_name: values['firstName'] ? values['firstName'] : '',
       phoneNumber: values['phoneNumber'] ? values['phoneNumber'] : '',
@@ -109,7 +109,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+                label="Email"
                 margin="dense"
                 name="email"
                 onChange={handleChange}

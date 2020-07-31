@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   const [showDetail, setShowDetail] = useState(false);
   const [activeOrderList, setActiveOrderList] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState( 0);
+  const [selectedOrder, setSelectedOrder] = useState(0);
   const [trackingInfo, setTrackingInfo] = useState({});
   const [orderDetail, setOrderDetail] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -63,6 +63,22 @@ const Dashboard = () => {
       return "You don't have any active orders.";
     }
     return `Your package #${orderNumber} to ${recipient} is ${status}`;
+  }
+
+  const searchOrderByID = (orderList) => {
+    console.log('selected -->', selected);
+    localStorage.removeItem('selected');
+    if (orderList && orderList.length !== 0) {
+      orderList.forEach((order, index) => {
+        if(order['Order ID'] === selected) {
+          console.log('index match selected -->', index);
+          setSelectedOrder(index);
+          return;
+        }
+      })
+    } else {
+      setSelectedOrder(0);
+    }
   }
 
   const toggleDetail = (event) => {
@@ -118,6 +134,7 @@ const Dashboard = () => {
           const orderArraySorted = data.sort(
             (a, b) => Date.parse(b['Order Date']) - Date.parse(a['Order Date'])
           );
+          searchOrderByID(orderArraySorted);
           setActiveOrderList(orderArraySorted);
         }
       })
@@ -128,7 +145,7 @@ const Dashboard = () => {
 
   //fetch tracking info
  const getTrackingInfo = async () => {
-   if(activeOrderList.length === 0 || showDetail === true) {return;}
+   if(activeOrderList.length === 0 || selectedOrder === undefined || showDetail === true) {return;}
    const tracking_id=activeOrderList[selectedOrder]['Tracking ID'];
    // console.log('tracking_id',tracking_id)
    await axios.post('http://3.15.25.220:5000/tracking',{
@@ -142,6 +159,10 @@ const Dashboard = () => {
      });
    console.log('trackingInfo -->', trackingInfo);
   }
+
+ /* useEffect(() => {
+    if(selected) { searchOrderByID(); }
+  }, [activeOrderList]) */
 
   useEffect(() => {
     // console.log('Tracking useEffect called')
@@ -162,8 +183,8 @@ const Dashboard = () => {
 
  // console.log('activeOrderList -->', activeOrderList);
 
-  const orderNumber = activeOrderList.length !== 0 ? activeOrderList[selectedOrder]['Tracking ID'] : undefined;
-  const recipient = activeOrderList.length !== 0 ? activeOrderList[selectedOrder]['Recipient'] : undefined;
+  const orderNumber = activeOrderList.length !== 0 && selectedOrder !== undefined ? activeOrderList[selectedOrder]['Tracking ID'] : undefined;
+  const recipient = activeOrderList.length !== 0 && selectedOrder !== undefined ? activeOrderList[selectedOrder]['Recipient'] : undefined;
   const status = trackingInfo ? trackingInfo.status : undefined;
 
   const deliveryTimeMS = Date.parse(trackingInfo['estimated delivered time']);
