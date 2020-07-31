@@ -82,7 +82,7 @@ function ShipInfoForm(props) {
 
   async function getOptions(address) {
     if(!address) { return; }
-    const response = await axios.post('http://3.15.25.220:5000/autocomplete',{
+    const response = await axios.post('https://api.dronbot.org/autocomplete',{
       address : address,
     });
     const data = response.data;
@@ -102,7 +102,7 @@ function ShipInfoForm(props) {
       }
     });
 
-      await axios.post('http://3.15.25.220:5000/duration',{
+      await axios.post('https://api.dronbot.org/duration',{
         origins: originsArr,
         destinations: destinationsArr,
       }).
