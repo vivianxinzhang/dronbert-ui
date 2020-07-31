@@ -207,7 +207,7 @@ const SignUp = props => {
     event.preventDefault();
     history.push('/');
     console.log(formState.values);
-    axios.post('https://api.dronbot.org/register', {
+    axios.post('http://3.15.25.220:5000/register', {
       "user_id": formState.values.username,
       "password": formState.values.password,
       "last_name": formState.values.lastName,
