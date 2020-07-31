@@ -6,15 +6,16 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 // import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Tooltip from '@material-ui/core/Tooltip';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -300,14 +301,23 @@ function ShipInfoForm(props) {
           item
           xs={3}
         >
-          <HtmlTooltip
-            arrow
-            placement="top"
-            title="The option list is sorted by default from nearest to farthest from the provided sender address">
-          <TextField
+            <FormControl>
+              <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                Dispatch Station
+              </InputLabel>
+          <Select
             id="stationID"
+            IconComponent={() => { return <HtmlTooltip
+              arrow
+              placement="top"
+              title={
+                <React.Fragment>
+                <span>The option list is sorted by default from nearest to farthest from the provided sender address</span>
+                </React.Fragment>
+              }>
+              <HelpOutlineIcon/>
+              </HtmlTooltip>} }
             label='Station'
-            select
             value={station}
             onChange={event => {
               setStation(event.target.value);
@@ -321,8 +331,9 @@ function ShipInfoForm(props) {
               stationOptions.map((option, index) =>
                 <MenuItem key={index} value={option.station}>{option.address}({option.distance}) </MenuItem>)
             }
-          </TextField>
-          </HtmlTooltip>
+          </Select>
+              <FormHelperText>The default selection is nearest to sender address</FormHelperText>
+              </FormControl>
         </Grid>
         <Grid
           item
