@@ -131,9 +131,9 @@ const UsersTable = (props) => {
                   {/*    onChange={handleSelectAll}*/}
                   {/*  />*/}
                   {/*</TableCell>*/}
-                  <TableCell>Order ID</TableCell>
+                  <TableCell>Order Number</TableCell>
                   <TableCell>Order Status</TableCell>
-                  <TableCell>Recipent</TableCell>
+                  <TableCell>Recipient</TableCell>
                   <TableCell>Delivery Address</TableCell>
                   <TableCell>Delivery Time</TableCell>
                   <TableCell>Order Date</TableCell>
@@ -175,8 +175,7 @@ const UsersTable = (props) => {
                     <TableCell>
                       {order['Delivery Address']}
                     </TableCell>
-
-                    <TableCell>{order['Order Status'] == 'delivered' ? order['Delivery Time']:
+                    <TableCell>{(order['Delivery Time'] && order['Order Status'] != 'delivered' ) ?
                       <Link to="/dashboard">
                         <Button
                           className={classes.button}
@@ -185,7 +184,7 @@ const UsersTable = (props) => {
                         >
                           Tracking
                         </Button>
-                      </Link>
+                      </Link> : order['Delivery Time']
                     }
                     </TableCell>
                     <TableCell>
