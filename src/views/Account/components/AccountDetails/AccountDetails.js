@@ -34,7 +34,7 @@ const AccountDetails = props => {
   };
 
   const postProfile = () => {
-    axios.post('http://3.15.25.220:5000/userprofile',{
+    axios.post('https://api.dronbot.org/userprofile',{
       user_id : profile['user_id'],
       email: values['email'] ? values['email'] : '',
       last_name: values['lastName'] ? values['lastName'] : '',

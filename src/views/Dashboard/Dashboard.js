@@ -88,7 +88,7 @@ const Dashboard = () => {
 
   const getOrderDetail = async () => {
 
-    await axios.post('http://3.15.25.220:5000/detail', {
+    await axios.post('https://api.dronbot.org/detail', {
       order_id : activeOrderList[selectedOrder]['Order ID'],
     })
       .then(response => {
@@ -123,7 +123,7 @@ const Dashboard = () => {
   //fetch active order list data
   useEffect(() => {
     console.log('useEffect called')
-    axios.post('http://3.15.25.220:5000/activeorder',{
+    axios.post('https://api.dronbot.org/activeorder',{
       user_id : user_id,
     })
       .then(res => {
@@ -148,7 +148,7 @@ const Dashboard = () => {
    if(activeOrderList.length === 0 || selectedOrder === undefined || showDetail === true) {return;}
    const tracking_id=activeOrderList[selectedOrder]['Tracking ID'];
    // console.log('tracking_id',tracking_id)
-   await axios.post('http://3.15.25.220:5000/tracking',{
+   await axios.post('https://api.dronbot.org/tracking',{
      tracking_id : tracking_id
    })
      .then(res => {
