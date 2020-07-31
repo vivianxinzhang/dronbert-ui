@@ -72,7 +72,7 @@ const UserList = () => {
       })
       .then(data => {
         console.log('last response -> ', data['Order ID']);
-        setOrderNumber(data['Order ID']);
+        setOrderNumber(data['Tracking ID']);
         return data['Order ID'];
       })
       .then(data => {
@@ -95,9 +95,9 @@ const UserList = () => {
       .catch(error => console.log(error));
   }
 
-  const handleSelect = orderNumber => {
-    setOrderNumber(orderNumber);
-    getOrderDetail(orderNumber);
+  const handleSelect = index => {
+    setOrderNumber(orderHistory[index]['Tracking ID']);
+    getOrderDetail(orderHistory[index]['Order ID']);
   }
   console.log(orderNumber);
 

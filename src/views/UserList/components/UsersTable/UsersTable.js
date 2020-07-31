@@ -141,11 +141,11 @@ const UsersTable = (props) => {
               </TableHead>
               <TableBody>
                 { orderHistory &&
-                orderHistory.map(order => (
+                orderHistory.map((order, index)=> (
                   <TableRow
                     className={classes.row}
                     key={order['Order ID']}
-                    onClick={ () => handleSelect(order['Order ID'],
+                    onClick={() => handleSelect(index
                       // document.getElementById(order['Order ID']).style.backgroundColor = "yellow"
                     )}
                     // id = {order['Order ID']}
@@ -167,7 +167,7 @@ const UsersTable = (props) => {
                         {/*>*/}
                         {/*  {getInitials(user.name)}*/}
                         {/*</Avatar>*/}
-                        <Typography variant="body1">{order['Order ID']}</Typography>
+                        <Typography variant="body1">{order['Tracking ID']}</Typography>
                       </div>
                     </TableCell>
                     <TableCell>{order['Order Status']}</TableCell>
@@ -175,12 +175,12 @@ const UsersTable = (props) => {
                     <TableCell>
                       {order['Delivery Address']}
                     </TableCell>
-                    <TableCell>{(order['Delivery Time'] && order['Order Status'] != 'delivered' ) ?
+                    <TableCell>{ order['Order Status'] !== 'delivered' ?
                       <Link to="/dashboard">
                         <Button
                           className={classes.button}
-                          to={page.href}
                           onClick={() => {localStorage.setItem('selected', order['Order ID'])}}
+                          to={page.href}
                         >
                           Tracking
                         </Button>
