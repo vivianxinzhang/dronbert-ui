@@ -114,6 +114,11 @@ const useStyles = makeStyles((theme) => ({
   },
 ]; */
 
+const capitalize = (s) => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 const Recommend = (props) => {
   const { handleChange } = props;
   const recommendations = props.recommendations.sort((a, b) => 
@@ -202,7 +207,7 @@ const Recommend = (props) => {
                       component="h2"
                       variant="h4"
                     >
-                      {option['dispatch within: ']}
+                      {capitalize(option['dispatch within: '])}
                     </Typography>
                   </div>
                       </Grid>
@@ -224,7 +229,7 @@ const Recommend = (props) => {
                     component="h2"
                     variant="h4"
                   >
-                    {option.carrier}
+                    {capitalize(option.carrier)}
                   </Typography>
                   </div>
                     </Grid>
@@ -234,7 +239,7 @@ const Recommend = (props) => {
                         variant="h4"
                         className={option.type === 'none' ? classes.optionNoType: classes.optionType}
                       >
-                        {option.type}
+                        {capitalize(option.type)}
                       </Typography>
                     </div>
                   </Grid>

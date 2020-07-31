@@ -312,7 +312,11 @@ function ShipInfoForm(props) {
               placement="top"
               title={
                 <React.Fragment>
-                <span>The option list is sorted by default from nearest to farthest from the provided sender address</span>
+                <span>The stations are where the packages are dispatched to ship;</span>
+                  <br/>
+                  <span>The sender should bring the package to one of the stations;</span>
+                  <br/>
+                  <span>The option of stations are sorted from nearest to farthest from sender address based on travelling time.</span>
                 </React.Fragment>
               }>
               <HelpOutlineIcon/>
@@ -501,7 +505,7 @@ function ShipInfoForm(props) {
             autoComplete="weight"
             error={error['weightError']}
             fullWidth
-            helperText="package weight must be within 20 lbs"
+            helperText="Package weight must be within 20 lbs"
             id="packageWeight"
             InputProps={{
               endAdornment: (
