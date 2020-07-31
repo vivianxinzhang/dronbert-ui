@@ -140,7 +140,7 @@ function ShipInfoForm(props) {
   }
 
   useEffect(() => {
-    const origins = [ senderAddress.address + ', CA, ' + senderAddress.zipCode ];
+    const origins = [ senderAddress.address + ', San Fransisco, CA, ' + senderAddress.zipCode ];
     const destinations = stationOptions.map(option => option.address);
     getDurations(origins, destinations);
   }, [])
@@ -247,7 +247,7 @@ function ShipInfoForm(props) {
               if (reason === 'select-option'){
                 setSenderAddress(value);
                 handleChange({
-                  senderAddress: value['address'] + ' ,CA, ' + value['zipCode'],
+                  senderAddress: value['address'] + ', San Fransisco ,CA, ' + value['zipCode'],
                 });
               }
             }}
@@ -268,7 +268,7 @@ function ShipInfoForm(props) {
                 }}
                 label="Address"
                 onMouseOut={() => {
-                  const origins = [ senderAddress.address + ', CA, ' + senderAddress.zipCode ];
+                  const origins = [ senderAddress.address + ', San Fransisco, CA, ' + senderAddress.zipCode ];
                   const destinations = stationOptions.map(option => option.address);
                   getDurations(origins, destinations);
                 }}
@@ -292,7 +292,7 @@ function ShipInfoForm(props) {
               setSenderAddress({...senderAddress,
                 zipCode: event.target.value
               });
-              handleChange({senderAddress : senderAddress['address'] + ', CA, ' + event.target.value});
+              handleChange({senderAddress : senderAddress['address'] + ', San Fransisco, CA, ' + event.target.value});
             }}
             required
           />
@@ -437,7 +437,7 @@ function ShipInfoForm(props) {
                 setRecipientAddress(value['address']);
                 setRecipientZip(value['zipCode']);
                 handleChange({
-                  recipientAddress: value['address'] + ' ,CA, ' + value['zipCode'],
+                  recipientAddress: value['address'] + ', San Fransisco, CA, ' + value['zipCode'],
                 });
               }
             }}

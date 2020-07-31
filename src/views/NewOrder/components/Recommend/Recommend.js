@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 1.5),
   },
   heroContent: {
-    padding: theme.spacing(3, 0, 6),
+    padding: theme.spacing(0, 0, 6),
   },
   cardHeader: {
     backgroundColor:
@@ -121,6 +121,7 @@ const capitalize = (s) => {
 
 const Recommend = (props) => {
   const { handleChange } = props;
+  const hasDrone = props.recommendations.findIndex(option => option['carrier'] === 'drone');
   const recommendations = props.recommendations.sort((a, b) => 
     (Number(a['price']) > Number(b['price']) ? 1 : -1)).map((option, index) => {
     if (index === 0) {
@@ -128,15 +129,19 @@ const Recommend = (props) => {
         type: 'Cheapest',
       });
     }
-    if (option['dispatch within: '] === '30 mins' && option['carrier'] === 'drone'){
-      return Object.assign(option, {
+    if (option['dispatch within: '] === '30 mins' && option['carrier'] === 'robot' && hasDrone === -1){
+      return  Object.assign(option, {
         type: 'Fastest',
-      })
-    } else {
-      return Object.assign(option, {
-        type: 'none',
-      })
+      });
     }
+    if (option['dispatch within: '] === '30 mins' && option['carrier'] === 'drone') {
+      return  Object.assign(option, {
+        type: 'Fastest',
+      });
+    }
+    return Object.assign(option, {
+      type: 'none',
+    })
   });
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
@@ -156,15 +161,6 @@ const Recommend = (props) => {
         component="main"
         maxWidth="sm"
       >
-        <Typography
-          align="center"
-          color="textPrimary"
-          component="h1"
-          gutterBottom
-          variant="h2"
-        >
-          Select your solution
-        </Typography>
       </Container>
       {/* End hero unit */}
       <Container
@@ -196,7 +192,7 @@ const Recommend = (props) => {
                       component="h2"
                       variant="h5"
                     >
-                      dispatch within:
+                      Dispatch within:
                     </Typography>
                   </div>
                     </Grid>

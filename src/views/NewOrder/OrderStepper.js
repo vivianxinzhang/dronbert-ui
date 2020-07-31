@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
   stepper: {
     padding: theme.spacing(3, 0, 5),
   },
+  stepLabel: {
+    fontSize: 'medium',
+  },
   buttons: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -95,7 +98,7 @@ function OrderStepper () {
     userId: localStorage.getItem('userID'),
     senderFirstName: localStorage.getItem('firstName'),
     senderLastName: localStorage.getItem('lastName'),
-    senderAddress: localStorage.getItem('primaryAddress') + ' San Fransisco, CA, ' + localStorage.getItem('zipCode'),
+    senderAddress: localStorage.getItem('primaryAddress') + ', San Fransisco, CA, ' + localStorage.getItem('zipCode'),
     senderPhoneNumber: localStorage.getItem('phoneNumber'),
     senderEmail: localStorage.getItem('email'),
     recipientFirstName: '',
@@ -322,7 +325,7 @@ function OrderStepper () {
             component="h1"
             variant="h4"
           >
-            Checkout
+            {activeStep === steps.length ? 'Order placed!' : steps[activeStep] }
           </Typography>
           <Stepper
             activeStep={activeStep}
@@ -330,7 +333,7 @@ function OrderStepper () {
           >
             {steps.map((label) => (
               <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+                <StepLabel><span className={classes.stepLabel}>{label}</span></StepLabel>
               </Step>
             ))}
           </Stepper>
@@ -344,10 +347,10 @@ function OrderStepper () {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your tracking ID is #{orderInfo['trackingID']}. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                  Your order #{orderInfo['trackingID']} is placed. We have emailed your order confirmation, and will
+                  send you an update when your order has shipped. <Link href="/dashboard">Click to track your package</Link>
                 </Typography>
-                <Link href="/dashboard">Track your package</Link>
+
               </React.Fragment>
             ) : (
               <React.Fragment>

@@ -288,7 +288,6 @@ const Dashboard = () => {
           </Card>
         </Box>
       </Grid>
-
     </Grid>
   );
 };

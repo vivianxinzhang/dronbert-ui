@@ -45,7 +45,7 @@ const Checkout = (props) => {
             gutterBottom
             variant="h6"
           >
-            Name : {orderInfo['senderFirstName'] + '' + orderInfo['senderLastName']}
+            Name : {orderInfo['senderFirstName'] + ' ' + orderInfo['senderLastName']}
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -92,7 +92,7 @@ const Checkout = (props) => {
             gutterBottom
             variant="h6"
           >
-            Name : {orderInfo['recipientFirstName'] + '' + orderInfo['recipientLastName']}
+            Name : {orderInfo['recipientFirstName'] + ' ' + orderInfo['recipientLastName']}
           </Typography>
         </Grid>
         <Grid item xs={6}>
