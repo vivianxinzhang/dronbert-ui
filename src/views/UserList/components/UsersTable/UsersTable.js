@@ -175,16 +175,16 @@ const UsersTable = (props) => {
                     <TableCell>
                       {order['Delivery Address']}
                     </TableCell>
-                    <TableCell>{(order['Delivery Time'] && order['Order Status'] != 'delivered' ) ?
-                      <Link to="/dashboard">
+                    <TableCell>{order['Delivery Time'] && order['Order Status'] == 'delivered' ? order['Delivery Time']
+                      : <Link to="/dashboard">
                         <Button
                           className={classes.button}
                           to={page.href}
                           onClick={() => {localStorage.setItem('selected', order['Order ID'])}}
                         >
-                          Tracking
+                          Tracking #{order['Tracking ID']}
                         </Button>
-                      </Link> : order['Delivery Time']
+                      </Link>
                     }
                     </TableCell>
                     <TableCell>
