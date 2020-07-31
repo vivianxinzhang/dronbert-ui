@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
     alignContent: 'center',
     justifyContent: 'center',
     margin: 'auto',
+    height: 500,
+    backgroundImage:'url(images/golden_gate_bridge_drone.jpg)',
   },
 }));
 
