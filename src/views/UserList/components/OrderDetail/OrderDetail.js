@@ -106,13 +106,13 @@ const OrderDetail = (props) => {
               <Paper className={classes.paper}>Package Info:
                 <br/>
                 <br/>
-                Length: {orderDetail['package_length']} lbs
+                Weight: {orderDetail['package_weight']} lbs
                 <br/>
-                Weight: {orderDetail['package_weight']} inches
+                Length: {orderDetail['package_length']} inches
                 <br/>
                 Height: {orderDetail['package_height']} inches
                 <br/>
-                Fragile: {orderDetail['package_fragile'] && orderDetail['package_fragile'] == 1 ? 'Yes' : 'No'}
+                Fragile: {(orderDetail['package_fragile'] && orderDetail['package_fragile'] == 1) ? 'Yes' : 'No'}
               </Paper>
             </Grid>
           </Grid>
