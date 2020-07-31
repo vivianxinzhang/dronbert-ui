@@ -10,8 +10,13 @@ const useStyles = makeStyles((theme) => ({
     alignContent: 'center',
     justifyContent: 'center',
     margin: 'auto',
-    height: 500,
+    // marginTop: 30,
+    // width: 1050,
+    height: 780,
     backgroundImage:'url(images/golden_gate_bridge_drone.jpg)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
   },
 }));
 
@@ -21,11 +26,10 @@ const Front  = (props) => {
   const classes = useStyles();
 
   return <Grid container className={classes.root}>
-    <Grid item>
-      <TrackingBar history={history}/>
+      <Grid item>
+        <TrackingBar history={history}/>
+      </Grid>
     </Grid>
-  </Grid>
-
 }
 
 export default Front;
