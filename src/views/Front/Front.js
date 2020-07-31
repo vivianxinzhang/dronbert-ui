@@ -10,13 +10,12 @@ const useStyles = makeStyles((theme) => ({
     alignContent: 'center',
     justifyContent: 'center',
     margin: 'auto',
-    // marginTop: 30,
-    // width: 1050,
-    height: 780,
+    height: 760,
+    // height: '100vh',  // this height also works
     backgroundImage:'url(images/golden_gate_bridge_drone.jpg)',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
   },
 }));
 
