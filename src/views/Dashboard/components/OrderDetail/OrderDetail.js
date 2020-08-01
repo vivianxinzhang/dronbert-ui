@@ -35,7 +35,7 @@ export default function OrderDetail(props) {
           <Paper className={classes.paper}>Order Detail
             <br/>
             <br/>
-            Total Cost: { orderDetail['total cost'] }
+            Total Cost: ${ orderDetail['total cost'] }
             <br/>
             Shipping Option: { orderDetail['machine_type']}
             <br/>
@@ -72,7 +72,13 @@ export default function OrderDetail(props) {
           <Paper className={classes.paper}>Package Info:
             <br/>
             <br/>
-            Length: {orderDetail['package_length']}     Weight: {orderDetail['package_weight']}      Height: {orderDetail['package_height']}   Fragile:{orderDetail['package_fragile']}
+            Weight: {orderDetail['package_weight']}lbs
+            <br/>
+            Length: {orderDetail['package_length']}inches
+            <br/>
+            Height: {orderDetail['package_height']}inches
+            <br/>
+            Fragile: {(orderDetail['package_fragile'] && orderDetail['package_fragile'] == 1) ? 'Yes' : 'No'}
           </Paper>
         </Grid>
       </Grid>

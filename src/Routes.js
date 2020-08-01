@@ -15,7 +15,8 @@ import {
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  Front as FrontView
 } from './views';
 import { initial } from 'underscore';
 
@@ -42,6 +43,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/dashboard"
+      />
+      <RouteWithLayout
+        component={FrontView}
+        exact
+        layout={MinimalLayout}
+        path="/front"
       />
       <RouteWithLayout
         component={TrackingView}

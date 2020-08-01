@@ -40,6 +40,7 @@ const Tracking = (props) => {
 
   // console.log(props.match);
 
+  const [currentTime, setCurrentTime] = useState(new Date());
   const [trackingInfo, setTrackingInfo] = useState({
     "current location": "37.76009460,-122.41483030",
     "estimated delivered time": "2020-07-31 16:07:44",
@@ -79,6 +80,19 @@ const Tracking = (props) => {
     }
     return `Package #${orderNumber} is ${status}. ${timeString()} It is ${delay ? 'delayed' : 'on time'}`;
   }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // console.log(new Date());
+      setCurrentTime(new Date());
+    }, 5 * 1000);
+    return () => clearInterval(timer);
+  }, [])
+
+  useEffect(() => {
+    // console.log('Tracking useEffect called')
+    getTrackingInfo();
+  },[currentTime])
 
   return <Box className={classes.root}>
     <Card >
