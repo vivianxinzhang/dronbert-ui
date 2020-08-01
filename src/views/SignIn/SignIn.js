@@ -275,7 +275,7 @@ const SignIn = props => {
                 >
                   Sign in
                 </Typography>
-                <Typography
+                {/* <Typography
                   color="textSecondary"
                   gutterBottom
                 >
@@ -315,7 +315,7 @@ const SignIn = props => {
                   variant="body1"
                 >
                   or login with user id
-                </Typography>
+                </Typography> */}
                 <TextField
                   className={classes.textField}
                   error={hasError('user_id')}
