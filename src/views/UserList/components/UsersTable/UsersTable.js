@@ -55,7 +55,8 @@ const useStyles = makeStyles(theme => ({
   row: {
     // '&:hover': { backgroundColor: '#c5cae9'},
     // '&:hover': { backgroundColor: '#8c9eff'},
-    '&:hover': { backgroundColor: '#e3f2fd'},
+    // '&:hover': { backgroundColor: '#e3f2fd'},
+    '&:hover': { backgroundColor: '#7ccccc'},
   }
 }));
 
