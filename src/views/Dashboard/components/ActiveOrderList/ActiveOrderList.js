@@ -113,7 +113,7 @@ function ActiveOrderList(props) {
             props.list.map((element,index) =>
               <BootstrapButton 
                 key={index}
-                onClick={() => { toggleActive(index) }}>{'Tracking# ' + element['Tracking ID'] + ', '+'send to '+element['Recipient'] }
+                onClick={() => { toggleActive(index) }}>{'Order# ' + element['Tracking ID'] + ', '+'send to '+element['Recipient'] }
               </BootstrapButton>)             
           // posts.map(post => <Button variant="contained" color="primary" key={post.id}>{post.name}</Button>)
           }

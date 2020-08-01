@@ -103,8 +103,10 @@ const Dashboard = () => {
   useEffect(() => {
     const timer = setInterval(() => {
      // console.log(new Date());
-      setCurrentTime(new Date());
-    }, 5 * 1000);
+    //   setCurrentTime(new Date());
+    // }, 2 * 1000);
+    setCurrentTime(new Date());
+    }, 60 * 1000);
     return () => clearInterval(timer);
   }, [])
 
