@@ -187,8 +187,10 @@ const Dashboard = () => {
   const recipient = activeOrderList.length !== 0 && selectedOrder !== undefined ? activeOrderList[selectedOrder]['Recipient'] : undefined;
   const status = trackingInfo ? trackingInfo.status : undefined;
 
+  const createdTimeMS = Date.parse(trackingInfo['created time']);
   const deliveryTimeMS = Date.parse(trackingInfo['estimated delivered time']);
   const currentTimeMS = Date.parse(currentTime);
+  const totalTime = (deliveryTimeMS - createdTimeMS)/1000/60;
   const timeLeftMS = deliveryTimeMS - currentTimeMS;
   const timeLeft = {
     hours: Math.floor(timeLeftMS / (1000 * 60 * 60) % 24),
@@ -267,7 +269,8 @@ const Dashboard = () => {
              />
             <Divider />
             <CardContent className={classes.cardContent}>
-              <TimeStamp 
+              <TimeStamp
+              totalTime={totalTime}
               time={timeLeft}/>
               <ActiveOrderList 
                 style={{height:285, overflow: 'auto'}}

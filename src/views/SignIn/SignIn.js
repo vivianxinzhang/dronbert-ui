@@ -314,7 +314,7 @@ const SignIn = props => {
                   color="textSecondary"
                   variant="body1"
                 >
-                  or login with email address
+                  or login with user id
                 </Typography>
                 <TextField
                   className={classes.textField}

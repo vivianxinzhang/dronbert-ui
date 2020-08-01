@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function CircularProgressWithLabel(props) {
+  console.log(props.timeLeft);
   return (
     <Box
       display="inline-flex"
@@ -62,16 +63,18 @@ function CircularProgressWithLabel(props) {
           color="textSecondary"
           variant="h4"
         >{
-            `${Math.floor(props.timeleft/60)} hrs
-          ${props.timeleft%60} mins`}</Typography>
+            `${Math.floor(props.timeLeft/60)} hrs
+          ${props.timeLeft % 60} mins`}</Typography>
       </Box>
     </Box>
   );
 }
 
 const TimeStamp = props => {
-  const { time, className, ...rest } = props;
+  const { totalTime, time, className, ...rest } = props;
   const classes = useStyles();
+
+  const timeLeft = time.hours * 60 + time.minutes;
 
   /* React.useEffect(() => {
     const timer = setInterval(() => {
@@ -91,11 +94,11 @@ const TimeStamp = props => {
       justify="center"
       spacing={0}
     >
-      {/* <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeleft={timeLeft}/>; */}
+
       {
         isNaN(time.hours) || isNaN(time.minutes) ?
           <div className={classes.time}> Delivery time will be available shortly after the package get dispatched</div> :
-          <div className={classes.time}>{time.hours} hrs {time.minutes} minutes</div>
+          <CircularProgressWithLabel value={100 - timeLeft/totalTime*100} timeLeft={timeLeft}/>
       }
     </Grid>
   );
