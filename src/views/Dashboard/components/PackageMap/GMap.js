@@ -1,39 +1,53 @@
 import React, { Component } from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import RedRob from './RedRob.svg'
-import R1 from './R1.png'
-import PurpleRob from './PurpleRob.svg'
 import blueMarker from './blue-marker.svg'
 import drone from './drone.png'
-
 import mapStyles from './mapStyles'
 import customStyles from './customStlyes.css'
+import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 export class GMap extends Component {
   constructor(props) {
     super(props);
   }
- /*   this.state = {
-      stores: [{lat: 37.7749, lng: -122.4194},
-              {latitude: 37.7749, longitude: -122.4194},
-              {latitude: 37.78, longitude: -122.48},
-              {latitude: 37.76, longitude: -122.46},
-              {latitude: 37.75, longitude: -122.44},
-              {latitude: 37.74, longitude: -122.49}]
-    }
-  } */
+
+  state = {
+    open: false,
+    robot: true,
+  };
 
   displayMarkers = (locations) => {
-    return locations.map((store, index) => {
-      return <Marker key={index} id={index} position={{
-       lat: store.lat,
-       lng: store.lng
-     }}
-     icon={{
-      url: RedRob,
-      scaledSize: new window.google.maps.Size(35,35),
-    }}
+    const { robot } = this.state;
+    if (robot) {
+      return locations.map((store, index) => {
+        return <Tooltip title="Your Package is getting closer! " placement="right">
+          <Marker key={index} id={index} position={{
+          lat: store.lat,
+          lng: store.lng
+        }}
+        icon={{
+          url: RedRob,
+          scaledSize: new window.google.maps.Size(35,35),
+        }}
+        onClick={() => console.log("You clicked me!")} />
+        </Tooltip>
+      })
+    } else {return locations.map((store, index) => {
+      return <Tooltip title="Your Package is getting closer! " placement="right">
+        <Marker key={index} id={index} position={{
+        lat: store.lat,
+        lng: store.lng
+      }}
+      icon={{
+        url: drone,
+        scaledSize: new window.google.maps.Size(35,35),
+      }}
      onClick={() => console.log("You clicked me!")} />
-    })
+     </Tooltip>
+    })}
+    
   }
   //customized map style 
   _mapLoaded(mapProps, map) {
@@ -41,7 +55,16 @@ export class GMap extends Component {
       styles: mapStyles
     })
   }
- 
+  handleTooltipClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleTooltipOpen = () => {
+    this.setState({ open: true });
+  };
+
+
+
   render() {
     const mapStyles = {
       width: '100%',
@@ -74,12 +97,12 @@ export class GMap extends Component {
 
     return (
       <div>
-      <customHead>
+        <customHead>
         Dronbot{" "} 
-        <span role = "img" aria-label = "robot" >
+          {/* <span role = "img" aria-label = "robot" >
           🤖️📦
-        </span>
-      </customHead>
+        </span> */}
+        </customHead>
         <Map
           google={this.props.google}
           zoom={12}
@@ -89,38 +112,20 @@ export class GMap extends Component {
           initialCenter={{ lat: 37.765, lng: -122.44}}
           onReady={(mapProps, map) => this._mapLoaded(mapProps, map)}
         >
-         {/* <Marker position={{ lat: 48.00, lng: -122.00}} /> */}
-         {this.displayMarkers([location])}
+          {/* <Marker position={{ lat: 48.00, lng: -122.00}} /> */}
+          {this.displayMarkers([location])}
 
-        <Marker
-          position={{lat: desLocation.desLat, lng: desLocation.desLng}}
-          icon={{
-            url: blueMarker,
-            scaledSize: new window.google.maps.Size(20,35),
-          }} 
-        />
-        {/* <Marker
-          position={{lat: 37.77325570, lng: -122.43554290}}
-          icon={{
-            url: PurpleRob,
-            scaledSize: new window.google.maps.Size(40,40),
-          }} 
-        /> */}
-        {/* <Marker
-          position={{lat: 37.75, lng: -122.42}}
-          icon={{
-            url: R1,
-            scaledSize: new window.google.maps.Size(40,40),
-          }} 
-        /> */}
-        {/* <Marker
-          position={{lat: 37.74, lng: -122.46}}
-          icon={{
-            url: blue,
-            scaledSize: new window.google.maps.Size(40,40),
-          }} 
-        /> */}
-      </Map>
+          <Tooltip title="This is Destination. Carrier is on the way. " placement="right">
+            <Marker
+              position={{lat: desLocation.desLat, lng: desLocation.desLng}}
+              icon={{
+                url: blueMarker,
+                scaledSize: new window.google.maps.Size(20,35),
+              }} 
+              onClick={this.handleTooltipOpen}
+            />
+          </Tooltip>
+        </Map>
       </div>
     );
     
